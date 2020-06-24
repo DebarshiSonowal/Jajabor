@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="jajabor.in.app.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_nav_home_to_nav_men"
+            app:destination="@id/nav_men" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_men"
+        android:name="jajabor.in.app.ui.Men.MenFragment"
+        android:label="Men"
+        tools:layout="@layout/fragment_men" >
+        <action
+            android:id="@+id/action_nav_men_to_nav_women"
+            app:destination="@id/nav_women" />
+        <action
+            android:id="@+id/action_nav_men_to_nav_home"
+            app:destination="@id/nav_home" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_women"
+        android:name="jajabor.in.app.ui.Women.WomenFragment"
+        android:label="Women"
+        tools:layout="@layout/fragment_women" >
+        <action
+            android:id="@+id/action_nav_women_to_nav_contactus"
+            app:destination="@id/nav_contactus" />
+        <action
+            android:id="@+id/action_nav_women_to_nav_men"
+            app:destination="@id/nav_men" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_contactus"
+        android:name="jajabor.in.app.ui.contact.ContactFragment"
+        android:label="Contact us"
+        tools:layout="@layout/fragment_contactus" >
+        <action
+            android:id="@+id/action_nav_contactus_to_nav_competition"
+            app:destination="@id/nav_competition" />
+        <action
+            android:id="@+id/action_nav_contactus_to_nav_women"
+            app:destination="@id/nav_women" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_competition"
+        android:name="jajabor.in.app.ui.competition.CompetitionFragment"
+        android:label="Competition"
+        tools:layout="@layout/fragment_comptition" >
+        <action
+            android:id="@+id/action_nav_competition_to_nav_profile"
+            app:destination="@id/nav_profile" />
+        <action
+            android:id="@+id/action_nav_competition_to_nav_contactus"
+            app:destination="@id/nav_contactus" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_profile"
+        android:name="jajabor.in.app.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_nav_profile_to_cartFragment"
+            app:destination="@id/nav_cart" />
+        <action
+            android:id="@+id/action_nav_profile_to_nav_competition"
+            app:destination="@id/nav_competition" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_cart"
+        android:name="jajabor.in.app.CartFragment"
+        android:label="Shopping Cart"
+        tools:layout="@layout/fragment_cart" >
+        <action
+            android:id="@+id/action_cartFragment_to_nav_profile"
+            app:destination="@id/nav_profile" />
+    </fragment>
+</navigation>

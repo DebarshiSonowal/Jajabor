@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "922781256202",
+    "firebase_url": "https://jajabor-android.firebaseio.com",
+    "project_id": "jajabor-android",
+    "storage_bucket": "jajabor-android.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:922781256202:android:c96ed0619cbe90279a6df3",
+        "android_client_info": {
+          "package_name": "jajabor.in.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "922781256202-08cpskggq3fcfee4963jqoam1cjs3dp1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "jajabor.in.app",
+            "certificate_hash": "a811250c388194aec02d0be825f7c80a025040e0"
+          }
+        },
+        {
+          "client_id": "922781256202-vml4qkcol7tfafvkumtpha7drkblufp7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBx-_vESjox_IoLglrsstYOtHM1gsF8_rY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "922781256202-vml4qkcol7tfafvkumtpha7drkblufp7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

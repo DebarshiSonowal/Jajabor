@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single" android:id="@+id/top">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_baseline_home_24"
+            android:title="@string/menu_home" />
+        <item
+            android:id="@+id/nav_men"
+            android:icon="@drawable/ic_person_1"
+            android:title="Men" />
+        <item
+            android:id="@+id/nav_women"
+            android:icon="@drawable/ic_woman_1"
+            android:title="Women" />
+    </group>
+    <group android:menuCategory="secondary"  android:id="@+id/bottom">
+        <item
+            android:id="@+id/nav_contactus"
+            android:icon="@drawable/ic_baseline_email_24"
+            android:title="Contact us" />
+        <item
+            android:id="@+id/nav_competition"
+            android:icon="@drawable/ic_baseline_compare_24"
+            android:title="Compition" />
+    </group>
+</menu>
