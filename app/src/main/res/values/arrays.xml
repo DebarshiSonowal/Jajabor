@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="switch_tabs">
+        <item>S</item>
+        <item>L</item>
+        <item>M</item>
+        <item>XL</item>
+        <item>XXL</item>
+    </string-array>
+    <string-array name="switch_color">
+        <item>Red</item>
+        <item>White</item>
+        <item>Black</item>
+        <item>Yellow</item>
+        <item>Maroon</item>
+        <item>Grey</item>
+    </string-array>
+</resources>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="@dimen/_160sdp"
     android:layout_height="@dimen/_172sdp"
     android:layout_gravity="center|top"
@@ -25,9 +25,9 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/productpic"
+                android:id="@+id/categpic"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_105sdp"
+                android:layout_height="@dimen/_115sdp"
                 android:scaleType="fitCenter"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -36,7 +36,7 @@
                 app:srcCompat="@drawable/asssamese" />
 
             <TextView
-                android:id="@+id/name"
+                android:id="@+id/categname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -44,18 +44,17 @@
                 android:textColor="#000000"
                 android:textSize="@dimen/_10sdp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/productpic" />
+                app:layout_constraintTop_toBottomOf="@+id/categpic" />
 
             <TextView
                 android:id="@+id/price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="TextView"
+                android:text="SHOP"
                 android:textColor="#000000"
-                android:textSize="@dimen/_10sdp"
+                android:textSize="@dimen/_13sdp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

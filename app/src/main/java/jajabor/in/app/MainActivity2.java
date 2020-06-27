@@ -42,9 +42,10 @@ public class MainActivity2 extends AppCompatActivity {
     NavigationView navigationView;
     MaterialSearchView searchView;
     private AppBarConfiguration mAppBarConfiguration;
-//Vitaly Gorbachev
+//Vitaly Gorbachev Amusion Borad Pankit
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         FirebaseInstanceId.getInstance().getInstanceId()
                 .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
                     @Override
@@ -63,7 +64,7 @@ public class MainActivity2 extends AppCompatActivity {
 
                     }
                 });
-        super.onCreate(savedInstanceState);
+
         if(Build.VERSION.SDK_INT >=  Build.VERSION_CODES.O){
             NotificationChannel channel = new NotificationChannel("MyNotifications","MyNotifiaction", NotificationManager.IMPORTANCE_DEFAULT);
             NotificationManager manager = getSystemService(NotificationManager.class);
@@ -143,7 +144,7 @@ public class MainActivity2 extends AppCompatActivity {
             searchView.closeSearch();
         } else {
             super.onBackPressed();
-            finishAffinity();
+//            finishAffinity();
         }
     }
     @Override
@@ -178,6 +179,7 @@ public class MainActivity2 extends AppCompatActivity {
                 break;
             case  R.id.cart:
                 Navigation.findNavController(this, R.id.nav_host_fragment).navigate(R.id.nav_cart);
+//                Navigation.findNavController(this, R.id.nav_host_fragment).navigate(R.id.nav_productview);
                 break;
 
         }

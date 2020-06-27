@@ -84,5 +84,18 @@
         <action
             android:id="@+id/action_cartFragment_to_nav_profile"
             app:destination="@id/nav_profile" />
+        <action
+            android:id="@+id/action_nav_cart_to_nav_productview"
+            app:destination="@id/nav_productview" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_productview"
+        android:name="jajabor.in.app.ProductView"
+        android:label="Productview"
+        tools:layout="@layout/activity_product_view">
+
+        <action
+            android:id="@+id/action_nav_productview_to_nav_cart"
+            app:destination="@id/nav_cart" />
     </fragment>
 </navigation>

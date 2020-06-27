@@ -1,6 +1,8 @@
 package jajabor.in.app.ui.Men;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,12 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,33 +32,61 @@ public class MenFragment extends Fragment {
     List<String>name;
     List<String>price;
     GridAdapter mGridAdapter;
+    DatabaseReference mFirebaseDatabase;
 private GridView mGridView;
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Background back = new Background();
+        back.execute();
+    }
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_men, container, false);
+        mFirebaseDatabase = FirebaseDatabase.getInstance().getReference();
         url = new ArrayList<>();
-        url.add("https://d2jnb1er72blne.cloudfront.net/wp-content/uploads/2020/02/Axomiya-mur-prothom-porichoy-Unisex-womens-Assamese-Tshirt-524x658.jpg");
-        url.add("https://d2jnb1er72blne.cloudfront.net/wp-content/uploads/2020/02/Akolxoriya-Unisex-Womens-Assamese-Tshirt-524x658.jpg");
-        url.add("https://d2jnb1er72blne.cloudfront.net/wp-content/uploads/2020/02/Sangeetei-mur-jibonMusic-is-my-Life-Assamese-Tshirt-524x658.jpg");
-        url.add("https://d2jnb1er72blne.cloudfront.net/wp-content/uploads/2020/01/Dusto-Lora-524x658.png");
-
         name = new ArrayList<>();
-        name.add("Axomiya Mur Prothom Porichoy Assamese Tshirt");
-        name.add("Akolxoriya Assamese Tshirt");
-        name.add("Sangeetei mur Jibon Assamese Tshirt");
-        name.add("Dusto Lora Assamese Tshirt");
-
         price = new ArrayList<>();
-        price.add("₹299.00");
-        price.add("₹299.00");
-        price.add("₹299.00");
-        price.add("₹299.00");
-
-
         mGridView = root.findViewById(R.id.mangrid);
         mGridAdapter = new GridAdapter(url,name,price,getContext());
         mGridView.setAdapter(mGridAdapter);
 
         return root;
+    }
+    class Background extends AsyncTask<String,String,String>{
+
+        @Override
+        protected String doInBackground(String... strings) {
+            mFirebaseDatabase.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for(DataSnapshot dataSnapshot:snapshot.getChildren()){
+                        for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren()){
+                            if(dataSnapshot1.getKey().equals("Images")){
+                                url.add(dataSnapshot1.getValue().toString());
+                                Log.d("Value",dataSnapshot1.getValue().toString());
+                            }
+                            if(dataSnapshot1.getKey().equals("Name")){
+                                name.add(dataSnapshot1.getValue().toString());
+                                Log.d("Value",dataSnapshot1.getValue().toString());
+                            }
+                            if(dataSnapshot1.getKey().equals("Price")){
+                                price.add(""+dataSnapshot1.getValue().toString());
+                                Log.d("Value",dataSnapshot1.getValue().toString());
+                            }
+                        }
+                    }
+                    mGridAdapter.notifyDataSetChanged();
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+            return null;
+        }
     }
 }

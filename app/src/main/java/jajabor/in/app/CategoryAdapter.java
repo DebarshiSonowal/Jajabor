@@ -1,6 +1,5 @@
 package jajabor.in.app;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,21 +12,19 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class GridAdapter extends BaseAdapter {
+public class CategoryAdapter extends BaseAdapter {
     List<String> url;
     List<String>name;
-    List<String>price;
     ImageView product;
-    TextView nameview,priceview;
-    private Context context ;
+    TextView nameview;
+    Context mContext;
     private LayoutInflater mLayoutInflater;
-
-    public GridAdapter(List<String> url, List<String> name, List<String> price, Context context) {
+    public CategoryAdapter(List<String> url, List<String> name, Context context) {
         this.url = url;
         this.name = name;
-        this.price = price;
-        mLayoutInflater = LayoutInflater.from(context);
+        mLayoutInflater= LayoutInflater.from(context);
     }
+
 
     @Override
     public int getCount() {
@@ -46,13 +43,11 @@ public class GridAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        convertView= mLayoutInflater.inflate(R.layout.basicproductview, null);
-        product = convertView.findViewById(R.id.productpic);
-        nameview = convertView.findViewById(R.id.name);
-        priceview = convertView.findViewById(R.id.price);
+        convertView= mLayoutInflater.inflate(R.layout.topweardemo, null);
+        product = convertView.findViewById(R.id.categpic);
+        nameview = convertView.findViewById(R.id.categname);
         Picasso.get().load(url.get(position)).into(product);
         nameview.setText(name.get(position));
-        priceview.setText("₹"+price.get(position));
         return convertView;
     }
 }
