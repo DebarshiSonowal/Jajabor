@@ -2,11 +2,13 @@ package jajabor.in.app.ui.home;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.transition.Slide;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -23,6 +25,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,8 +49,11 @@ List<String>name;
 List<String>price;
     List<String>tag;
     List<String>shrdesc;
-List<Integer>bihu;
+List<Integer>PID;
 List<Integer>Valentines;
+    Networkk work;
+ValueEventListener mValueEventListener;
+ImageView mImageView,mImageView2,offer;
     CategoryAdapter mGridAdapter;
 DatabaseReference mFirebaseDatabase;
 ProductAdapter mAdapter,mAdapter1,mAdapter2;
@@ -55,9 +61,26 @@ GridView mGridView;
     @Override
     public void onStart() {
         super.onStart();
-    Networkk work = new Networkk();
+   work = new Networkk();
     work.execute();
 
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mFirebaseDatabase.removeEventListener(mValueEventListener);
+        mValueEventListener = null;
+        mGridView = null;
+        mImageView = null;
+        mImageView2 = null;
+        offer = null;
+        slider = null;
+        mAdapter = null;
+        mAdapter1 = null;
+        mAdapter2 = null;
+        mGridAdapter = null;
+        work.cancel(true);
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -70,9 +93,16 @@ GridView mGridView;
         name1 = new ArrayList<>();
         tag = new ArrayList<>();
         shrdesc = new ArrayList<>();
+        PID = new ArrayList<>();
         mFirebaseDatabase = FirebaseDatabase.getInstance().getReference();
         mGridView = root.findViewById(R.id.TOPWEAR);
-//        url.add("https://d2jnb1er72blne.cloudfront.net/wp-content/uploads/2020/02/Axomiya-mur-prothom-porichoy-Unisex-womens-Assamese-Tshirt-524x658.jpg");
+        mImageView = root.findViewById(R.id.imageView3);
+        mImageView2 = root.findViewById(R.id.imageView6);
+        offer = root.findViewById(R.id.imageView15);
+        Picasso.get().load("https://firebasestorage.googleapis.com/v0/b/jajabor-android.appspot.com/o/banners%20for%20app-02.jpg?alt=media&token=f59a2969-34d4-4654-88b6-87a0ce2040e6").resize(1240,1240).into(mImageView);
+        Picasso.get().load("https://firebasestorage.googleapis.com/v0/b/jajabor-android.appspot.com/o/banners%20for%20app-01.jpg?alt=media&token=aa67bdfd-4ea8-4637-8b2c-6f7457691c8c").resize(1240,1240).into(mImageView2);
+        Picasso.get().load("https://firebasestorage.googleapis.com/v0/b/jajabor-android.appspot.com/o/banners%20for%20app-03.jpg?alt=media&token=36d7a59b-493a-4458-afac-7aad0c4801df").resize(1240,1240).into(offer);
+        //        url.add("https://d2jnb1er72blne.cloudfront.net/wp-content/uploads/2020/02/Axomiya-mur-prothom-porichoy-Unisex-womens-Assamese-Tshirt-524x658.jpg");
 //        url.add("https://d2jnb1er72blne.cloudfront.net/wp-content/uploads/2020/02/Akolxoriya-Unisex-Womens-Assamese-Tshirt-524x658.jpg");
 //        url.add("https://d2jnb1er72blne.cloudfront.net/wp-content/uploads/2020/02/Sangeetei-mur-jibonMusic-is-my-Life-Assamese-Tshirt-524x658.jpg");
 //        url.add("https://d2jnb1er72blne.cloudfront.net/wp-content/uploads/2020/01/Dusto-Lora-524x658.png"
@@ -98,9 +128,9 @@ GridView mGridView;
         slider = root.findViewById(R.id.banner_slider1);
         slider.setAdapter(new AdapterSlider());
         slider.setSelectedSlide(1);
-        mAdapter = new ProductAdapter(url,name,price,shrdesc,getContext(),getActivity());
-        mAdapter1 =  new ProductAdapter(url,name,price,shrdesc,getContext(),getActivity());
-        mAdapter2 =  new ProductAdapter(url,name,price,shrdesc,getContext(),getActivity());
+        mAdapter = new ProductAdapter(url,name,price,shrdesc,PID,getContext(),getActivity());
+        mAdapter1 =  new ProductAdapter(url,name,price,shrdesc,PID,getContext(),getActivity());
+        mAdapter2 =  new ProductAdapter(url,name,price,shrdesc,PID,getContext(),getActivity());
         final RecyclerView mRecyclerView= root.findViewById(R.id.flashsale);
         final RecyclerView mRecyclerView1= root.findViewById(R.id.bihusale);
         final RecyclerView mRecyclerView2= root.findViewById(R.id.allproducts);
@@ -130,7 +160,7 @@ GridView mGridView;
 
         @Override
         protected String doInBackground(String... strings) {
-            mFirebaseDatabase.addValueEventListener(new ValueEventListener() {
+            mFirebaseDatabase.addValueEventListener(mValueEventListener = new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     for(DataSnapshot dataSnapshot:snapshot.getChildren()){
@@ -155,6 +185,10 @@ GridView mGridView;
                                 shrdesc.add(""+dataSnapshot1.getValue().toString());
                                 Log.d("Value5",dataSnapshot1.getValue().toString());
                             }
+                            if(dataSnapshot1.getKey().equals("ID")){
+                                PID.add( Integer.parseInt(dataSnapshot1.getValue().toString()) );
+                                Log.d("Value5",dataSnapshot1.getValue().toString());
+                            }
                         }
                     }
                     mAdapter.notifyDataSetChanged();
@@ -174,12 +208,12 @@ GridView mGridView;
     @Override
     public void onResume() {
         super.onResume();
-        BusStation.getBus().register(this);
+
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        BusStation.getBus().unregister(this);
+
     }
 }

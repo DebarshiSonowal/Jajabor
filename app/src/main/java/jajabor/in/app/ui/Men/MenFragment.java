@@ -30,16 +30,30 @@ import jajabor.in.app.R;
 public class MenFragment extends Fragment {
     List<String> url;
     List<String>name;
+    Background back;
     List<String>price;
     GridAdapter mGridAdapter;
     DatabaseReference mFirebaseDatabase;
+    ValueEventListener mValueEventListener;
 private GridView mGridView;
 
     @Override
     public void onStart() {
         super.onStart();
-        Background back = new Background();
+        back = new Background();
         back.execute();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mGridAdapter = null;
+        mGridView=null;
+        mFirebaseDatabase.removeEventListener(mValueEventListener);
+        mFirebaseDatabase = null;
+        mValueEventListener = null;
+        back.cancel(true);
+        System.gc();
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -55,11 +69,11 @@ private GridView mGridView;
 
         return root;
     }
-    class Background extends AsyncTask<String,String,String>{
+     class Background extends AsyncTask<String,String,String>{
 
         @Override
         protected String doInBackground(String... strings) {
-            mFirebaseDatabase.addValueEventListener(new ValueEventListener() {
+            mFirebaseDatabase.addValueEventListener(mValueEventListener = new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     for(DataSnapshot dataSnapshot:snapshot.getChildren()){

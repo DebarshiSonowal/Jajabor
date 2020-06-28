@@ -47,7 +47,8 @@ public class CategoryAdapter extends BaseAdapter {
         product = convertView.findViewById(R.id.categpic);
         nameview = convertView.findViewById(R.id.categname);
         Picasso.get().load(url.get(position)).into(product);
-        nameview.setText(name.get(position));
+        nameview.setVisibility(View.GONE);
+//        nameview.setText(name.get(position));
         return convertView;
     }
 }

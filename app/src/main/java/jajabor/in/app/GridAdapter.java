@@ -19,7 +19,6 @@ public class GridAdapter extends BaseAdapter {
     List<String>price;
     ImageView product;
     TextView nameview,priceview;
-    private Context context ;
     private LayoutInflater mLayoutInflater;
 
     public GridAdapter(List<String> url, List<String> name, List<String> price, Context context) {
@@ -50,7 +49,7 @@ public class GridAdapter extends BaseAdapter {
         product = convertView.findViewById(R.id.productpic);
         nameview = convertView.findViewById(R.id.name);
         priceview = convertView.findViewById(R.id.price);
-        Picasso.get().load(url.get(position)).into(product);
+        Picasso.get().load(url.get(position)).fit().into(product);
         nameview.setText(name.get(position));
         priceview.setText("₹"+price.get(position));
         return convertView;

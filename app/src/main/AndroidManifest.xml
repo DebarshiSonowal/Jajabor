@@ -7,25 +7,20 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:largeHeap="true"
         android:hardwareAccelerated="false"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="adjustResize">
-        <activity android:name=".SearchActivity">
-
-        </activity>
-        <activity android:name=".MainActivity3">
-
-        </activity>
+        <activity android:name=".CartActivity"></activity>
+        <activity android:name=".SearchActivity"></activity>
+        <activity android:name=".MainActivity3"></activity>
         <activity
             android:name=".MainActivity2"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -41,7 +36,10 @@
         <activity
             android:name=".signup"
             android:theme="@style/AppTheme.NoActionBar" />
-<activity android:name=".ProductView" android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".ProductView"
+            android:theme="@style/AppTheme.NoActionBar" />
+
         <service
             android:name=".MyMessagingService"
             android:enabled="true">
@@ -50,6 +48,10 @@
                 <action android:name="android.intent.action.RESPOND_VIA_MESSAGE" />
             </intent-filter>
         </service>
+
+        <meta-data
+            android:name="com.razorpay.ApiKey"
+            android:value="rzp_test_grmtE0KHU0FbE0" />
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

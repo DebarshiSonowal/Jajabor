@@ -178,7 +178,8 @@ public class MainActivity2 extends AppCompatActivity {
                 Toast.makeText(this,"Hello",Toast.LENGTH_SHORT).show();
                 break;
             case  R.id.cart:
-                Navigation.findNavController(this, R.id.nav_host_fragment).navigate(R.id.nav_cart);
+//                Navigation.findNavController(this, R.id.nav_host_fragment).navigate(R.id.nav_cart);
+                startActivity(new Intent(this,CartActivity.class));
 //                Navigation.findNavController(this, R.id.nav_host_fragment).navigate(R.id.nav_productview);
                 break;
 

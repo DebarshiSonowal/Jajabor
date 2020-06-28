@@ -3,12 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/_140sdp">
+    android:layout_height="@dimen/_150sdp">
 
     <androidx.cardview.widget.CardView
         android:layout_width="409dp"
-        android:layout_height="@dimen/_120sdp"
+        android:layout_height="@dimen/_130sdp"
         app:cardCornerRadius="20dp"
+        app:cardElevation="6dp"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,19 +25,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="192dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="12dp"
                 android:text="Quantity:"
                 android:textColor="#232121"
                 app:layout_constraintStart_toEndOf="@+id/cartpic"
                 app:layout_constraintTop_toBottomOf="@+id/cartprice" />
 
             <TextView
-                android:id="@+id/colourview2"
+                android:id="@+id/colourview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="96dp"
                 android:layout_marginTop="12dp"
-                android:text="TextView"
                 app:layout_constraintStart_toEndOf="@+id/cartpic"
                 app:layout_constraintTop_toBottomOf="@+id/cartprice2" />
 
@@ -45,7 +46,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="192dp"
                 android:layout_marginTop="12dp"
-                android:text="TextView"
                 app:layout_constraintStart_toEndOf="@+id/cartpic"
                 app:layout_constraintTop_toBottomOf="@+id/cartprice4" />
 
@@ -54,7 +54,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="12dp"
                 android:text="Size:"
                 android:textColor="#232121"
                 app:layout_constraintStart_toEndOf="@+id/cartpic"
@@ -65,7 +65,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="96dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="12dp"
                 android:text="Colour:"
                 android:textColor="#232121"
                 app:layout_constraintStart_toEndOf="@+id/cartpic"
@@ -85,10 +85,10 @@
                 android:id="@+id/cartname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="96dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:text="TextView"
                 android:textColor="#000000"
+                android:textSize="@dimen/_12sdp"
                 app:layout_constraintStart_toEndOf="@+id/cartpic"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -98,7 +98,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="20dp"
-                android:text="TextView"
                 android:textColor="#232121"
                 app:layout_constraintStart_toEndOf="@+id/cartpic"
                 app:layout_constraintTop_toBottomOf="@+id/cartname" />
@@ -109,7 +108,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="12dp"
-                android:text="TextView"
                 app:layout_constraintStart_toEndOf="@+id/cartpic"
                 app:layout_constraintTop_toBottomOf="@+id/cartprice3" />
 

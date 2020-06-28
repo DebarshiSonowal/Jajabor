@@ -1,12 +1,15 @@
 package jajabor.in.app;
 
 import android.annotation.SuppressLint;
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -33,9 +36,10 @@ import me.himanshusoni.quantityview.QuantityView;
 public class ProductView extends AppCompatActivity {
 TextView productname,productdesc,productprice;
 ImageView productpic;
-Integer quantity;
+Integer quantity,pid;
 Long money;
 ElasticImageView addto;
+SQLiteDatabase mDatabase;
 String colour,size;
     DatabaseReference databaseReference;
     FirebaseFirestore db ;
@@ -44,6 +48,8 @@ String colour,size;
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_view);
+        DatabaseHelper databaseHelper = new DatabaseHelper(ProductView.this);
+        mDatabase =  databaseHelper.getWritableDatabase();
         colour = "Black";
         size = "S";
         quantity = 1;
@@ -56,6 +62,7 @@ String colour,size;
         productname.setText(getIntent().getStringExtra("name"));
         productdesc.setText(getIntent().getStringExtra("desc"));
         productprice.setText("Price: "+"₹" +getIntent().getStringExtra("price"));
+        pid = getIntent().getIntExtra("pid",0);
         money =Long.parseLong( getIntent().getStringExtra("price"));
         Picasso.get().load(getIntent().getStringExtra("url")).into(productpic);
         QuantityView quantityView =findViewById(R.id.quantityView_default);
@@ -71,12 +78,13 @@ String colour,size;
 
             }
         });
+
         SwitchMultiButton mSwitchMultiButton1 = (SwitchMultiButton) findViewById(R.id.switchmultibutton1);
         mSwitchMultiButton1.setOnSwitchListener(new SwitchMultiButton.OnSwitchListener() {
             @Override
             public void onSwitch(int position, String tabText) {
                 Toast.makeText(ProductView.this, tabText, Toast.LENGTH_SHORT).show();
-                size = tabText;
+                colour = tabText;
             }
         });
         SwitchMultiButton mSwitchMultiButton = (SwitchMultiButton) findViewById(R.id.switchmultibutton);
@@ -84,28 +92,40 @@ String colour,size;
             @Override
             public void onSwitch(int position, String tabText) {
                 Toast.makeText(ProductView.this, tabText, Toast.LENGTH_SHORT).show();
-                colour = tabText;
+                size = tabText;
             }
         });
         addto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Map<String, Object> note = new HashMap<>();
-                note.put("Productpic", getIntent().getStringExtra("url"));
-                note.put("name", getIntent().getStringExtra("name"));
-                note.put("Price", money);
-                note.put("Colour", colour);
-                note.put("Size", size);
-                note.put("Quantity", quantity);
-                note.put("User",FirebaseAuth.getInstance().getCurrentUser().getUid());
+                ContentValues cv = new ContentValues();
+                cv.put(Contract.CartItem.COLUMN_NAME,getIntent().getStringExtra("name"));
+                Log.d("Product",getIntent().getStringExtra("name"));
+                cv.put(Contract.CartItem.COLUMN_PIC,getIntent().getStringExtra("url"));
+                cv.put(Contract.CartItem.COLUMN_PRICE,money*quantity);
+                cv.put(Contract.CartItem.COLUMN_SIZE,size);
+                cv.put(Contract.CartItem.COLUMN_COLOR,colour);
+                cv.put(Contract.CartItem.COLUMN_QUANTITY,quantity);
+                cv.put(Contract.CartItem.COLUMN_PID,pid);
+                mDatabase.insert(Contract.CartItem.TABLE_NAME,null,cv);
 
-                db.collection("Cart").add(note).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Toast.makeText(ProductView.this, "Added to cart", Toast.LENGTH_SHORT).show();
-                        finish();
-                    }
-                });
+//                mDatabase.insert(Contract.MissedCalls.TABLE_NAME,null,cv);
+//                Map<String, Object> note = new HashMap<>();
+//                note.put("Productpic", getIntent().getStringExtra("url"));
+//                note.put("name", getIntent().getStringExtra("name"));
+//                note.put("Price", money);
+//                note.put("Colour", colour);
+//                note.put("Size", size);
+//                note.put("Quantity", quantity);
+//                note.put("User",FirebaseAuth.getInstance().getCurrentUser().getUid());
+
+//                db.collection("Cart").add(note).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+//                    @Override
+//                    public void onSuccess(DocumentReference documentReference) {
+//                        Toast.makeText(ProductView.this, "Added to cart", Toast.LENGTH_SHORT).show();
+//                        finish();
+//                    }
+//                });
             }
 
 

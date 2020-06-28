@@ -25,9 +25,21 @@ public class ProfileFragment extends Fragment {
     private FirebaseAuth firebaseAuth;
     DocumentReference noteref;
     FirebaseFirestore db ;
+    EventListener<DocumentSnapshot>mEventListener;
 EditText username,firstname,lastname,phone,pincode,address;
 String uname,fnam,lnam,add;
 int pno,pinno;
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mEventListener = null;
+        noteref = null;
+        db = null;
+        firebaseAuth = null;
+        System.gc();
+    }
+
     @Override
     public void onStart() {
         super.onStart();

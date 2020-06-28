@@ -32,10 +32,6 @@ class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         this.quantity = quantity;
        mLayoutInflater = LayoutInflater.from(context);
     }
-
-
-
-
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -47,10 +43,15 @@ class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Picasso.get().load(url.get(position)).into(holder.product);
         holder.nameview.setText(name.get(position));
-        holder.quantityview.setText(quantity.get(position)+"");
+        if (quantity.get(position)!= null) {
+            holder.quantityview.setText(String.valueOf(quantity.get(position)));
+        }
         holder.colourview.setText(colour.get(position));
         holder.sizeview.setText(size.get(position));
-        holder.priceview.setText(price.get(position)+"");
+        if (quantity.get(position) != null) {
+            holder.priceview.setText(String.valueOf(price.get(position)));
+        }
+        holder.itemView.setTag(position);
     }
 
     @Override
@@ -66,9 +67,19 @@ class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             nameview = itemView.findViewById(R.id.cartname);
             priceview = itemView.findViewById(R.id.cartprice);
             sizeview = itemView.findViewById(R.id.sizeview);
-            colourview = itemView.findViewById(R.id.colourview2);
+            colourview = itemView.findViewById(R.id.colourview);
             quantityview = itemView.findViewById(R.id.quantview);
 
         }
+    }
+    public void delete(int pos){
+        url.remove(pos);
+        price.remove(pos);
+        name.remove(pos);
+        size.remove(pos);
+        colour.remove(pos);
+        quantity.remove(pos);
+        notifyItemRemoved(pos);
+        notifyItemRangeChanged(pos,1);
     }
 }

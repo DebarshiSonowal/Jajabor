@@ -24,16 +24,18 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     List<String>name;
     List<String>price;
     List<String>shrt;
+    List<Integer>pid;
     private Context context ;
     private LayoutInflater mLayoutInflater;
     Activity mActivity;
 
-    public ProductAdapter(List<String> url, List<String> name, List<String> price,  List<String>shrt, Context context, Activity mActivity) {
+    public ProductAdapter(List<String> url, List<String> name, List<String> price,  List<String>shrt,List<Integer>pid, Context context, Activity mActivity) {
         this.url = url;
         this.name = name;
         this.price = price;
         this.shrt = shrt;
         this.context = context;
+        this.pid = pid;
         this.mActivity = mActivity;
         mLayoutInflater = LayoutInflater.from(context);
     }
@@ -42,14 +44,13 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = mLayoutInflater.inflate(R.layout.basicproductview,parent,false);
-        BusStation.getBus().register(context);
         return new ViewHolder(view);
     }
 
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
-        Picasso.get().load(url.get(position)).into(holder.product);
+        Picasso.get().load(url.get(position)).resize(400,400).into(holder.product);
         holder.nameview.setText(name.get(position));
         holder.priceview.setText("₹"+price.get(position));
         holder.priceview.setOnClickListener(new View.OnClickListener() {
@@ -61,6 +62,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                 i.putExtra("price",price.get(position));
                 i.putExtra("desc",shrt.get(position));
                 i.putExtra("position",position);
+                i.putExtra("pid",pid.get(position));
                 mActivity.startActivity(i);
             }
         });
@@ -73,6 +75,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                 i.putExtra("price",price.get(position));
                 i.putExtra("desc",shrt.get(position));
                 i.putExtra("position",position);
+                i.putExtra("pid",pid.get(position));
                 mActivity.startActivity(i);
             }
         });
@@ -85,6 +88,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                 i.putExtra("price",price.get(position));
                 i.putExtra("desc",shrt.get(position));
                 i.putExtra("position",position);
+                i.putExtra("pid",pid.get(position));
                 mActivity.startActivity(i);
             }
         });
