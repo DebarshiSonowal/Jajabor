@@ -4,29 +4,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFEB3B"
+    android:background="#FFE503"
     tools:context=".MainActivity">
 
     <ImageView
         android:id="@+id/logo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="276dp"
+        android:layout_width="252dp"
+        android:layout_height="201dp"
+        android:layout_marginTop="216dp"
+        android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.312"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo" />
+        app:srcCompat="@drawable/ic_logo__04" />
 
-    <TextView
-        android:id="@+id/tagline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="272dp"
-        android:text="Get custom logos on T Shirts"
-        android:textColor="#050505"
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="273dp"
+        android:layout_height="61dp"
+        android:layout_marginBottom="4dp"
+        android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.722"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ic_logo__09" />
+
+    <TextView
+        android:id="@+id/textView36"
+        android:layout_width="217dp"
+        android:layout_height="30dp"
+        android:gravity="center"
+        android:text="FROM"
+        android:textColor="#1B1919"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

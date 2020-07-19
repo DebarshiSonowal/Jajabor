@@ -89,9 +89,9 @@ public class MyMessagingService extends com.google.firebase.messaging.FirebaseMe
         protected void onPostExecute(Bitmap result) {
             super.onPostExecute(result);
 
-//            Intent intent = new Intent(mContext, MyOpenableActivity.class);
-//            intent.putExtra("key", "value");
-//            PendingIntent pendingIntent = PendingIntent.getActivity(mContext, 100, intent, PendingIntent.FLAG_ONE_SHOT);
+            Intent intent = new Intent(mContext, MainActivity2.class);
+            intent.putExtra("key", "value");
+            PendingIntent pendingIntent = PendingIntent.getActivity(mContext, 100, intent, PendingIntent.FLAG_ONE_SHOT);
 
             NotificationManager notificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
             Notification notif = new Notification.Builder(mContext)
@@ -102,6 +102,7 @@ public class MyMessagingService extends com.google.firebase.messaging.FirebaseMe
                     .setLargeIcon(result)
                     .setStyle(new Notification.BigPictureStyle().bigPicture(result))
                     .setChannelId("MyNotifications")
+                    .setContentIntent(pendingIntent)
                     .build();
             notif.flags |= Notification.FLAG_AUTO_CANCEL;
             notificationManager.notify(1, notif);

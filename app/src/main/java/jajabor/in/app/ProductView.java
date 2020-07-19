@@ -3,10 +3,11 @@ package jajabor.in.app;
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Build;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.util.Log;
@@ -16,18 +17,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.pd.chocobar.ChocoBar;
 import com.skydoves.elasticviews.ElasticImageView;
 import com.squareup.picasso.Picasso;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
 
 import lib.kingja.switchbutton.SwitchMultiButton;
@@ -40,9 +35,10 @@ Integer quantity,pid;
 Long money;
 ElasticImageView addto;
 SQLiteDatabase mDatabase;
-String colour,size;
+    String colour,size;
     DatabaseReference databaseReference;
     FirebaseFirestore db ;
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -65,7 +61,7 @@ String colour,size;
         pid = getIntent().getIntExtra("pid",0);
         money =Long.parseLong( getIntent().getStringExtra("price"));
         Picasso.get().load(getIntent().getStringExtra("url")).into(productpic);
-        QuantityView quantityView =findViewById(R.id.quantityView_default);
+        QuantityView quantityView =findViewById(R.id.quantityview);
         quantityView.setOnQuantityChangeListener(new QuantityView.OnQuantityChangeListener() {
             @Override
             public void onQuantityChanged(int oldQuantity, int newQuantity, boolean programmatically) {
@@ -126,6 +122,11 @@ String colour,size;
 //                        finish();
 //                    }
 //                });
+                ChocoBar.builder().setActivity(ProductView.this)
+                        .setText("Added to cart")
+                        .setDuration(ChocoBar.LENGTH_SHORT)
+                        .green()  // in built green ChocoBar
+                        .show();
             }
 
 

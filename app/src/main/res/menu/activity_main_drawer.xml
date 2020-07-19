@@ -18,12 +18,44 @@
                   android:id="@+id/nav_women"
                   android:icon="@drawable/ic_woman_1"
                   android:title="Women" />
+              <item
+                  android:id="@+id/nav_orderstatus"
+                  android:icon="@drawable/ic_purchase"
+                  android:title="Order Status"/>
+              <item
+                  android:id="@+id/nav_customdesign"
+                  android:icon="@drawable/ic_ropa"
+                  android:title="Custom Design"
+                  />
           </group>
       </menu>
     </item>
+    <item android:title="Options">
+   <menu>
+       <group android:checkableBehavior="single"
+           android:id="@+id/middle">
+           <item
+               android:id="@+id/nav_wishlist"
+               android:icon="@drawable/ic_heart"
+               android:title="Wishlist"
+               />
+           <item
+               android:id="@+id/nav_profile"
+               android:icon="@drawable/ic_baseline_person_24"
+               android:title="Profile"
+               />
+       </group>
+   </menu>
+    </item>
+
     <item android:title="Contact">
     <menu>
         <group android:checkableBehavior="single"   android:id="@+id/bottom">
+            <item
+                android:id="@+id/nav_about"
+                android:icon="@drawable/ic_baseline_info_24"
+                android:title="About"
+                />
             <item
                 android:id="@+id/nav_contactus"
                 android:icon="@drawable/ic_baseline_email_24"

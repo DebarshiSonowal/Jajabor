@@ -39,6 +39,21 @@
         <action
             android:id="@+id/action_nav_women_to_nav_men"
             app:destination="@id/nav_men" />
+        <action
+            android:id="@+id/action_nav_women_to_nav_orderstatus"
+            app:destination="@id/nav_orderstatus" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_orderstatus"
+        android:name="jajabor.in.app.OrderStatusFragment"
+        android:label="Order Status"
+        tools:layout="@layout/fragment_order_status" >
+        <action
+            android:id="@+id/action_nav_orderstatus_to_nav_contactus"
+            app:destination="@id/nav_contactus" />
+        <action
+            android:id="@+id/action_nav_orderstatus_to_nav_women"
+            app:destination="@id/nav_women" />
     </fragment>
     <fragment
         android:id="@+id/nav_contactus"
@@ -97,5 +112,58 @@
         <action
             android:id="@+id/action_nav_productview_to_nav_cart"
             app:destination="@id/nav_cart" />
+        <action
+            android:id="@+id/action_nav_productview_to_nav_customdesign"
+            app:destination="@id/nav_customdesign" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_customdesign"
+        android:name="jajabor.in.app.CustomDesignFragment"
+        android:label="Custom Design"
+        tools:layout="@layout/fragment_custom_design"
+        >
+        <action
+            android:id="@+id/action_nav_customdesign_to_nav_productview"
+            app:destination="@id/nav_productview" />
+        <action
+            android:id="@+id/action_nav_customdesign_to_nav_about"
+            app:destination="@id/nav_about" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_about"
+        android:name="jajabor.in.app.AboutFragment"
+        android:label="About"
+        tools:layout="@layout/fragment_about"
+        >
+        <action
+            android:id="@+id/action_nav_about_to_nav_customdesign"
+            app:destination="@id/nav_customdesign" />
+        <action
+            android:id="@+id/action_nav_about_to_nav_wishlist"
+            app:destination="@id/nav_wishlist" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_wishlist"
+        android:name="jajabor.in.app.WishlistFragment"
+        android:label="Wishlist"
+        tools:layout="@layout/fragment_wishlist"
+        >
+        <action
+            android:id="@+id/action_nav_wishlist_to_nav_about"
+            app:destination="@id/nav_about" />
+        <action
+            android:id="@+id/action_nav_wishlist_to_nav_searchresult"
+            app:destination="@id/nav_searchresult" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_searchresult"
+        android:name="jajabor.in.app.SerarchResultFragment"
+        android:label="SearchResult"
+        tools:layout="@layout/fragment_serarch_result"
+        >
+
+        <action
+            android:id="@+id/action_nav_searchresult_to_nav_wishlist"
+            app:destination="@id/nav_wishlist" />
     </fragment>
 </navigation>

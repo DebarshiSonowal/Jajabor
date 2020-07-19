@@ -101,9 +101,6 @@ public class signup extends AppCompatActivity {
                     return;
                 }
 
-
-
-
                 if (password.equals(confirmPassword)) {
                     firebaseAuth.createUserWithEmailAndPassword(email, password)
                             .addOnCompleteListener(signup.this, new OnCompleteListener<AuthResult>() {
@@ -123,6 +120,9 @@ public class signup extends AppCompatActivity {
                                         note.put("Firstname",firstName);
                                         note.put("Lastname",lastName);
                                         note.put("Address",null);
+                                        note.put("Phone",null);
+                                        note.put("Pin",0);
+                                        note.put("No. Order",0);
                                         db.collection("UserProfile").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).set(note).addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
@@ -149,7 +149,6 @@ public class signup extends AppCompatActivity {
 //                                                startActivity(new Intent(getApplicationContext(), login.class));
 //                                            }
 //                                        });
-
                                     } else {
                                         Toast.makeText(signup.this, "Authentication Failed", Toast.LENGTH_SHORT).show();
                                     }

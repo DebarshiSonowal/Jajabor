@@ -1,8 +1,10 @@
 package jajabor.in.app;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +16,9 @@ import androidx.annotation.NonNull;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.like.LikeButton;
+import com.like.OnLikeListener;
+import com.shashank.sony.fancytoastlib.FancyToast;
 import com.squareup.otto.Bus;
 import com.squareup.picasso.Picasso;
 
@@ -92,6 +97,25 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                 mActivity.startActivity(i);
             }
         });
+        holder.wishlist.setOnLikeListener(new OnLikeListener() {
+            @Override
+            public void liked(LikeButton likeButton) {
+                DatabaseHelper2 databaseHelper = new DatabaseHelper2(mActivity);
+                SQLiteDatabase mDatabase =  databaseHelper.getWritableDatabase();
+                ContentValues cv = new ContentValues();
+                cv.put(Contract2.CartItem2.COLUMN_NAME,name.get(position));
+                cv.put(Contract2.CartItem2.COLUMN_PIC,url.get(position));
+                cv.put(Contract2.CartItem2.COLUMN_PRICE,price.get(position));
+                cv.put(Contract2.CartItem2.COLUMN_PID,pid.get(position));
+                cv.put(Contract2.CartItem2.COLUMN_DESC,shrt.get(position));
+                mDatabase.insert(Contract2.CartItem2.TABLE_NAME,null,cv);
+            }
+
+            @Override
+            public void unLiked(LikeButton likeButton) {
+
+            }
+        });
     }
 
     @Override
@@ -101,11 +125,13 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     public static class ViewHolder extends RecyclerView.ViewHolder {
     ImageView product;
     TextView nameview,priceview;
+    LikeButton wishlist;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             product = itemView.findViewById(R.id.productpic);
             nameview = itemView.findViewById(R.id.name);
             priceview = itemView.findViewById(R.id.price);
+            wishlist = itemView.findViewById(R.id.star_button);
         }
     }
 }

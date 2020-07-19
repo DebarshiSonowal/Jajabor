@@ -47,9 +47,9 @@ public class WomenFragment extends Fragment {
         price.add("₹299.00");
         price.add("₹299.00");
 
-        mGridView = root.findViewById(R.id.womengrid);
-        mGridAdapter = new GridAdapter(url,name,price,getContext());
-        mGridView.setAdapter(mGridAdapter);
+//        mGridView = root.findViewById(R.id.womengrid);
+//        mGridAdapter = new GridAdapter(url,name,price,getContext());
+//        mGridView.setAdapter(mGridAdapter);
         return root;
     }
 }

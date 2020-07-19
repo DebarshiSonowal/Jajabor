@@ -194,12 +194,11 @@ public class login extends AppCompatActivity {
                             Map<String, Object> note = new HashMap<>();
                             note.put("Email",personEmail);
                             note.put("Username",personName);
-                            note.put("level1",0);
-                            note.put("level2",0);
-                            note.put("level3",0);
-                            note.put("level4",0);
-                            note.put("level5",0);
-                            note.put("Coin",20);
+                            note.put("Firstname","firstName");
+                            note.put("Lastname","lastName");
+                            note.put("Address",null);
+                            note.put("Phone",null);
+                            note.put("Pin",null);
 
                             db.collection("UserProfile").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).set(note).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override

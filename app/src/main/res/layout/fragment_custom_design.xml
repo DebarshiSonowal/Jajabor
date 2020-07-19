@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    tools:context=".CustomDesignFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.legacy.widget.Space
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_20sdp" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.skydoves.elasticviews.ElasticButton
+                android:id="@+id/paybtn2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:background="#5AFF00"
+                android:elevation="10dp"
+                android:text="Add to cart"
+                android:textColor="@android:color/widget_edittext_dark"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:button_cornerRadius="10dp"
+                app:button_duration="250"
+                app:button_scale="0.87"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <me.himanshusoni.quantityview.QuantityView
+                android:id="@+id/quantityview"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_26sdp"
+                android:layout_marginBottom="24dp"
+                android:gravity="center"
+                app:layout_constraintBottom_toTopOf="@+id/paybtn2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.483"
+                app:layout_constraintStart_toStartOf="parent"
+                app:qv_addButtonText="+"
+                app:qv_addButtonTextColor="#000000"
+                app:qv_maxQuantity="5"
+                app:qv_minQuantity="1"
+                app:qv_quantity="1"
+                app:qv_quantityDialog="true"
+                app:qv_quantityTextColor="#000000"
+                app:qv_removeButtonText="-"
+                app:qv_removeButtonTextColor="#000000" />
+
+            <lib.kingja.switchbutton.SwitchMultiButton
+                android:id="@+id/sizeswitch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:padding="8dp"
+                app:layout_constraintBottom_toTopOf="@+id/colourswitch"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:selectedColor="#FFC107"
+                app:selectedTab="0"
+                app:strokeRadius="5dp"
+                app:strokeWidth="1dp"
+                app:switchTabs="@array/switch_tabs"
+                app:textSize="14sp" />
+
+            <lib.kingja.switchbutton.SwitchMultiButton
+                android:id="@+id/colourswitch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="36dp"
+                android:padding="8dp"
+                app:layout_constraintBottom_toTopOf="@+id/quantityview"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:selectedColor="#FFC107"
+                app:selectedTab="0"
+                app:strokeRadius="5dp"
+                app:strokeWidth="1dp"
+                app:switchTabs="@array/switch_color"
+                app:textSize="14sp" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/designview"
+                android:layout_width="153dp"
+                android:layout_height="122dp"
+                android:layout_marginTop="100dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView32"
+                android:layout_width="163dp"
+                android:layout_height="41dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="36dp"
+                android:gravity="center"
+                android:text="Choose the design file:"
+                android:textColor="#050505"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.skydoves.elasticviews.ElasticImageView
+                android:id="@+id/selectbtn"
+                android:layout_width="67dp"
+                android:layout_height="58dp"
+                android:layout_marginTop="100dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.325"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_scale" />
+
+            <com.skydoves.elasticviews.ElasticImageView
+                android:id="@+id/upldbtn"
+                android:layout_width="69dp"
+                android:layout_height="58dp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.327"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView34"
+                app:srcCompat="@drawable/ic_photo" />
+
+            <TextView
+                android:id="@+id/textView34"
+                android:layout_width="wrap_content"
+                android:layout_height="23dp"
+                android:layout_marginTop="4dp"
+                android:gravity="center"
+                android:text="Select the file"
+                android:textColor="#050505"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.313"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/selectbtn" />
+
+            <TextView
+                android:id="@+id/textView26"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Upload"
+                android:textColor="#050505"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.336"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/upldbtn" />
+
+            <TextView
+                android:id="@+id/textView28"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:text="Choose options:"
+                android:textColor="#050505"
+                app:layout_constraintBottom_toTopOf="@+id/sizeswitch"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+
+</FrameLayout>

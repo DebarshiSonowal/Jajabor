@@ -22,22 +22,23 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         tite = findViewById(R.id.logo);
-        tag = findViewById(R.id.tagline);
+//        tag = findViewById(R.id.tagline);
 //        from = findViewById(R.id.fromview);
 //        publisher = findViewById(R.id.owner);
 
         top = AnimationUtils.loadAnimation(MainActivity.this,R.anim.top_animation );
-        bottom = AnimationUtils.loadAnimation(MainActivity.this,R.anim.bottom_animation );
+//        bottom = AnimationUtils.loadAnimation(MainActivity.this,R.anim.bottom_animation );
         tite.setAnimation(top);
-        tag.setAnimation(bottom);
+//        tag.setAnimation(bottom);
 //        from.setAnimation(bottom);
 //        publisher.setAnimation(bottom);
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(MainActivity.this,login.class);
-                startActivity(intent);
+//                Intent intent = new Intent(MainActivity.this,login.class);
+//                startActivity(intent);
+                startActivity(new Intent(MainActivity.this, MainActivity2.class));
                 finish();
             }
         },SPLASH_TIME);
