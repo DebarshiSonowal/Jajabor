@@ -1,7 +1,11 @@
 package jajabor.in.app;
 
+import android.app.AlertDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.Html;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -9,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.github.nikartm.button.FitButton;
@@ -33,15 +38,20 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.shobhitpuri.custombuttons.GoogleSignInButton;
+import com.skydoves.elasticviews.ElasticButton;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import dmax.dialog.SpotsDialog;
+
 public class login extends AppCompatActivity {
     private static final int RC_SIGN_IN = 2;
-    SignInButton mSignInButton;
+
+    GoogleSignInButton mSignInButton;
     EditText txtEmail, txtPassword;
-    FitButton btn_login,btn_signup;
+    ElasticButton btn_login,btn_signup;
     FirebaseAuth mAuth,firebaseAuth;
     GoogleApiClient mGoogleApiClient;
     DatabaseReference root;
@@ -49,6 +59,7 @@ public class login extends AppCompatActivity {
     String personName;
     String personEmail;
     FirebaseFirestore db ;
+    AlertDialog mDialog;
 
     @Override
     protected void onStart() {
@@ -63,10 +74,14 @@ public class login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         //Connect
+        ActionBar bar = getSupportActionBar();
+        bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#FFEB3B")));
+        bar.setTitle(Html.fromHtml("<font color='#000000'>LOGIN </font>"));
+        bar.setHomeAsUpIndicator(R.drawable.ic_back_vector);
         mSignInButton = findViewById(R.id.googlebtn);
         txtEmail = (EditText)findViewById(R.id.emailtext);
         txtPassword = (EditText)findViewById(R.id.passwordtext);
-        btn_login =  findViewById(R.id.loginbtn);
+        btn_login =  findViewById(R.id.mailbtn);
         btn_signup = findViewById(R.id.signupbtn);
         db = FirebaseFirestore.getInstance();
         //Instance
@@ -93,19 +108,27 @@ public class login extends AppCompatActivity {
             public void onClick(View v) {
                 String email = txtEmail.getText().toString().trim();
                 String password = txtPassword.getText().toString().trim();
-
-
+                mDialog =  new SpotsDialog.Builder()
+                        .setContext(login.this)
+                        .setTheme(R.style.Custom)
+                        .setMessage("Please Wait")
+                        .setCancelable(false)
+                       .build();
+               mDialog.show();
                 if (TextUtils.isEmpty(email)) {
                     Toast.makeText(login.this, "Please Enter Email", Toast.LENGTH_SHORT).show();
+                    mDialog.dismiss();
                     return;
                 }
                 if (TextUtils.isEmpty(password)) {
                     Toast.makeText(login.this, "Please Enter Password", Toast.LENGTH_SHORT).show();
+                    mDialog.dismiss();
                     return;
                 }
 
                 if (password.length() < 6) {
                     Toast.makeText(login.this, "Password too short", Toast.LENGTH_SHORT).show();
+                    mDialog.dismiss();
                 }
 
                 firebaseAuth.signInWithEmailAndPassword(email, password)
@@ -113,9 +136,10 @@ public class login extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
+                                    mDialog.dismiss();
                                     startActivity(new Intent(getApplicationContext(), MainActivity2.class));
                                 } else {
-
+                                    mDialog.dismiss();
                                     Toast.makeText(login.this, "Login failed or User not Available", Toast.LENGTH_SHORT).show();
 
                                 }

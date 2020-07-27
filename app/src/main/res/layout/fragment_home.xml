@@ -18,9 +18,10 @@
             android:layout_height="wrap_content">
 
         </androidx.recyclerview.widget.RecyclerView>
+
         <androidx.legacy.widget.Space
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_20sdp"/>
+            android:layout_height="@dimen/_10sdp" />
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -60,9 +61,10 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.cardview.widget.CardView>
+
         <androidx.legacy.widget.Space
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_30sdp"/>
+            android:layout_height="@dimen/_10sdp" />
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -78,15 +80,11 @@
                 app:slider_interval="5000"
                 app:slider_loopSlides="true" />
         </androidx.cardview.widget.CardView>
+
         <androidx.legacy.widget.Space
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_30sdp"/>
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardBackgroundColor="#00FFFFFF"
-            android:layout_margin="@dimen/_5sdp"
-            app:cardCornerRadius="6dp">
+            android:layout_height="@dimen/_10sdp" />
+
 
             <ImageView
                 android:id="@+id/imageView15"
@@ -100,7 +98,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-        </androidx.cardview.widget.CardView>
+
 
         <androidx.legacy.widget.Space
             android:layout_width="match_parent"
@@ -126,13 +124,25 @@
             android:textSize="@dimen/_25sdp"
             android:textStyle="bold" />
 
+        <TextView
+            android:id="@+id/textView37"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="PRICE STARTING AT ₹235"
+            android:textColor="#B03566" />
+
         <GridView
             android:id="@+id/TOPWEAR"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_550sdp"
-            android:horizontalSpacing="@dimen/_2sdp"
-            android:numColumns="auto_fit"
+            android:layout_height="@dimen/_600sdp"
+            android:numColumns="2"
+            android:background="#FFFFFF"
+            android:horizontalSpacing="@dimen/_4sdp"
             android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:layout_margin="4dp"
+            android:scrollbars="vertical"
             android:verticalScrollbarPosition="right"
             android:verticalSpacing="@dimen/_20sdp">
 
@@ -142,6 +152,48 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/_10sdp"/>
 
+        <TextView
+            android:id="@+id/textView38"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="BROWSE"
+            android:textColor="#000000"
+            android:textSize="@dimen/_18sdp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView39"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="ACCESSORIES"
+            android:textColor="#000000"
+            android:textSize="@dimen/_25sdp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView40"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="PRICE STARTING AT ₹39"
+            android:textColor="#B03566" />
+
+        <GridView
+            android:id="@+id/ACCESSORIES"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:horizontalSpacing="@dimen/_2sdp"
+            android:numColumns="auto_fit"
+            android:paddingTop="10dp"
+            android:verticalScrollbarPosition="right"
+            android:verticalSpacing="@dimen/_20sdp">
+
+        </GridView>
+        <androidx.legacy.widget.Space
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_10sdp"/>
         <TextView
             android:id="@+id/textView2"
             android:layout_width="match_parent"
@@ -167,7 +219,7 @@
             android:layout_height="@dimen/_140sdp"
             android:layout_margin="4dp"
             app:cardBackgroundColor="#FFEB3B"
-            app:cardCornerRadius="20dp"
+
             app:cardElevation="6dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -228,14 +280,13 @@
 
         <androidx.legacy.widget.Space
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_30sdp"/>
+            android:layout_height="@dimen/_10sdp" />
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="@dimen/_100sdp"
             android:layout_margin="4dp"
             app:cardBackgroundColor="#FFEB3B"
-            app:cardCornerRadius="20dp"
             app:cardElevation="6dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -295,9 +346,10 @@
             android:id="@+id/allproducts"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
+
         <androidx.legacy.widget.Space
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_30sdp"/>
+            android:layout_height="@dimen/_10sdp" />
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

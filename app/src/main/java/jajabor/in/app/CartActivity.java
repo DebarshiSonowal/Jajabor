@@ -70,7 +70,7 @@ public class CartActivity extends AppCompatActivity implements PaymentResultWith
     Cursor mCursor;
     Integer totalprice;
     Double mDouble;
-    TextView MRP,PAYABLE,Delivery;
+    TextView MRP,PAYABLE,Delivery,itemno;
     String pids,totalquantity;
     Map<String,Object>note;
     FirebaseUser mUser;
@@ -116,11 +116,13 @@ public class CartActivity extends AppCompatActivity implements PaymentResultWith
         PAYABLE = findViewById(R.id.total);
         mRecyclerView = findViewById(R.id.cartview);
         mCursor = getAllItems();
+        itemno = findViewById(R.id.itemno);
         Delivery=findViewById(R.id.delivery);
         final LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         mProductAdapter = new CartProductAdapter(this,getAllItems());
         mProductAdapter.swapCursor(getAllItems());
         getMRP();
+        itemno.setText("Item"+" ("+mCursor.getCount()+")");
         PID = getAllPid();
         quant = getquantity();
         getDataToString();
@@ -311,6 +313,7 @@ private List<String>getPic(){
         quant = getquantity();
         getDataToString();
         size = getsizes();
+        itemno.setText("Item"+" ("+mCursor.getCount()+")");
     }
 
     private void getMRP() {

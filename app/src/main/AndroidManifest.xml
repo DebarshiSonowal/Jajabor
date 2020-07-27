@@ -16,8 +16,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:windowSoftInputMode="adjustResize">
-        <activity android:name=".SearchActivity"
+        android:windowSoftInputMode="adjustNothing"
+        >
+    <activity android:name=".SearchActivity"
             android:theme="@style/AppTheme.NoActionBar"
             >
 
@@ -30,7 +31,7 @@
         <activity
             android:name=".MainActivity2"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustResize">
+            android:windowSoftInputMode="adjustNothing">
 
         </activity>
         <activity
@@ -44,10 +45,10 @@
         </activity>
         <activity
             android:name=".login"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/Dark"/>
         <activity
             android:name=".signup"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/Dark"/>
         <activity
             android:name=".ProductView"
             android:theme="@style/AppTheme.NoActionBar" />

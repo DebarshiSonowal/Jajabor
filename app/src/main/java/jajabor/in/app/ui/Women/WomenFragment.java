@@ -1,6 +1,8 @@
 package jajabor.in.app.ui.Women;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,43 +15,137 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import jajabor.in.app.GridAdapter;
 import jajabor.in.app.R;
+import jajabor.in.app.ui.Men.MenFragment;
 
 public class WomenFragment extends Fragment {
-
-    List<String> url;
-    List<String>name;
-    List<String>price;
+    List<String> url,url1;
+    List<String>name,name1;
+    Background back;
+    List<String>price,price1;
+    List<String>categ,shrdesc;
+    List<Integer>no,pid;
     GridAdapter mGridAdapter;
+    DatabaseReference mFirebaseDatabase;
+    ValueEventListener mValueEventListener;
     private GridView mGridView;
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        back = new Background();
+        back.execute();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mGridAdapter = null;
+        mGridView=null;
+        mFirebaseDatabase.removeEventListener(mValueEventListener);
+        mFirebaseDatabase = null;
+        mValueEventListener = null;
+        back.cancel(true);
+        System.gc();
+    }
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
       View root = inflater.inflate(R.layout.fragment_women, container, false);
+        mFirebaseDatabase = FirebaseDatabase.getInstance().getReference();
         url = new ArrayList<>();
-        url.add("https://d2jnb1er72blne.cloudfront.net/wp-content/uploads/2020/02/Axomiya-mur-prothom-porichoy-Unisex-womens-Assamese-Tshirt-524x658.jpg");
-        url.add("https://d2jnb1er72blne.cloudfront.net/wp-content/uploads/2020/02/Akolxoriya-Unisex-Womens-Assamese-Tshirt-524x658.jpg");
-        url.add("https://d2jnb1er72blne.cloudfront.net/wp-content/uploads/2020/02/Sangeetei-mur-jibonMusic-is-my-Life-Assamese-Tshirt-524x658.jpg");
-        url.add("https://d2jnb1er72blne.cloudfront.net/wp-content/uploads/2020/01/Dusto-Lora-524x658.png");
-
+        url1= new ArrayList<>();
+        name1= new ArrayList<>();
         name = new ArrayList<>();
-        name.add("Axomiya Mur Prothom Porichoy Assamese Tshirt");
-        name.add("Akolxoriya Assamese Tshirt");
-        name.add("Sangeetei mur Jibon Assamese Tshirt");
-        name.add("Dusto Lora Assamese Tshirt");
-
         price = new ArrayList<>();
-        price.add("₹299.00");
-        price.add("₹299.00");
-        price.add("₹299.00");
-        price.add("₹299.00");
-
-//        mGridView = root.findViewById(R.id.womengrid);
-//        mGridAdapter = new GridAdapter(url,name,price,getContext());
-//        mGridView.setAdapter(mGridAdapter);
+        price1= new ArrayList<>();
+        categ = new ArrayList<>();
+        shrdesc =new ArrayList<>();
+        pid = new ArrayList<>();
+        no = new ArrayList<>();
+        mGridView = root.findViewById(R.id.womengrid);
+        mGridAdapter = new GridAdapter(url1,name1,price1,shrdesc,pid,getContext(),getActivity());
+        mGridView.setAdapter(mGridAdapter);
         return root;
+    }
+    class Background extends AsyncTask<String,String,String> {
+
+        @Override
+        protected String doInBackground(String... strings) {
+            mFirebaseDatabase.addValueEventListener(mValueEventListener = new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for(DataSnapshot dataSnapshot:snapshot.getChildren()){
+                        for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren()){
+                            if(dataSnapshot1.getKey().equals("Images")){
+                                url.add(dataSnapshot1.getValue().toString());
+                                Log.d("Value",dataSnapshot1.getValue().toString());
+                            }
+                            if(dataSnapshot1.getKey().equals("Name")){
+                                name.add(dataSnapshot1.getValue().toString());
+                                Log.d("Value",dataSnapshot1.getValue().toString());
+                            }
+                            if(dataSnapshot1.getKey().equals("Price")){
+                                price.add(""+dataSnapshot1.getValue().toString());
+                                Log.d("Value",dataSnapshot1.getValue().toString());
+                            }
+                            if(dataSnapshot1.getKey().equals("Categories")){
+                                categ.add(dataSnapshot1.getValue().toString());
+                                Log.d("Value",dataSnapshot1.getValue().toString());
+                            }
+                            if(dataSnapshot1.getKey().equals("Short description")){
+                                shrdesc.add(""+dataSnapshot1.getValue().toString());
+                                Log.d("Value5",dataSnapshot1.getValue().toString());
+                            }
+                            if(dataSnapshot1.getKey().equals("ID")){
+                                pid.add( Integer.parseInt(dataSnapshot1.getValue().toString()) );
+                                Log.d("Value6",dataSnapshot1.getValue().toString());
+                            }
+                        }
+                    }
+                    getExecute();
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+            return null;
+        }
+    }
+    private void getExecute() {
+        for (int i=0;i<categ.size();i++){
+            Log.d("Value",categ.get(i).split("[,]", 0).toString());
+            for(String myStr: categ.get(i).split("[,]", 0)) {
+                if(myStr.toLowerCase().trim().equals("women")){
+                    no.add(i);
+                    Log.d("ValueQ",i+"");
+                }
+            }
+        }
+
+        for(int j=0;j<no.size();j++){
+
+            url1.add(url.get(no.get(j)));
+//                    Log.d("ValueW",url.get(j));
+            name1.add(name.get(no.get(j)));
+//                    Log.d("ValueE",name.get(j));
+            price1.add(price.get(no.get(j)));
+//                    Log.d("ValueR",price.get(j));
+
+        }
+
+        mGridAdapter.notifyDataSetChanged();
     }
 }

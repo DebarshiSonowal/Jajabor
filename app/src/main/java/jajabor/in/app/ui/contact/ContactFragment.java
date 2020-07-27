@@ -1,69 +1,38 @@
 package jajabor.in.app.ui.contact;
 
-import androidx.lifecycle.ViewModelProviders;
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
+import com.github.nikartm.button.FitButton;
 import com.skydoves.elasticviews.ElasticButton;
 import com.skydoves.elasticviews.ElasticImageView;
 
 import jajabor.in.app.R;
 
 public class ContactFragment extends Fragment {
-private ElasticImageView call,mail,loc;
-private ElasticButton callbtn,mailbtn,locbtn;
+private FitButton callbtn,mailbtn,locbtn,fbtn,instabtn,tbtn;
+    Intent intentAiguilleur;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view =inflater.inflate(R.layout.fragment_contactus, container, false);
-        call =view.findViewById(R.id.callview);
-        mail =view.findViewById(R.id.mailview);
-        loc =view.findViewById(R.id.locview);
+
         callbtn = view.findViewById(R.id.callbtn);
         mailbtn = view.findViewById(R.id.mailbtn);
-        locbtn = view.findViewById(R.id.locbtn);
+        locbtn = view.findViewById(R.id.locationbtn);
+        fbtn = view.findViewById(R.id.fbbtn);
+        tbtn = view.findViewById(R.id.twiterbtn);
+        instabtn = view.findViewById(R.id.instabtn);
 
-        call.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Uri number2 = Uri.parse( "tel:"+"+918486558323");
-                Intent callIntent = new Intent(Intent.ACTION_DIAL, number2);
-                startActivity(callIntent);
-            }
-        });
 
-        mail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent send = new Intent(Intent.ACTION_SENDTO);
-                String uriText = "mailto:" + Uri.encode("jajabor.in@gmail.com") +
-                        "?subject=" + Uri.encode("") +
-                        "&body=" + Uri.encode("");
-                Uri uri = Uri.parse(uriText);
-                send.setData(uri);
-                startActivity(Intent.createChooser(send, "Send mail..."));
-            }
-        });
-
-        locbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Uri gmmIntentUri = Uri.parse("geo:26.4626776,90.5568552?q=Jajabor,Borpara, Bongaigaon");
-                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-                mapIntent.setPackage("com.google.android.apps.maps");
-                startActivity(mapIntent);
-            }
-        });
 
         callbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,6 +63,79 @@ private ElasticButton callbtn,mailbtn,locbtn;
                 startActivity(mapIntent);
             }
         });
+        fbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("fb://profile/1735926303287804"));
+                    startActivity(intent);
+                } catch(Exception e) {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/jajabor.in")));
+                }
+            }
+        });
+        instabtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String scheme = "http://instagram.com/_u/jajabor.in";
+                String path = "https://www.instagram.com/jajabor.in";
+                String nomPackageInfo ="com.instagram.android";
+                try {
+                    getActivity().getPackageManager().getPackageInfo(nomPackageInfo, 0);
+                   intentAiguilleur = new Intent(Intent.ACTION_VIEW, Uri.parse(scheme));
+                } catch (Exception e) {
+                    intentAiguilleur = new Intent(Intent.ACTION_VIEW, Uri.parse(path));
+                }
+                getActivity().startActivity(intentAiguilleur);
+            }
+        });
+        tbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("twitter://user?screen_name=" + "@jajaborshopping")));
+                }catch (Exception e) {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/#!/" + "@jajaborshopping")));
+                }
+            }
+        });
+
+
+//        f1 = view.findViewById(R.id.btn_1);
+//        f2 = view.findViewById(R.id.btn_2);
+//        f3 = view.findViewById(R.id.btn_3);
+//        f1.setIconResource(R.drawable.ic_contact_us);
+//        f2.setIconResource(R.drawable.ic_mail);
+//        f3.setIconResource(R.drawable.ic_location);
+//        f1.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Uri number2 = Uri.parse( "tel:"+"+918486558323");
+//                Intent callIntent = new Intent(Intent.ACTION_DIAL, number2);
+//                startActivity(callIntent);
+//            }
+//        });
+//        f2.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent send = new Intent(Intent.ACTION_SENDTO);
+//                String uriText = "mailto:" + Uri.encode("jajabor.in@gmail.com") +
+//                        "?subject=" + Uri.encode("") +
+//                        "&body=" + Uri.encode("");
+//                Uri uri = Uri.parse(uriText);
+//                send.setData(uri);
+//                startActivity(Intent.createChooser(send, "Send mail..."));
+//            }
+//        });
+//        f3.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Uri gmmIntentUri = Uri.parse("geo:26.4626776,90.5568552?q=Jajabor,Borpara, Bongaigaon");
+//                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+//                mapIntent.setPackage("com.google.android.apps.maps");
+//                startActivity(mapIntent);
+//            }
+//        });
         return view;
     }
 

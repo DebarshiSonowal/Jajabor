@@ -66,12 +66,14 @@ dependencies {
     implementation 'com.github.beworker:fabuless:3f146f4a5f'
     implementation 'com.github.jd-alexander:LikeButton:0.2.3'
     implementation 'android.arch.lifecycle:extensions:1.1.1'
+    implementation 'com.github.siyamed:android-shape-imageview:0.9.3@aar'
+    implementation 'com.github.d-max:spots-dialog:1.1@aar'
+    implementation 'com.shobhitpuri.custombuttons:google-signin:1.1.0'
     //Testing
     implementation 'com.google.firebase:firebase-database:19.3.1'
     implementation 'com.google.firebase:firebase-storage:19.1.1'
     implementation 'androidx.viewpager:viewpager:1.0.0'
     testImplementation 'junit:junit:4.12'
-
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 

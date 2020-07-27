@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.github.siyamed.shapeimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -59,7 +60,7 @@ class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         return url.size();
     }
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView product;
+        RoundedImageView product;
         TextView nameview,priceview,sizeview,colourview,quantityview;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

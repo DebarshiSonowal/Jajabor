@@ -20,14 +20,13 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import jajabor.in.app.AdapterSlider;
 import jajabor.in.app.AdapterSlider2;
+import jajabor.in.app.CategAccessAdapter;
 import jajabor.in.app.CategBannerAdapter;
 import jajabor.in.app.CategoryAdapter;
 import jajabor.in.app.PicassoImageLoadingService;
@@ -39,7 +38,7 @@ public class HomeFragment extends Fragment {
 Slider slider,slider1;
 List<String>url,url1,name,name1,price,tag,shrdesc;
 List<String>bihuurl,bihuname,bihuprice,categ,bihushrdesc;
-List<String>bannerpic;
+List<String>bannerpic,urlaccessory;
 List<String>coupleurl,couplename,coupleprice,coupletagg,coupledesc;
 List<String>bannername;
 List<Integer>PID,no,no1,bihuPID,couplePID;
@@ -47,17 +46,19 @@ List<Integer>Valentines;
     Networkk work;
 ValueEventListener mValueEventListener;
 ImageView mImageView,mImageView2,offer;
-CategoryAdapter mGridAdapter;
+CategoryAdapter topwearadater;
+CategAccessAdapter accessoriadapter;
 DatabaseReference mFirebaseDatabase;
 ProductAdapter mAdapter,mAdapter1,mAdapter2;
 CategBannerAdapter mCategBannerAdapter;
-GridView mGridView;
+GridView topweargrid,accessorygrid;
     @Override
     public void onStart() {
         super.onStart();
    work = new Networkk();
     work.execute();
-
+//https://images.bewakoof.com/uploads/grid/app/bewakoof-mobille-cover-parade-1594908843.jpg
+        //https://images.bewakoof.com/uploads/grid/app/collab-banner-v-2-1593079023.jpg
     }
 
     @Override
@@ -66,7 +67,7 @@ GridView mGridView;
         mFirebaseDatabase.removeEventListener(mValueEventListener);
         mValueEventListener = null;
         mCategBannerAdapter = null;
-        mGridView = null;
+        topweargrid = null;
         mImageView = null;
         mImageView2 = null;
         offer = null;
@@ -75,7 +76,7 @@ GridView mGridView;
         mAdapter = null;
         mAdapter1 = null;
         mAdapter2 = null;
-        mGridAdapter = null;
+        topwearadater = null;
         work.cancel(true);
     }
 
@@ -105,12 +106,16 @@ GridView mGridView;
         bihushrdesc = new ArrayList<>();
         bihuPID = new ArrayList<>();
         couplePID = new ArrayList<>();
+        urlaccessory = new ArrayList<>();
+        urlaccessory.add("https://images.bewakoof.com/uploads/grid/app/bewakoof-mobille-cover-parade-1594908843.jpg");
+        urlaccessory.add("https://images.bewakoof.com/uploads/grid/app/collab-banner-v-2-1593079023.jpg");
         no=new ArrayList<>();
         mFirebaseDatabase = FirebaseDatabase.getInstance().getReference();
-        mGridView = root.findViewById(R.id.TOPWEAR);
+        topweargrid = root.findViewById(R.id.TOPWEAR);
         mImageView = root.findViewById(R.id.imageView3);
         mImageView2 = root.findViewById(R.id.imageView6);
         offer = root.findViewById(R.id.imageView15);
+        accessorygrid = root.findViewById(R.id.ACCESSORIES);
 //        Picasso.get().load("https://firebasestorage.googleapis.com/v0/b/jajabor-android.appspot.com/o/banners%20for%20app-02.jpg?alt=media&token=f59a2969-34d4-4654-88b6-87a0ce2040e6").resize(1240,1240).into(mImageView);
 //        Picasso.get().load("https://firebasestorage.googleapis.com/v0/b/jajabor-android.appspot.com/o/banners%20for%20app-01.jpg?alt=media&token=aa67bdfd-4ea8-4637-8b2c-6f7457691c8c").resize(1240,1240).into(mImageView2);
 //        Picasso.get().load("https://firebasestorage.googleapis.com/v0/b/jajabor-android.appspot.com/o/banners%20for%20app-03.jpg?alt=media&token=36d7a59b-493a-4458-afac-7aad0c4801df").resize(1240,1240).into(offer);
@@ -159,7 +164,8 @@ GridView mGridView;
         mAdapter1 =  new ProductAdapter(bihuurl,bihuname,bihuprice,bihushrdesc,bihuPID,getContext(),getActivity());
         mAdapter2 =  new ProductAdapter(url,name,price,shrdesc,PID,getContext(),getActivity());
         mCategBannerAdapter = new CategBannerAdapter(bannerpic,bannername,getContext());
-        mGridAdapter = new CategoryAdapter(url1,name1,getContext());
+        accessoriadapter = new CategAccessAdapter(urlaccessory,getContext(),getActivity());
+        topwearadater = new CategoryAdapter(url1,name1,getContext());
 
         //Recyclerview
         final RecyclerView mRecyclerView= root.findViewById(R.id.couplesale);
@@ -188,8 +194,8 @@ GridView mGridView;
         mRecyclerView1.setAdapter(mAdapter1);
         mRecyclerView2.setAdapter(mAdapter2);
         CategBanner.setAdapter(mCategBannerAdapter);
-        mGridView.setAdapter(mGridAdapter);
-
+        topweargrid.setAdapter(topwearadater);
+        accessorygrid.setAdapter(accessoriadapter);
         return root;
     }
 

@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/_150sdp">
+    android:layout_height="@dimen/_150sdp"
+    android:background="#FFFFFF">
 
     <androidx.cardview.widget.CardView
         android:layout_width="409dp"
@@ -18,7 +19,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="#FFFFFF">
 
             <TextView
                 android:id="@+id/cartprice4"
@@ -37,6 +39,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="96dp"
                 android:layout_marginTop="12dp"
+                android:textColor="#020202"
                 app:layout_constraintStart_toEndOf="@+id/cartpic"
                 app:layout_constraintTop_toBottomOf="@+id/cartprice2" />
 
@@ -46,6 +49,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="192dp"
                 android:layout_marginTop="12dp"
+                android:textColor="#020202"
                 app:layout_constraintStart_toEndOf="@+id/cartpic"
                 app:layout_constraintTop_toBottomOf="@+id/cartprice4" />
 
@@ -88,7 +92,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:textColor="#000000"
-                android:textSize="8sp"
+                android:textSize="12sp"
                 app:layout_constraintStart_toEndOf="@+id/cartpic"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -108,6 +112,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="12dp"
+                android:textColor="#020202"
                 app:layout_constraintStart_toEndOf="@+id/cartpic"
                 app:layout_constraintTop_toBottomOf="@+id/cartprice3" />
 
