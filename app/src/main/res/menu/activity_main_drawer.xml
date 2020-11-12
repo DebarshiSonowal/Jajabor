@@ -23,6 +23,10 @@
                   android:icon="@drawable/ic_purchase"
                   android:title="Order Status"/>
               <item
+                  android:id="@+id/nav_customorder"
+                  android:icon="@drawable/custom"
+                  android:title="Custom Orders"/>
+              <item
                   android:id="@+id/nav_customdesign"
                   android:icon="@drawable/ic_ropa"
                   android:title="Custom Design"

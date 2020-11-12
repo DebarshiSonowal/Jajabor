@@ -4,19 +4,49 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    tools:context=".login">
+    android:background="@drawable/gp"
+    tools:context=".ui.Activity.login">
+
+    <com.github.nikartm.button.FitButton
+        android:id="@+id/OTPbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="88dp"
+        android:enabled="true"
+        android:gravity="center_vertical"
+        app:fb_backgroundColor="#6169FB"
+        app:fb_cornerRadius="2dp"
+        app:fb_divColor="#fff"
+        app:fb_divHeight="40dp"
+        app:fb_divWidth="1dp"
+        app:fb_icon="@drawable/ic_call"
+        app:fb_iconColor="#FFF"
+        app:fb_iconHeight="28dp"
+        app:fb_iconMarginEnd="10dp"
+        app:fb_iconMarginStart="10dp"
+        app:fb_iconPosition="left"
+        app:fb_iconWidth="28dp"
+        app:fb_rippleColor="#FBE9E7"
+        app:fb_shape="rectangle"
+        app:fb_text="Sign up with OTP"
+        app:fb_textColor="#FFF"
+        app:fb_textPaddingEnd="10dp"
+        app:fb_textPaddingStart="10dp"
+        app:fb_textSize="@dimen/_10sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.shobhitpuri.custombuttons.GoogleSignInButton
         android:id="@+id/googlebtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:layout_marginTop="88dp"
+        android:layout_marginTop="84dp"
         android:text="@string/google_sign_up"
         app:isDarkTheme="true"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.482"
+        app:layout_constraintHorizontal_bias="0.926"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -54,7 +84,7 @@
         android:layout_height="0dp"
         android:background="#FFFFFF"
         android:elevation="6dp"
-        app:cardBackgroundColor="#FFFFFF"
+        app:cardBackgroundColor="#00FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/guideline54"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -67,10 +97,10 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
+            android:layout_marginStart="3dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="0dp"
+            android:layout_marginEnd="3dp"
             android:layout_marginBottom="0dp"
-            android:background="@drawable/edit"
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:textColorHint="#000000"
@@ -122,8 +152,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:elevation="6dp"
-        app:cardBackgroundColor="#FFFFFF"
-
+        app:cardBackgroundColor="#00FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/guideline57"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -139,7 +168,6 @@
             android:layout_marginTop="0dp"
             android:layout_marginEnd="0dp"
             android:layout_marginBottom="0dp"
-            android:background="@drawable/edit"
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:textColorHint="#000000"
@@ -156,11 +184,12 @@
                 android:id="@+id/passwordtext"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginStart="3dp"
+                android:layout_marginEnd="3dp"
                 android:background="#00FFFFFF"
-
+                android:cursorVisible="true"
                 android:ems="10"
                 android:hint="Password"
-
                 android:inputType="textPassword"
                 android:textColor="#000000"
                 android:textCursorDrawable="@null"
@@ -192,7 +221,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.75" />
+        app:layout_constraintGuide_percent="0.76" />
 
     <TextView
         android:id="@+id/textView21"
@@ -227,7 +256,8 @@
         android:layout_marginTop="16dp"
         android:text="Discover Great fashion"
         android:textColor="#000000"
-        android:textSize="18sp"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -249,7 +279,7 @@
         android:layout_width="@dimen/_250sdp"
         android:layout_height="@dimen/_36sdp"
         android:layout_marginTop="20dp"
-        android:background="#F600FF"
+        android:background="#F4214E"
         android:text="SIGNUP"
         android:textColor="#FFFFFF"
         android:textSize="18sp"

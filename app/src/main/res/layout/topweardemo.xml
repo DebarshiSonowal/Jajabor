@@ -36,7 +36,8 @@
             android:layout_marginTop="3dp"
             android:gravity="center"
             android:text="TextView"
-            android:textColor="#000000"
+            android:textColor="#F4214E"
+            android:textStyle="bold"
             android:textSize="@dimen/_10sdp"
           />
 
@@ -46,9 +47,9 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="100% Cotton"
-            android:textColor="#B03566"
+            android:textColor="#F4214E"
             android:textSize="@dimen/_8sdp"
-            android:textStyle="bold"
+
 
              />
     </LinearLayout>

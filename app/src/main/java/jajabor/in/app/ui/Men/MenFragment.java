@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -24,8 +24,9 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import jajabor.in.app.GridAdapter;
+import jajabor.in.app.Adapters.GridAdapter;
 import jajabor.in.app.R;
+import jajabor.in.app.ui.Women.ShimmeringViewModel;
 
 public class MenFragment extends Fragment {
     List<String> url,url1;
@@ -37,7 +38,27 @@ public class MenFragment extends Fragment {
     GridAdapter mGridAdapter;
     DatabaseReference mFirebaseDatabase;
     ValueEventListener mValueEventListener;
+    MenViewModel mModel;
+    ShimmerFrameLayout shimmerFrameLayout;
 private GridView mGridView;
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mModel =  ViewModelProviders.of(getActivity()).get(MenViewModel.class);
+        mModel.getMenSize().observe(getViewLifecycleOwner(), new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer integer) {
+                if(integer>0){
+                    shimmerFrameLayout.stopShimmer();
+                    shimmerFrameLayout.setVisibility(View.GONE);
+                }else {
+                    shimmerFrameLayout.setVisibility(View.VISIBLE);
+                    shimmerFrameLayout.startShimmer();
+                }
+            }
+        });
+    }
 
     @Override
     public void onStart() {
@@ -76,6 +97,8 @@ private GridView mGridView;
         mGridView = root.findViewById(R.id.mangrid);
         mGridAdapter = new GridAdapter(url1,name1,price1,shrdesc,pid,getContext(),getActivity());
         mGridView.setAdapter(mGridAdapter);
+        shimmerFrameLayout = root.findViewById(R.id.shimmerLayoutmen);
+        shimmerFrameLayout.showShimmer(true);
         return root;
     }
      class Background extends AsyncTask<String,String,String>{
@@ -146,7 +169,7 @@ private GridView mGridView;
 //                    Log.d("ValueR",price.get(j));
 
             }
-
         mGridAdapter.notifyDataSetChanged();
+        mModel.setMenSize(mGridAdapter.getCount());
     }
 }

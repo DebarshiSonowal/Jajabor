@@ -1,37 +1,52 @@
 package jajabor.in.app.ui.home;
 
+import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.bumptech.glide.Glide;
+import com.facebook.shimmer.ShimmerFrameLayout;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import jajabor.in.app.AdapterSlider;
-import jajabor.in.app.AdapterSlider2;
-import jajabor.in.app.CategAccessAdapter;
-import jajabor.in.app.CategBannerAdapter;
-import jajabor.in.app.CategoryAdapter;
-import jajabor.in.app.PicassoImageLoadingService;
-import jajabor.in.app.ProductAdapter;
+import jajabor.in.app.Adapters.AdapterSlider;
+import jajabor.in.app.Adapters.AdapterSlider2;
+import jajabor.in.app.Adapters.CategAccessAdapter;
+import jajabor.in.app.Adapters.CategBannerAdapter;
+import jajabor.in.app.Adapters.CategoryAdapter;
+import jajabor.in.app.Service.GlideImageLoadingService;
+import jajabor.in.app.Adapters.ProductAdapter;
 import jajabor.in.app.R;
+import jajabor.in.app.ui.SearchResult.SharedViewModel;
 import ss.com.bannerslider.Slider;
 
 public class HomeFragment extends Fragment {
@@ -44,6 +59,8 @@ List<String>bannername;
 List<Integer>PID,no,no1,bihuPID,couplePID;
 List<Integer>Valentines;
     Networkk work;
+    String sa;
+    SharedViewModel viewModel;
 ValueEventListener mValueEventListener;
 ImageView mImageView,mImageView2,offer;
 CategoryAdapter topwearadater;
@@ -52,6 +69,10 @@ DatabaseReference mFirebaseDatabase;
 ProductAdapter mAdapter,mAdapter1,mAdapter2;
 CategBannerAdapter mCategBannerAdapter;
 GridView topweargrid,accessorygrid;
+FirebaseFirestore db;
+ShimmerFrameLayout Cshimmer,Bshimmer,Ashimmer;
+HomeShimmeringViewModel mModel;
+
     @Override
     public void onStart() {
         super.onStart();
@@ -80,9 +101,16 @@ GridView topweargrid,accessorygrid;
         work.cancel(true);
     }
 
+    @SuppressLint("ResourceType")
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
+        Cshimmer = root.findViewById(R.id.shimmerLayoutcouple);
+        Cshimmer.showShimmer(true);
+        Bshimmer = root.findViewById(R.id.shimmerLayoutbihu);
+        Bshimmer.showShimmer(true);
+        Ashimmer = root.findViewById(R.id.shimmerLayoutall);
+        Ashimmer.showShimmer(true);
         url = new ArrayList<>();
         price = new ArrayList<>();
         name = new ArrayList<>();
@@ -116,6 +144,19 @@ GridView topweargrid,accessorygrid;
         mImageView2 = root.findViewById(R.id.imageView6);
         offer = root.findViewById(R.id.imageView15);
         accessorygrid = root.findViewById(R.id.ACCESSORIES);
+        try {
+            Log.d("Provider IS",FirebaseAuth.getInstance().getCurrentUser().getIdToken(false).getResult().getSignInProvider());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            if(FirebaseAuth.getInstance().getCurrentUser().getIdToken(false).getResult().getSignInProvider().equals("phone")){
+                Log.d("QWERTYU","22323");
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 //        Picasso.get().load("https://firebasestorage.googleapis.com/v0/b/jajabor-android.appspot.com/o/banners%20for%20app-02.jpg?alt=media&token=f59a2969-34d4-4654-88b6-87a0ce2040e6").resize(1240,1240).into(mImageView);
 //        Picasso.get().load("https://firebasestorage.googleapis.com/v0/b/jajabor-android.appspot.com/o/banners%20for%20app-01.jpg?alt=media&token=aa67bdfd-4ea8-4637-8b2c-6f7457691c8c").resize(1240,1240).into(mImageView2);
 //        Picasso.get().load("https://firebasestorage.googleapis.com/v0/b/jajabor-android.appspot.com/o/banners%20for%20app-03.jpg?alt=media&token=36d7a59b-493a-4458-afac-7aad0c4801df").resize(1240,1240).into(offer);
@@ -152,7 +193,7 @@ GridView topweargrid,accessorygrid;
         name1.add("Womens 34th Sleeves");   name1.add("Men-s-Colorblock");   name1.add("Men-s-Colorblock");
 
 
-        Slider.init(new PicassoImageLoadingService(getContext()));
+        Slider.init(new GlideImageLoadingService(getContext()));
         slider = root.findViewById(R.id.banner_slider1);
         slider.setAdapter(new AdapterSlider());
         slider.setSelectedSlide(1);
@@ -196,10 +237,101 @@ GridView topweargrid,accessorygrid;
         CategBanner.setAdapter(mCategBannerAdapter);
         topweargrid.setAdapter(topwearadater);
         accessorygrid.setAdapter(accessoriadapter);
+
+        mCategBannerAdapter.setOnItemClickListener(new CategBannerAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                if (mCategBannerAdapter.getname().get(position).equals("Men")) {
+                    Toast.makeText(getContext(),"Coming Soon",Toast.LENGTH_SHORT).show();
+                    Log.d("Coming","MEn");
+                    Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.nav_men);
+                }else if(mCategBannerAdapter.getname().get(position).equals("Women")){
+                    Toast.makeText(getContext(),"Coming Soon",Toast.LENGTH_SHORT).show();
+                    Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.nav_women);
+                }else
+                    Toast.makeText(getContext(),"Coming Soon",Toast.LENGTH_SHORT).show();
+            }
+        });
+        try {
+            if(sa.equals("Phone")){
+                new MaterialDialog.Builder(container.getContext())
+                        .title("We require an Email")
+                        .cancelable(false)
+                        .content("Please enter an Email")
+                        .inputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS)
+                        .input("abc@gmail.com", "", new MaterialDialog.InputCallback() {
+                            @Override
+                            public void onInput(MaterialDialog dialog, CharSequence input) {
+                                Map<String, Object> note = new HashMap<>();
+                                note.put("Email",note);
+                                // Do something
+                                db = FirebaseFirestore.getInstance();
+                                db.collection("UserProfile").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).update(note).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        dialog.dismiss();
+                                    }
+                                });
+                            }
+                        }).show();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return root;
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        viewModel = ViewModelProviders.of(getActivity()).get(SharedViewModel.class);
+        viewModel.getType().observe(getActivity(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                sa =s;
+                Log.d("String",s);
+            }
+        });
+        mModel = ViewModelProviders.of(getActivity()).get(HomeShimmeringViewModel.class);
+        mModel.getCouplesize().observe(getViewLifecycleOwner(), new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer integer) {
+                if (integer > 0) {
+                    Cshimmer.stopShimmer();
+                    Cshimmer.setVisibility(View.GONE);
+                } else {
+                    Cshimmer.setVisibility(View.VISIBLE);
+                    Cshimmer.startShimmer();
+                }
 
+
+            }
+        });
+        mModel.getAllsize().observe(getViewLifecycleOwner(), new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer integer) {
+                if (integer > 0) {
+                    Ashimmer.stopShimmer();
+                    Ashimmer.setVisibility(View.GONE);
+                } else {
+                    Ashimmer.setVisibility(View.VISIBLE);
+                    Ashimmer.startShimmer();
+                }
+            }
+        });
+        mModel.getBihusize().observe(getViewLifecycleOwner(), new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer integer) {
+                if (integer > 0) {
+                    Bshimmer.stopShimmer();
+                    Bshimmer.setVisibility(View.GONE);
+                } else {
+                    Bshimmer.setVisibility(View.VISIBLE);
+                    Bshimmer.startShimmer();
+                }
+            }
+        });
+    }
 
     class Networkk extends AsyncTask<String,Integer,String >{
 
@@ -255,6 +387,7 @@ GridView topweargrid,accessorygrid;
 
                 }
             });
+
             return null;
         }
     }
@@ -283,6 +416,9 @@ GridView topweargrid,accessorygrid;
         mAdapter.notifyDataSetChanged();
         mAdapter2.notifyDataSetChanged();
         mAdapter1.notifyDataSetChanged();
+        mModel.setCouplesize(coupleurl.size());
+        mModel.setAllsize(url.size());
+        mModel.setBihusize(bihuurl.size());
     }
 
     private void filterbihu() {

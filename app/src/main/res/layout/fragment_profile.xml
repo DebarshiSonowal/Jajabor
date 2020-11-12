@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF"
     android:orientation="vertical"
-    tools:context=".ProfileFragment">
+    tools:context=".ui.Profile.ProfileFragment">
 
     <com.skydoves.elasticviews.ElasticImageView
         android:id="@+id/logoutbtn"
@@ -45,12 +45,14 @@
             android:textColor="#000000"
             android:textColorHint="#000000"
             android:textCursorDrawable="@null"
-            android:textSize="@dimen/_12sdp" />
+            android:textSize="@dimen/_12sdp"
+            android:textStyle="bold" />
     </com.google.android.material.textfield.TextInputLayout>
-
     <androidx.legacy.widget.Space
         android:layout_width="match_parent"
         android:layout_height="@dimen/_10sdp" />
+
+
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_weight="1"
@@ -71,7 +73,8 @@
             android:textColor="#000000"
             android:textColorHint="#040404"
             android:textCursorDrawable="@null"
-            android:textSize="@dimen/_12sdp" />
+            android:textSize="@dimen/_12sdp"
+            android:textStyle="bold" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.legacy.widget.Space
@@ -97,9 +100,38 @@
             android:textColor="#000000"
             android:textColorHint="#000000"
             android:textCursorDrawable="@null"
-            android:textSize="@dimen/_12sdp" />
+            android:textSize="@dimen/_12sdp"
+            android:textStyle="bold" />
     </com.google.android.material.textfield.TextInputLayout>
+    <androidx.legacy.widget.Space
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_10sdp" />
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/edit"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:textColorHint="#000000">
 
+        <EditText
+            android:id="@+id/editEmail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#00FFFFFF"
+            android:cursorVisible="true"
+            android:ems="10"
+            android:gravity="start|top"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:textColor="#000000"
+            android:textCursorDrawable="@null"
+            android:textSize="@dimen/_12sdp"
+            android:textStyle="bold" />
+    </com.google.android.material.textfield.TextInputLayout>
     <androidx.legacy.widget.Space
         android:layout_width="match_parent"
         android:layout_height="@dimen/_10sdp" />
@@ -124,7 +156,8 @@
             android:inputType="textEmailAddress"
             android:textColor="#000000"
             android:textCursorDrawable="@null"
-            android:textSize="@dimen/_12sdp" />
+            android:textSize="@dimen/_12sdp"
+            android:textStyle="bold" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.legacy.widget.Space
@@ -151,7 +184,8 @@
             android:inputType="phone"
             android:textColor="#000000"
             android:textCursorDrawable="@null"
-            android:textSize="@dimen/_12sdp" />
+            android:textSize="@dimen/_12sdp"
+            android:textStyle="bold" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.legacy.widget.Space
@@ -168,6 +202,7 @@
         android:focusable="true"
         android:focusableInTouchMode="true"
         android:textColorHint="#000000">
+
         <EditText
             android:id="@+id/editTextAddress"
             android:layout_width="match_parent"
@@ -175,12 +210,13 @@
             android:background="#00FFFFFF"
             android:cursorVisible="true"
             android:ems="10"
-            android:hint="Address"
             android:gravity="start|top"
+            android:hint="Address"
             android:inputType="textMultiLine"
             android:textColor="#000000"
             android:textCursorDrawable="@null"
-            android:textSize="@dimen/_12sdp" />
+            android:textSize="@dimen/_12sdp"
+            android:textStyle="bold" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.legacy.widget.Space

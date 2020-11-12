@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    tools:context=".CustomDesignFragment">
+    tools:context=".ui.CustomDesign.CustomDesignFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -24,8 +24,8 @@
                 android:id="@+id/paybtn2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp"
-                android:background="#5AFF00"
+                android:layout_margin="@dimen/_10sdp"
+                android:background="#FFEB3B"
                 android:elevation="10dp"
                 android:text="Add to cart"
                 android:textColor="@android:color/widget_edittext_dark"
@@ -95,8 +95,8 @@
                 android:id="@+id/designview"
                 android:layout_width="153dp"
                 android:layout_height="122dp"
-                android:layout_marginTop="100dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginTop="124dp"
+                android:layout_marginEnd="28dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

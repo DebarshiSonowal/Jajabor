@@ -17,4 +17,14 @@
     <string name="jajabor_com_2020">© Jajabor 2020 \n Developed by Debarshi Sonowal \n Icons by @Freepik/flaticon.com </string>
     <string name="btn">asdad</string>
     <string name="Contact">TextView</string>
+
+    <string name="show_progress" translatable="false">Show progress</string>
+    <string name="show_content" translatable="false">Show content</string>
+    <string name="show_error" translatable="false">Show error</string>
+    <string name="show_empty" translatable="false">Show empty</string>
+    <string name="text_sample" translatable="false">Sample Text</string>
+    <string name="sample_normal" translatable="false">Normal Sample</string>
+    <string name="sample_recycler_view" translatable="false">RecyclerView Sample</string>
+    <string name="try_again" translatable="false">Try Again</string>
+    <string name="empty">Content not found</string>
 </resources>

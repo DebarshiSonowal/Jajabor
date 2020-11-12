@@ -33,7 +33,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:slider_animateIndicators="true"
-
                 app:slider_emptyView="@layout/layout_empty_view"
                 app:slider_interval="5000"
                 app:slider_loopSlides="true" />
@@ -132,16 +131,26 @@
             android:text="PRICE STARTING AT ₹235"
             android:textColor="#B03566" />
 
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="VIEW ALL"
+            android:textColor="#F4214E"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
         <GridView
             android:id="@+id/TOPWEAR"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_600sdp"
-            android:numColumns="2"
+            android:layout_margin="4dp"
             android:background="#FFFFFF"
             android:horizontalSpacing="@dimen/_4sdp"
+            android:numColumns="2"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
-            android:layout_margin="4dp"
             android:scrollbars="vertical"
             android:verticalScrollbarPosition="right"
             android:verticalSpacing="@dimen/_20sdp">
@@ -179,7 +188,15 @@
             android:gravity="center"
             android:text="PRICE STARTING AT ₹39"
             android:textColor="#B03566" />
-
+        <TextView
+            android:id="@+id/textViewVX"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="VIEW ALL"
+            android:textColor="#F4214E"
+            android:textSize="18sp"
+            android:textStyle="bold" />
         <GridView
             android:id="@+id/ACCESSORIES"
             android:layout_width="match_parent"
@@ -204,24 +221,49 @@
             android:textSize="@dimen/_18sdp"
             android:textStyle="bold" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/couplesale"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        </androidx.recyclerview.widget.RecyclerView>
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/shimmerLayoutcouple"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:shimmer_auto_start="true"
+                app:shimmer_shape="linear">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+                    <include
+                        layout="@layout/padad"
+                        android:layout_weight="1"
+                        android:layout_margin="@dimen/_7sdp"
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent" />
+                    <include
+                        layout="@layout/padad"
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_margin="@dimen/_7sdp"
+                         />
+                </LinearLayout>
+            </com.facebook.shimmer.ShimmerFrameLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/couplesale"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
 <androidx.legacy.widget.Space
     android:layout_width="match_parent"
     android:layout_height="@dimen/_10sdp"/>
-
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="@dimen/_140sdp"
             android:layout_margin="4dp"
             app:cardBackgroundColor="#FFEB3B"
-
             app:cardElevation="6dp">
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -271,12 +313,40 @@
             android:textSize="@dimen/_18sdp"
             android:textStyle="bold" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/bihusale"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        </androidx.recyclerview.widget.RecyclerView>
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/shimmerLayoutbihu"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:shimmer_auto_start="true"
+                app:shimmer_shape="linear">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+                    <include
+                        layout="@layout/padad"
+                        android:layout_weight="1"
+                        android:layout_margin="@dimen/_7sdp"
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent" />
+                    <include
+                        layout="@layout/padad"
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_margin="@dimen/_7sdp"
+                        />
+                </LinearLayout>
+            </com.facebook.shimmer.ShimmerFrameLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/bihusale"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
 
         <androidx.legacy.widget.Space
             android:layout_width="match_parent"
@@ -342,10 +412,40 @@
             android:textSize="@dimen/_18sdp"
             android:textStyle="bold" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/allproducts"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/shimmerLayoutall"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:shimmer_auto_start="true"
+                app:shimmer_shape="linear">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+                    <include
+                        layout="@layout/padad"
+                        android:layout_weight="1"
+                        android:layout_margin="@dimen/_7sdp"
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent" />
+                    <include
+                        layout="@layout/padad"
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_margin="@dimen/_7sdp"
+                        />
+                </LinearLayout>
+            </com.facebook.shimmer.ShimmerFrameLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/allproducts"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
 
         <androidx.legacy.widget.Space
             android:layout_width="match_parent"

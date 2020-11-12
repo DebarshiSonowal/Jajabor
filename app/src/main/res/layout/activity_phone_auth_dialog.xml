@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/DAD"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Enter the phone no"
+        android:textColor="#231D1D"
+        android:textSize="@dimen/_18sdp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/edit_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/DAD"
+        android:layout_marginTop="8dp"
+        android:hint="Phone"
+        android:inputType="phone"
+        android:textColor="#000000"
+        android:textColorHint="#1C1B1B" />
+
+    <com.skydoves.elasticviews.ElasticButton
+        android:id="@+id/sendOTPbtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edit_phone"
+        android:layout_marginStart="@dimen/_24sdp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="@dimen/_24sdp"
+        android:layout_marginBottom="8dp"
+        android:background="#FFEB3B"
+        android:text="SEND"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/DAD1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/sendOTPbtn"
+        android:maxLength="6"
+        android:text="Code:"
+        android:textColor="#231D1D"
+        android:textSize="@dimen/_18sdp"
+        android:textStyle="bold" />
+
+    <in.aabhasjindal.otptextview.OtpTextView
+        android:id="@+id/otp_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/DAD1"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="8dp"
+        android:textColor="#000000"
+        app:bar_enabled="true"
+        app:bar_height="2dp"
+        app:box_margin="@dimen/_5sdp"
+        app:height="40dp"
+        app:length="6"
+        app:otp=""
+        app:otp_text_size="24dp"
+        app:width="40dp" />
+
+    <com.skydoves.elasticviews.ElasticButton
+        android:id="@+id/verifyCODE"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/otp_view"
+        android:layout_marginStart="@dimen/_24sdp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="@dimen/_24sdp"
+        android:layout_marginBottom="8dp"
+        android:background="#FFEB3B"
+        android:text="Verify"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+</RelativeLayout>

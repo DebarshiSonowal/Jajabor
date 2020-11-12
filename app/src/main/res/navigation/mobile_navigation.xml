@@ -45,7 +45,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_orderstatus"
-        android:name="jajabor.in.app.OrderStatusFragment"
+        android:name="jajabor.in.app.ui.Order.OrderStatusFragment"
         android:label="Order Status"
         tools:layout="@layout/fragment_order_status" >
         <action
@@ -81,7 +81,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_profile"
-        android:name="jajabor.in.app.ProfileFragment"
+        android:name="jajabor.in.app.ui.Profile.ProfileFragment"
         android:label="Profile"
         tools:layout="@layout/fragment_profile">
         <action
@@ -105,7 +105,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_productview"
-        android:name="jajabor.in.app.ProductView"
+        android:name="jajabor.in.app.ui.Activity.ProductView"
         android:label="Productview"
         tools:layout="@layout/activity_product_view">
 
@@ -118,7 +118,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_customdesign"
-        android:name="jajabor.in.app.CustomDesignFragment"
+        android:name="jajabor.in.app.ui.CustomDesign.CustomDesignFragment"
         android:label="Custom Design"
         tools:layout="@layout/fragment_custom_design"
         >
@@ -131,7 +131,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_about"
-        android:name="jajabor.in.app.AboutFragment"
+        android:name="jajabor.in.app.ui.Activity.AboutFragment"
         android:label="About"
         tools:layout="@layout/fragment_about"
         >
@@ -144,7 +144,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_wishlist"
-        android:name="jajabor.in.app.WishlistFragment"
+        android:name="jajabor.in.app.ui.Wishlist.WishlistFragment"
         android:label="Wishlist"
         tools:layout="@layout/fragment_wishlist"
         >
@@ -157,13 +157,40 @@
     </fragment>
     <fragment
         android:id="@+id/nav_searchresult"
-        android:name="jajabor.in.app.SerarchResultFragment"
+        android:name="jajabor.in.app.ui.SearchResult.SerarchResultFragment"
         android:label="SearchResult"
         tools:layout="@layout/fragment_serarch_result"
         >
-
         <action
             android:id="@+id/action_nav_searchresult_to_nav_wishlist"
             app:destination="@id/nav_wishlist" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_customorder"
+        android:name="jajabor.in.app.ui.CustomDesign.CustomOrdersFragment"
+        android:label="Custome Orders"
+        tools:layout="@layout/fragment_custom_orders"
+        >
+
+        <action
+            android:id="@+id/action_nav_customorder_to_nav_home"
+            app:destination="@id/nav_home" />
+        <action
+            android:id="@+id/action_nav_customorder_to_nav_searchresult"
+            app:destination="@id/nav_searchresult" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_orderDetailsFragment"
+        android:name="jajabor.in.app.ui.Order.OrderDetailsFragment"
+        android:label="Orders Detaii"
+        tools:layout="@layout/order_details_fragment"
+        >
+    </fragment>
+    <fragment
+        android:id="@+id/nav_CustomOrderDetailsFragment"
+        android:name="jajabor.in.app.ui.Order.CustomOrderDetailsFragment"
+        android:label="Orders Detaii"
+        tools:layout="@layout/fragment_custom_order_details"
+        >
     </fragment>
 </navigation>
