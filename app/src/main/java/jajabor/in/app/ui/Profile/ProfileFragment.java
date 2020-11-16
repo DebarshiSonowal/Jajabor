@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +31,7 @@ import com.skydoves.elasticviews.ElasticImageView;
 import java.util.HashMap;
 import java.util.Map;
 
+import de.mrapp.util.TextUtil;
 import jajabor.in.app.R;
 import jajabor.in.app.ui.SearchResult.SharedViewModel;
 import jajabor.in.app.ui.Activity.login;
@@ -114,28 +116,34 @@ String pno;
             @Override
             public void onClick(View v) {
                 if (mUser != null) {
-                    Map<String,Object>note = new HashMap<>();
-                    uname = username.getText().toString();
-                    note.put("Username",uname);
-                    fnam = firstname.getText().toString();
-                    note.put("Firstname",fnam);
-                    lnam = lastname.getText().toString();
-                    note.put("Lastname",lnam);
-                    add = address.getText().toString();
-                    note.put("Address",add);
-                    email = mail.getText().toString();
-                    note.put("Email",email);
+                    if (!TextUtils.isEmpty(username.getText()) && !TextUtils.isEmpty(firstname.getText())
+                            && !TextUtils.isEmpty(lastname.getText()) && !TextUtils.isEmpty(address.getText()) && !TextUtils.isEmpty(mail.getText()) &&
+                    !TextUtils.isEmpty(phone.getText()) && !TextUtils.isEmpty(pincode.getText())) {
+                        Map<String,Object>note = new HashMap<>();
+                        uname = username.getText().toString();
+                        note.put("Username",uname);
+                        fnam = firstname.getText().toString();
+                        note.put("Firstname",fnam);
+                        lnam = lastname.getText().toString();
+                        note.put("Lastname",lnam);
+                        add = address.getText().toString();
+                        note.put("Address",add);
+                        email = mail.getText().toString();
+                        note.put("Email",email);
                         pinno =pincode.getText().toString();
                         Log.d("Value pin",pinno);
                         pno = phone.getText().toString();
                         note.put("Pin",pinno);
                         note.put("Phone",pno);
-                    db.collection("UserProfile").document(uid).set(note).addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            FancyToast.makeText(getContext(),"Saved Successfully",FancyToast.LENGTH_SHORT).show();
-                        }
-                    });
+                        db.collection("UserProfile").document(uid).set(note).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                FancyToast.makeText(getContext(),"Saved Successfully",FancyToast.LENGTH_SHORT).show();
+                            }
+                        });
+                    } else {
+                        Toast.makeText(getContext(),"Fill all the details",Toast.LENGTH_SHORT).show();
+                    }
                 } else {
                     ChocoBar.builder().setActivity(getActivity())
                             .setText("Login or Sign up")
