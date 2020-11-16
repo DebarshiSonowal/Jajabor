@@ -456,7 +456,10 @@ HomeShimmeringViewModel mModel;
     @Override
     public void onResume() {
         super.onResume();
-
+        bihuurl.clear(); bihuname.clear();bihuprice.clear();bihushrdesc.clear();
+        bihuPID.clear();coupleurl.clear();couplename.clear();coupleprice.clear();
+        couplePID.clear();coupledesc.clear();url.clear();name.clear();PID.clear();
+        shrdesc.clear();price.clear();tag.clear();categ.clear();
     }
 
     @Override

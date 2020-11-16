@@ -33,29 +33,39 @@
         <item name="emptyBackgroundColor">#ffffff</item>
         <item name="shimmer_base_color">#ffffff</item>
     </style>
+
+
     <style name="ToolbarColoredBackArrow" parent="AppTheme">
         <item name="android:textColorSecondary">#000000</item>
     </style>
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Dark" />
+
+
     <style name="Custom" parent="android:Theme.DeviceDefault.Dialog">
         <item name="DialogTitleAppearance">@android:style/TextAppearance.Medium</item>
         <item name="DialogTitleText">Updating…</item>
         <item name="DialogSpotColor">@android:color/holo_orange_dark</item>
         <item name="DialogSpotCount">4</item>
     </style>
+
+
     <style name="Dark" parent="Theme.AppCompat.DayNight.DarkActionBar">
         <item name="colorPrimary">#FFEB3B</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="android:actionBarStyle">@style/MyActionBar</item>
         <item name="android:textColor">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-
     </style>
+
+
     <style name="MyActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
         <item name="android:background">#FFEB3B</item>
         <item name="android:textColor">@color/colorPrimaryDark</item>
         <item name="titleTextColor">@color/colorPrimaryDark</item>
     </style>
+
+
 </resources>

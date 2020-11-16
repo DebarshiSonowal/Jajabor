@@ -194,6 +194,7 @@ public class CartActivity extends AppCompatActivity implements PaymentResultWith
         Cursor cursor =  mDatabase.rawQuery("SELECT SUM(" + Contract.CartItem.COLUMN_PRICE + ") as Total FROM " + Contract.CartItem.TABLE_NAME, null);
         if (cursor.moveToFirst()) {
             totalprice = cursor.getInt(cursor.getColumnIndex("Total"));
+            cursor.close();
         }
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
@@ -219,8 +220,12 @@ public class CartActivity extends AppCompatActivity implements PaymentResultWith
             @Override
             public void onClick(View v) {
                 if (mUser != null) {
-                    if (!TextUtils.isEmpty(Delivery.getText())) {
+                    if (!TextUtils.isEmpty(Delivery.getText()) && !size.isEmpty() && !email.isEmpty()) {
+                        size = getsizes();
+                        getMRP();
                         startPayment();
+                        Toast.makeText(CartActivity.this,size+""+colour,Toast.LENGTH_SHORT).show();
+                        Log.d("Size",size+"");
                     } else {
                         FancyToast.makeText(CartActivity.this,"Delivery Address is not available please add an address",FancyToast.LENGTH_SHORT,FancyToast.ERROR,false).show();
                         new BottomDialog.Builder(CartActivity.this)
@@ -275,6 +280,7 @@ private List<String> getColour(){
             res.moveToNext();
         }
     }
+    res.close();
     return arrayList;
 }
 private List<String>getPic(){
@@ -291,6 +297,7 @@ private List<String>getPic(){
             res.moveToNext();
         }
     }
+    res.close();
     return arrayList;
 }
     private List<String> getsizes() {
@@ -433,8 +440,8 @@ private List<String>getPic(){
         Log.d("Payment", " payment successfull "+ s);
         mDatabase.delete(Contract.CartItem.TABLE_NAME,null,null);
         mProductAdapter.swapCursor(getAllItems());
-        getMRP();
-        size = getsizes();
+//        getMRP();
+//        size = getsizes();
         try {
             generateInvoice(paymentData);
         } catch (Exception e) {
@@ -541,6 +548,8 @@ private List<String>getPic(){
 
     @Override
     public void onPaymentError(int i, String s, PaymentData paymentData) {
+        mDouble=0.0;
+        totalprice=0;
         Log.e("Payment",  "error code "+String.valueOf(i)+" -- Payment failed "+s.toString()  );
         ChocoBar.builder().setActivity(CartActivity.this)
                 .setText("Failed")

@@ -1,17 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:progressActivity="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
     tools:context=".ui.Wishlist.WishlistFragment">
-
-    <GridView
-        android:id="@+id/wishgrid"
+    <com.vlonjatg.progressactivity.ProgressRelativeLayout
+        android:id="@+id/emptyActivity"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:numColumns="2"
-        android:verticalSpacing="@dimen/_5sdp"
-        android:layout_marginTop="@dimen/_5sdp"
-        android:layout_marginBottom="@dimen/_5sdp"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        progressActivity:emptyBackgroundColor="#fbc02d"
+        progressActivity:errorBackgroundColor="#42a5f5"
+        progressActivity:loadingBackgroundColor="#FFFFFF">
+        <GridView
+            android:id="@+id/wishgrid"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:numColumns="2"
+            android:verticalSpacing="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp"/>
+    </com.vlonjatg.progressactivity.ProgressRelativeLayout>
+
 </FrameLayout>
