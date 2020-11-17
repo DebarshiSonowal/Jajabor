@@ -1,7 +1,9 @@
 package jajabor.in.app.ui.Activity;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Build;
@@ -19,8 +21,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.bumptech.glide.Glide;
 import com.ceylonlabs.imageviewpopup.ImagePopup;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.core.ZombieEventManager;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -45,14 +49,44 @@ public class ProductView extends AppCompatActivity {
 TextView productname,productdesc,productprice,sizechart;
 ImageView productpic;
 Integer quantity,pid;
-    ToggleSwitch toggleSwitch,mToggleSwitch;
-    ArrayList<String> labels,labels2;
+ToggleSwitch toggleSwitch,mToggleSwitch;
+ArrayList<String> labels,labels2;
 Long money;
 ElasticButton addto;
 SQLiteDatabase mDatabase;
-    String colour,size;
-    DatabaseReference databaseReference;
-    FirebaseFirestore db ;
+String colour,size;
+DatabaseReference databaseReference;
+FirebaseFirestore db ;
+ValueEventListener mListener;
+QuantityView quantityView;
+DatabaseHelper databaseHelper;
+ImagePopup imagePopup;
+    Context mContext;
+    Activity mActivity;
+    ContentValues cv;
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        db = null;
+        databaseReference = null;
+        mDatabase.close();
+        toggleSwitch = null;
+        mToggleSwitch = null;
+        quantityView = null;
+        databaseHelper.close();
+        imagePopup = null;
+        try {
+            cv.clear();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        cv =null;
+        databaseHelper = null;
+        mContext = null;
+        mActivity=null;
+        System.gc();
+    }
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     @SuppressLint("SetTextI18n")
     @Override
@@ -63,8 +97,10 @@ SQLiteDatabase mDatabase;
         mToggleSwitch =findViewById(R.id.colorswitch);
         labels = new ArrayList<>();
         labels2 = new ArrayList<>();
+        mContext = this;
+        mActivity = this;
         databaseReference = FirebaseDatabase.getInstance().getReference();
-        databaseReference.child("0").addValueEventListener(new ValueEventListener() {
+        databaseReference.child("0").addValueEventListener(mListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()){
@@ -87,8 +123,8 @@ SQLiteDatabase mDatabase;
 
             }
         });
-        DatabaseHelper databaseHelper = new DatabaseHelper(ProductView.this);
-        final ImagePopup imagePopup = new ImagePopup(this);
+        databaseHelper = new DatabaseHelper( mContext);
+        imagePopup = new ImagePopup( mContext);
         imagePopup.setWindowHeight(800); // Optional
         imagePopup.setWindowWidth(800); // Optional
         imagePopup.setBackgroundColor(Color.TRANSPARENT);  // Optional
@@ -122,12 +158,13 @@ SQLiteDatabase mDatabase;
         productprice.setText("Price: "+"₹" +getIntent().getStringExtra("price"));
         pid = getIntent().getIntExtra("pid",0);
         money =Long.parseLong( getIntent().getStringExtra("price"));
-        Picasso.get().load(getIntent().getStringExtra("url")).into(productpic);
-        QuantityView quantityView =findViewById(R.id.quantityview);
+//        Picasso.get().load(getIntent().getStringExtra("url")).into(productpic);
+        Glide.with( mActivity).load(getIntent().getStringExtra("url")).into(productpic);
+        quantityView =findViewById(R.id.quantityview);
         quantityView.setOnQuantityChangeListener(new QuantityView.OnQuantityChangeListener() {
             @Override
             public void onQuantityChanged(int oldQuantity, int newQuantity, boolean programmatically) {
-                Toast.makeText(ProductView.this,""+newQuantity,Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext,""+newQuantity,Toast.LENGTH_SHORT).show();
                 quantity = newQuantity;
             }
 
@@ -137,27 +174,11 @@ SQLiteDatabase mDatabase;
             }
         });
 
-//        SwitchMultiButton mSwitchMultiButton1 = (SwitchMultiButton) findViewById(R.id.switchmultibutton1);
-//        mSwitchMultiButton1.setOnSwitchListener(new SwitchMultiButton.OnSwitchListener() {
-//            @Override
-//            public void onSwitch(int position, String tabText) {
-//                Toast.makeText(ProductView.this, tabText, Toast.LENGTH_SHORT).show();
-//                colour = tabText;
-//            }
-//        });
-//        SwitchMultiButton mSwitchMultiButton = (SwitchMultiButton) findViewById(R.id.switchmultibutton);
-//        mSwitchMultiButton.setOnSwitchListener(new SwitchMultiButton.OnSwitchListener() {
-//            @Override
-//            public void onSwitch(int position, String tabText) {
-//                Toast.makeText(ProductView.this, tabText, Toast.LENGTH_SHORT).show();
-//                size = tabText;
-//            }
-//        });
         addto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (!labels.isEmpty() && !labels2.isEmpty()) {
-                    ContentValues cv = new ContentValues();
+                    cv = new ContentValues();
                     cv.put(Contract.CartItem.COLUMN_NAME,getIntent().getStringExtra("name"));
                     Log.d("Product",getIntent().getStringExtra("name"));
                     cv.put(Contract.CartItem.COLUMN_PIC,getIntent().getStringExtra("url"));
@@ -168,24 +189,7 @@ SQLiteDatabase mDatabase;
                     cv.put(Contract.CartItem.COLUMN_PID,pid);
                     mDatabase.insert(Contract.CartItem.TABLE_NAME,null,cv);
                 }
-//                mDatabase.insert(Contract.MissedCalls.TABLE_NAME,null,cv);
-//                Map<String, Object> note = new HashMap<>();
-//                note.put("Productpic", getIntent().getStringExtra("url"));
-//                note.put("name", getIntent().getStringExtra("name"));
-//                note.put("Price", money);
-//                note.put("Colour", colour);
-//                note.put("Size", size);
-//                note.put("Quantity", quantity);
-//                note.put("User",FirebaseAuth.getInstance().getCurrentUser().getUid());
-
-//                db.collection("Cart").add(note).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-//                    @Override
-//                    public void onSuccess(DocumentReference documentReference) {
-//                        Toast.makeText(ProductView.this, "Added to cart", Toast.LENGTH_SHORT).show();
-//                        finish();
-//                    }
-//                });
-                ChocoBar.builder().setActivity(ProductView.this)
+                ChocoBar.builder().setActivity(mActivity)
                         .setText("Added to cart")
                         .setDuration(ChocoBar.LENGTH_SHORT)
                         .green()  // in built green ChocoBar
@@ -196,11 +200,4 @@ SQLiteDatabase mDatabase;
         });
     }
 
-    private String getid() {
-        Random rnd = new Random();
-        int number = rnd.nextInt(999999);
-
-        // this will convert any number sequence into 6 character.
-        return String.format("%06d", number);
-    }
 }

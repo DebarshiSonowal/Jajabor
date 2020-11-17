@@ -175,6 +175,7 @@
                         android:layout_marginTop="@dimen/_10sdp"
                         android:layout_marginEnd="@dimen/_8sdp"
                         android:layout_marginBottom="@dimen/_8sdp"
+                        android:nestedScrollingEnabled="true"
                         android:background="#FFFFFF" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -207,6 +208,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_230sdp"
                         android:layout_weight="1"
+                        android:nestedScrollingEnabled="true"
                         android:background="#FFFFFF"
                         android:divider="@null"
                         android:dividerHeight="0dp" />

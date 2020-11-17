@@ -130,7 +130,21 @@ public class CartActivity extends AppCompatActivity implements PaymentResultWith
             });
         }
     }
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mEventListener = null;
+        documentReference = null;
+        mListener = null;
+        databaseReference = null;
+        mAdapter = null;
+        mRecyclerView = null;
+        db = null;
+        mViewModel = null;
+        databaseHelper = null;
+        mDatabase = null;
+        System.gc();
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -344,18 +358,7 @@ private List<String>getPic(){
         return arrayList;
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mEventListener = null;
-        documentReference = null;
-        mListener = null;
-        databaseReference = null;
-        mAdapter = null;
-        mRecyclerView = null;
-        db = null;
-        System.gc();
-    }
+
     private void startPayment() {
         final Activity activity = this;
         final Checkout co = new Checkout();

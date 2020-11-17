@@ -1,6 +1,7 @@
 package jajabor.in.app.ui.CustomDesign;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -51,15 +52,14 @@ public class CustomOrdersFragment extends Fragment implements CustomOrderStatusA
 
     FirebaseFirestore db;
     EventListener<QuerySnapshot> mListener;
-    EventListener<DocumentSnapshot> mEventListener,mEventListener1;
+    EventListener<DocumentSnapshot> mEventListener1;
     List<String> ids;
     AlertDialog mDialog;
     LinearLayoutManager layoutManager;
     List<String>status,products,price,temp1,temp,image;
-    String Delivery,email,phone,uid,id,piclist;
+    String Delivery,phone,uid,id,piclist;
     RecyclerView recyclerView;
     CustomOrderStatusAdapter mAdapter;
-    Boolean first= true;
     OrderViewModel mModel;
     private List<List<String>>colour,size;
     private List<List<Double>> quantity;
@@ -68,14 +68,33 @@ public class CustomOrdersFragment extends Fragment implements CustomOrderStatusA
     OrderObject mOrderStatusElement;
     ShimmerFrameLayout mShimmerFrameLayout;
     OrderDetailsViewModel mOrderDetailsViewModel;
-    ElasticButton help;
+    Context mContext;
     CustomOrderStatusAdapter.OnItemSelectedListener Listener;
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mEmptyView = null;
+        recyclerView = null;
+        mModel =null;
+        layoutManager = null;
+        mEventListener1 = null;
+        mListener = null;
+        db=null;
+        mAdapter =null;
+        Listener=null;
+        mShimmerFrameLayout=null;
+        mOrderStatusElement =null;
+        mOrderDetailsViewModel=null;
+        mContext = null;
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mUser = FirebaseAuth.getInstance().getCurrentUser();
         db = FirebaseFirestore.getInstance();
-
+        mContext = getContext();
         if (mUser != null) {
             uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         }
@@ -97,7 +116,7 @@ public class CustomOrdersFragment extends Fragment implements CustomOrderStatusA
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mModel = ViewModelProviders.of(getActivity()).get(OrderViewModel.class);
+        mModel = new ViewModelProvider(getActivity()).get(OrderViewModel.class);
         mOrderDetailsViewModel = new ViewModelProvider(getActivity()).get(OrderDetailsViewModel.class);
         mModel.getOrderlist().observe(getViewLifecycleOwner(), new Observer<Integer>() {
             @Override
@@ -131,6 +150,7 @@ public class CustomOrdersFragment extends Fragment implements CustomOrderStatusA
         temp1= new ArrayList<>();
         image = new ArrayList<>();
         Listener =  this;
+        mContext = getContext();
         recyclerView = view.findViewById(R.id.customorderlist);
         mShimmerFrameLayout = view.findViewById(R.id.shimmerLayoutorder1);
         if(uid == null){
@@ -143,7 +163,7 @@ public class CustomOrdersFragment extends Fragment implements CustomOrderStatusA
         }else {
             mEmptyView.showContent();
             mDialog =  new SpotsDialog.Builder()
-                    .setContext(getContext())
+                    .setContext(mContext)
                     .setTheme(R.style.Custom)
                     .setMessage("Please Wait")
                     .setCancelable(false)
@@ -159,6 +179,7 @@ public class CustomOrdersFragment extends Fragment implements CustomOrderStatusA
     public void onStart() {
         super.onStart();
         if (mUser != null) {
+            db = FirebaseFirestore.getInstance();
             db.collection("Special Order").whereEqualTo("UID", FirebaseAuth.getInstance().getCurrentUser().getUid()).addSnapshotListener(mListener = new EventListener<QuerySnapshot>() {
                 @Override
                 public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
@@ -192,15 +213,12 @@ public class CustomOrdersFragment extends Fragment implements CustomOrderStatusA
                                             }
                                         }
                                         if (ids.size() == price.size()) {
-//                                            mOrderStatusElement = new OrderStatusElement(ids,status,price,image,products,getContext());
-
-//                                            mAdapter.OnItemSelectedListener(Listener);
                                             mOrderStatusElement = new OrderObject(image,ids, colour.get(0), price, status);
-                                            mAdapter = new CustomOrderStatusAdapter(getContext(), mOrderStatusElement);
+                                            mAdapter = new CustomOrderStatusAdapter(mContext, mOrderStatusElement);
                                             recyclerView.setAdapter(mAdapter);
                                             mModel.setOrderlist(mAdapter.getItemCount());
                                             mAdapter.setOnItemSelectedListener(Listener);
-                                            layoutManager = new LinearLayoutManager(getContext());
+                                            layoutManager = new LinearLayoutManager(mContext);
                                             layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
                                             recyclerView.setLayoutManager(layoutManager);
                                             try {

@@ -23,6 +23,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -79,21 +80,38 @@ public class MainActivity2 extends AppCompatActivity {
     String data,address,email1,phone,pin;
     DocumentReference noteref;
     MaterialDialog mDialog,selectCART;
-    DocumentReference mDocumentReference;
     private SharedViewModel viewModel;
     private ProfileViewModel mModel;
     BottomDialog mBottomDialog;
+    ValueEventListener mListener;
+    EventListener<DocumentSnapshot> listener;
     public String getData() {
         return data;
     }
     //Vitaly Gorbachev Amusion Borad Pankit Changhyun Lee
 //Flaticon freepik Ctrlastudio
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mDatabaseReference = null;
+        db = null;
+        noteref= null;
+        mListener = null;
+        listener = null;
+        mDialog =null;
+        mModel = null;
+        viewModel = null;
+        mUser=null;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-        viewModel = ViewModelProviders.of(MainActivity2.this).get(SharedViewModel.class);
-        mModel = ViewModelProviders.of(MainActivity2.this).get(ProfileViewModel.class);
+        viewModel = new ViewModelProvider(MainActivity2.this).get(SharedViewModel.class);
+        mModel =  new ViewModelProvider(MainActivity2.this).get(ProfileViewModel.class);
         mDatabaseReference = FirebaseDatabase.getInstance().getReference();
         mUser = FirebaseAuth.getInstance().getCurrentUser();
         if(mUser != null){
@@ -148,7 +166,7 @@ public class MainActivity2 extends AppCompatActivity {
                 })
                 .build();
         db = FirebaseFirestore.getInstance();
-        mDatabaseReference.addValueEventListener(new ValueEventListener() {
+        mDatabaseReference.addValueEventListener(mListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot dataSnapshot: snapshot.getChildren()){
@@ -278,7 +296,7 @@ public class MainActivity2 extends AppCompatActivity {
                 public void onChanged(Boolean aBoolean) {
                     Toast.makeText(MainActivity2.this,"Changed",Toast.LENGTH_SHORT).show();
                     if(aBoolean.booleanValue()){
-                        db.collection("UserProfile").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                        db.collection("UserProfile").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).addSnapshotListener(listener = new EventListener<DocumentSnapshot>() {
                             @Override
                             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
                                 if(documentSnapshot.exists()){
@@ -388,7 +406,7 @@ public class MainActivity2 extends AppCompatActivity {
         try {
             noteref = db.document("UserProfile/"+FirebaseAuth.getInstance().getCurrentUser().getUid());
             Log.d("Authstate",FirebaseAuth.getInstance().getCurrentUser().getUid());
-            noteref.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            noteref.addSnapshotListener(listener = new EventListener<DocumentSnapshot>() {
                 @Override
                 public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
                     if (e != null) {

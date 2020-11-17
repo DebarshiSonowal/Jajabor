@@ -1,5 +1,6 @@
 package jajabor.in.app.ui.Order;
 
+import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -46,31 +47,39 @@ import jajabor.in.app.R;
 public class CustomOrderDetailsFragment extends Fragment {
     private OrderDetailsViewModel mViewModel;
     private TextView mIDs,orderID,price,address;
-    private ImageView picture;
-    //    private String[] ;
     private List<String> picList,idList,sizeList,ids,colorList;
     private List<Long>quantityList;
     private String color,size,id,pic,destination,uid,orderStatus;
     private Integer quantity;
     private CollectionReference noteref,ref;
     private FirebaseFirestore db ;
-    private TimelineView mTimelineView;
-    private DatabaseReference mDocumentReference;
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLinearLayoutManager;
     private IndivisualOrderAdapter mAdapter;
     private IndivisualOrderObject mIndivisual;
     private ListView myListView;
     private ElasticButton help;
-
+    private Context mContext;
+    private EventListener<DocumentSnapshot> mListener;
     enum status {
         PLACED,PACKED,SENT
     };
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
+    public void onDestroyView() {
+        super.onDestroyView();
+        myListView = null;
+        mIndivisual = null;
+        mLinearLayoutManager = null;
+        mRecyclerView = null;
+        db = null;
+        noteref = null;
+        ref = null;
+        mViewModel = null;
+        mAdapter=null;
+        mContext=null;
+        mListener = null;
+        System.gc();
     }
 
     @Override
@@ -82,7 +91,7 @@ public class CustomOrderDetailsFragment extends Fragment {
 //                Log.d("ORDERDETAILS",s+"");
                 id = s;
                 orderID.setText(s);
-                ref.document(id).addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                ref.document(id).addSnapshotListener( mListener =new EventListener<DocumentSnapshot>() {
                     @Override
                     public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
                         if(value.exists()){
@@ -108,14 +117,14 @@ public class CustomOrderDetailsFragment extends Fragment {
                             sizeList = (List<String>)value.get("Size");
                             Log.d("ORDERDETAILS",sizeList+"");
                             mIndivisual = new IndivisualOrderObject(picList,ids,colorList,sizeList,quantityList);
-                            mAdapter = new IndivisualOrderAdapter(getContext(),mIndivisual);
+                            mAdapter = new IndivisualOrderAdapter(mContext,mIndivisual);
                             Log.d("ORDERDETAILS",quantityList.get(0)+"");
                             mRecyclerView.setAdapter(mAdapter);
-                            mLinearLayoutManager = new LinearLayoutManager(getContext());
+                            mLinearLayoutManager = new LinearLayoutManager(mContext);
                             mLinearLayoutManager.setOrientation(RecyclerView.VERTICAL);
                             mRecyclerView.setLayoutManager(mLinearLayoutManager);
                         }
-                        noteref.document(value.getString("UID")).addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                        noteref.document(value.getString("UID")).addSnapshotListener(mListener = new EventListener<DocumentSnapshot>() {
                             @Override
                             public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
                                 address.setText(value.getString("Address"));
@@ -144,13 +153,13 @@ public class CustomOrderDetailsFragment extends Fragment {
         quantityList=new ArrayList<>();
         colorList = new ArrayList<>();
         help = root.findViewById(R.id.HelpBtn);
+        mContext = getContext();
         help.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.nav_contactus);
             }
         });
-        mDocumentReference = FirebaseDatabase.getInstance().getReference();
 //        mTimelineView =  root.findViewById(R.id.timeline);
         db = FirebaseFirestore.getInstance();
         noteref = db.collection("UserProfile");
@@ -162,7 +171,6 @@ public class CustomOrderDetailsFragment extends Fragment {
     public void SetTimeline(OrderDetailsFragment.status Status){
         ArrayList<TimelineRow> timelineRowsList = new ArrayList<>();
         if(Status == OrderDetailsFragment.status.PLACED){
-
             TimelineRow myRow = new TimelineRow(0);
             Date date = new Date();
             Calendar calendar = Calendar.getInstance();
@@ -185,7 +193,7 @@ public class CustomOrderDetailsFragment extends Fragment {
 // Add the new row to the list
             timelineRowsList.add(myRow);
 
-            ArrayAdapter<TimelineRow> myAdapter = new TimelineViewAdapter(getContext(), 0, timelineRowsList,
+            ArrayAdapter<TimelineRow> myAdapter = new TimelineViewAdapter(mContext, 0, timelineRowsList,
                     //if true, list will be sorted by date
                     false);
             myListView.setAdapter(myAdapter);
@@ -237,7 +245,7 @@ public class CustomOrderDetailsFragment extends Fragment {
 // Add the new row to the list
             timelineRowsList.add(myRow1);
 
-            ArrayAdapter<TimelineRow> myAdapter = new TimelineViewAdapter(getContext(), 0, timelineRowsList,
+            ArrayAdapter<TimelineRow> myAdapter = new TimelineViewAdapter(mContext, 0, timelineRowsList,
                     //if true, list will be sorted by date
                     false);
             myListView.setAdapter(myAdapter);
@@ -311,7 +319,7 @@ public class CustomOrderDetailsFragment extends Fragment {
             timelineRowsList.add(myRow2);
 
 
-            ArrayAdapter<TimelineRow> myAdapter = new TimelineViewAdapter(getContext(), 0, timelineRowsList,
+            ArrayAdapter<TimelineRow> myAdapter = new TimelineViewAdapter(mContext, 0, timelineRowsList,
                     //if true, list will be sorted by date
                     false);
             myListView.setAdapter(myAdapter);

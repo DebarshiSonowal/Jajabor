@@ -54,8 +54,6 @@ public class OrderDetailsFragment extends Fragment {
     private Integer quantity;
     private CollectionReference noteref,ref;
     private FirebaseFirestore db ;
-    private TimelineView mTimelineView;
-    private DatabaseReference mDocumentReference;
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLinearLayoutManager;
     private IndivisualOrderAdapter mAdapter;
@@ -65,6 +63,21 @@ public class OrderDetailsFragment extends Fragment {
     enum status {
         PLACED,PACKED,SENT
     };
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        myListView =null;
+        mIndivisual = null;
+        mAdapter = null;
+        mLinearLayoutManager =null;
+        mRecyclerView = null;
+        db = null;
+        noteref = null;
+        ref = null;
+        mViewModel=null;
+    }
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -81,7 +94,6 @@ public class OrderDetailsFragment extends Fragment {
         quantityList=new ArrayList<>();
         help = root.findViewById(R.id.helpbtn);
         colorList = new ArrayList<>();
-        mDocumentReference = FirebaseDatabase.getInstance().getReference();
 //        mTimelineView =  root.findViewById(R.id.timeline);
         db = FirebaseFirestore.getInstance();
         noteref = db.collection("UserProfile");

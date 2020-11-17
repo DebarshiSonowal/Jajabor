@@ -60,10 +60,24 @@ public class OrderStatusFragment extends Fragment implements OrderStatusAdapter.
     Boolean first= true;
     OrderViewModel mModel;
     FirebaseUser mUser;
-
     ProgressRelativeLayout mEmptyView;
     OrderStatusElement mOrderStatusElement;
     ShimmerFrameLayout mShimmerFrameLayout;
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mEmptyView = null;
+        mShimmerFrameLayout=null;
+        mViewModel = null;
+        mModel = null;
+        mEventListener=null;
+        mEventListener1=null;
+        mOrderStatusElement=null;
+        mListener=null;
+        db = null;
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -125,7 +139,7 @@ public class OrderStatusFragment extends Fragment implements OrderStatusAdapter.
         size = new ArrayList<>();
         quantity = new ArrayList<>();
         image = new ArrayList<>();
-
+        db = FirebaseFirestore.getInstance();
         listener = this;
         recyclerView = view.findViewById(R.id.orderlist);
         mShimmerFrameLayout = view.findViewById(R.id.shimmerLayoutorder);
@@ -266,4 +280,6 @@ public class OrderStatusFragment extends Fragment implements OrderStatusAdapter.
         Log.d("IHAVECLICKER",mViewModel.getColor().getValue()+"");
         Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.nav_orderDetailsFragment);
     }
+
+
 }

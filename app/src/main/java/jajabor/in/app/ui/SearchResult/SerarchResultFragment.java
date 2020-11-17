@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.util.Log;
@@ -37,6 +38,7 @@ public class SerarchResultFragment extends Fragment {
     GridAdapter mGridAdapter;
     MainActivity2 mMainActivity2;
     private SharedViewModel viewModel;
+    ValueEventListener mListener;
     public static SerarchResultFragment newInstance(String text) {
         SerarchResultFragment fragment = new SerarchResultFragment();
         Bundle args = new Bundle();
@@ -44,16 +46,22 @@ public class SerarchResultFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mMainActivity2=null;
+        viewModel = null;
+        db = null;
+        mGridAdapter = null;
+        mGridView = null;
+        mListener=null;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        viewModel = ViewModelProviders.of(getActivity()).get(SharedViewModel.class);
+        viewModel = new ViewModelProvider(getActivity()).get(SharedViewModel.class);
         viewModel.getText().observe(getViewLifecycleOwner(), new Observer<CharSequence>() {
             @Override
             public void onChanged(@Nullable CharSequence charSequence) {
@@ -91,7 +99,7 @@ public class SerarchResultFragment extends Fragment {
         querry = "sdad";
         mGridView = root.findViewById(R.id.searchresult);
         db = FirebaseDatabase.getInstance().getReference();
-        db.addValueEventListener(new ValueEventListener() {
+        db.addValueEventListener( mListener=new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot dataSnapshot:snapshot.getChildren()){

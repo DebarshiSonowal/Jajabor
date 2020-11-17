@@ -1,6 +1,8 @@
 package jajabor.in.app.ui.home;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.InputType;
@@ -16,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -58,9 +61,12 @@ List<String>coupleurl,couplename,coupleprice,coupletagg,coupledesc;
 List<String>bannername;
 List<Integer>PID,no,no1,bihuPID,couplePID;
 List<Integer>Valentines;
+RecyclerView CategBanner,mRecyclerView2,mRecyclerView1,mRecyclerView;
     Networkk work;
+    Activity mActivity;
     String sa;
     SharedViewModel viewModel;
+    Context mContext;
 ValueEventListener mValueEventListener;
 ImageView mImageView,mImageView2,offer;
 CategoryAdapter topwearadater;
@@ -72,7 +78,11 @@ GridView topweargrid,accessorygrid;
 FirebaseFirestore db;
 ShimmerFrameLayout Cshimmer,Bshimmer,Ashimmer;
 HomeShimmeringViewModel mModel;
-
+  LinearLayoutManager layoutManager;
+ LinearLayoutManager layoutManager1;
+LinearLayoutManager layoutManager2;
+   LinearLayoutManager layoutManager3;
+    GlideImageLoadingService  mLoadingService;
     @Override
     public void onStart() {
         super.onStart();
@@ -87,8 +97,10 @@ HomeShimmeringViewModel mModel;
         super.onDestroyView();
         mFirebaseDatabase.removeEventListener(mValueEventListener);
         mValueEventListener = null;
+        mFirebaseDatabase = null;
         mCategBannerAdapter = null;
         topweargrid = null;
+        accessorygrid =null;
         mImageView = null;
         mImageView2 = null;
         offer = null;
@@ -98,7 +110,25 @@ HomeShimmeringViewModel mModel;
         mAdapter1 = null;
         mAdapter2 = null;
         topwearadater = null;
+        layoutManager = null;
+        layoutManager1 = null;
+        layoutManager2 = null;
+        layoutManager3 = null;
+        Cshimmer =null;
+        Bshimmer= null;
+        Ashimmer = null;
+        mModel = null;
+        viewModel=null;
         work.cancel(true);
+        work = null;
+        mLoadingService = null;
+        mContext = null;
+        CategBanner=null;
+        mRecyclerView2=null;
+        mRecyclerView1=null;
+        mRecyclerView=null;
+        accessoriadapter=null;
+        System.gc();
     }
 
     @SuppressLint("ResourceType")
@@ -111,6 +141,7 @@ HomeShimmeringViewModel mModel;
         Bshimmer.showShimmer(true);
         Ashimmer = root.findViewById(R.id.shimmerLayoutall);
         Ashimmer.showShimmer(true);
+        mContext = getContext();
         url = new ArrayList<>();
         price = new ArrayList<>();
         name = new ArrayList<>();
@@ -144,6 +175,7 @@ HomeShimmeringViewModel mModel;
         mImageView2 = root.findViewById(R.id.imageView6);
         offer = root.findViewById(R.id.imageView15);
         accessorygrid = root.findViewById(R.id.ACCESSORIES);
+        mActivity = getActivity();
         try {
             Log.d("Provider IS",FirebaseAuth.getInstance().getCurrentUser().getIdToken(false).getResult().getSignInProvider());
         } catch (Exception e) {
@@ -161,9 +193,9 @@ HomeShimmeringViewModel mModel;
 //        Picasso.get().load("https://firebasestorage.googleapis.com/v0/b/jajabor-android.appspot.com/o/banners%20for%20app-01.jpg?alt=media&token=aa67bdfd-4ea8-4637-8b2c-6f7457691c8c").resize(1240,1240).into(mImageView2);
 //        Picasso.get().load("https://firebasestorage.googleapis.com/v0/b/jajabor-android.appspot.com/o/banners%20for%20app-03.jpg?alt=media&token=36d7a59b-493a-4458-afac-7aad0c4801df").resize(1240,1240).into(offer);
 
-        Glide.with(getContext()).load("https://firebasestorage.googleapis.com/v0/b/jajabor-android.appspot.com/o/banners%20for%20app-03.jpg?alt=media&token=36d7a59b-493a-4458-afac-7aad0c4801df").into(offer);
-        Glide.with(getContext()).load("https://firebasestorage.googleapis.com/v0/b/jajabor-android.appspot.com/o/banners%20for%20app-02.jpg?alt=media&token=f59a2969-34d4-4654-88b6-87a0ce2040e6").into(mImageView);
-        Glide.with(getContext()).load("https://firebasestorage.googleapis.com/v0/b/jajabor-android.appspot.com/o/banners%20for%20app-01.jpg?alt=media&token=aa67bdfd-4ea8-4637-8b2c-6f7457691c8c").into(mImageView2);
+        Glide.with(mContext).load("https://firebasestorage.googleapis.com/v0/b/jajabor-android.appspot.com/o/banners%20for%20app-03.jpg?alt=media&token=36d7a59b-493a-4458-afac-7aad0c4801df").into(offer);
+        Glide.with(mContext).load("https://firebasestorage.googleapis.com/v0/b/jajabor-android.appspot.com/o/banners%20for%20app-02.jpg?alt=media&token=f59a2969-34d4-4654-88b6-87a0ce2040e6").into(mImageView);
+        Glide.with(mContext).load("https://firebasestorage.googleapis.com/v0/b/jajabor-android.appspot.com/o/banners%20for%20app-01.jpg?alt=media&token=aa67bdfd-4ea8-4637-8b2c-6f7457691c8c").into(mImageView2);
         //        url.add("https://d2jnb1er72blne.cloudfront.net/wp-content/uploads/2020/02/Axomiya-mur-prothom-porichoy-Unisex-womens-Assamese-Tshirt-524x658.jpg");
 //        url.add("https://d2jnb1er72blne.cloudfront.net/wp-content/uploads/2020/02/Akolxoriya-Unisex-Womens-Assamese-Tshirt-524x658.jpg");
 //        url.add("https://d2jnb1er72blne.cloudfront.net/wp-content/uploads/2020/02/Sangeetei-mur-jibonMusic-is-my-Life-Assamese-Tshirt-524x658.jpg");
@@ -193,7 +225,7 @@ HomeShimmeringViewModel mModel;
         name1.add("Womens 34th Sleeves");   name1.add("Men-s-Colorblock");   name1.add("Men-s-Colorblock");
 
 
-        Slider.init(new GlideImageLoadingService(getContext()));
+        Slider.init( mLoadingService=new GlideImageLoadingService(mContext));
         slider = root.findViewById(R.id.banner_slider1);
         slider.setAdapter(new AdapterSlider());
         slider.setSelectedSlide(1);
@@ -201,24 +233,24 @@ HomeShimmeringViewModel mModel;
         slider1.setAdapter(new AdapterSlider2());
         slider1.setSelectedSlide(1);
         //Adapter
-        mAdapter = new ProductAdapter(coupleurl,couplename,coupleprice,coupledesc,couplePID,getContext(),getActivity());
-        mAdapter1 =  new ProductAdapter(bihuurl,bihuname,bihuprice,bihushrdesc,bihuPID,getContext(),getActivity());
-        mAdapter2 =  new ProductAdapter(url,name,price,shrdesc,PID,getContext(),getActivity());
-        mCategBannerAdapter = new CategBannerAdapter(bannerpic,bannername,getContext());
-        accessoriadapter = new CategAccessAdapter(urlaccessory,getContext(),getActivity());
-        topwearadater = new CategoryAdapter(url1,name1,getContext());
+        mAdapter = new ProductAdapter(coupleurl,couplename,coupleprice,coupledesc,couplePID,mContext,mActivity);
+        mAdapter1 =  new ProductAdapter(bihuurl,bihuname,bihuprice,bihushrdesc,bihuPID,mContext,mActivity);
+        mAdapter2 =  new ProductAdapter(url,name,price,shrdesc,PID,mContext,mActivity);
+        mCategBannerAdapter = new CategBannerAdapter(bannerpic,bannername,mActivity);
+        accessoriadapter = new CategAccessAdapter(urlaccessory,mContext,mActivity);
+        topwearadater = new CategoryAdapter(url1,name1,mContext);
 
         //Recyclerview
-        final RecyclerView mRecyclerView= root.findViewById(R.id.couplesale);
-        final RecyclerView mRecyclerView1= root.findViewById(R.id.bihusale);
-        final RecyclerView mRecyclerView2= root.findViewById(R.id.allproducts);
-        final RecyclerView CategBanner = root.findViewById(R.id.categorybanner);
+        mRecyclerView= root.findViewById(R.id.couplesale);
+        mRecyclerView1= root.findViewById(R.id.bihusale);
+        mRecyclerView2= root.findViewById(R.id.allproducts);
+        CategBanner = root.findViewById(R.id.categorybanner);
 
         //Layoutmanager
-        final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        final LinearLayoutManager layoutManager1 = new LinearLayoutManager(getContext());
-        final LinearLayoutManager layoutManager2 = new LinearLayoutManager(getContext());
-        final LinearLayoutManager layoutManager3 = new LinearLayoutManager(getContext());
+        layoutManager = new LinearLayoutManager(mContext);
+        layoutManager1 = new LinearLayoutManager(mContext);
+        layoutManager2 = new LinearLayoutManager(mContext);
+        layoutManager3 = new LinearLayoutManager(mContext);
 
         //Set orientation
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -242,7 +274,7 @@ HomeShimmeringViewModel mModel;
             @Override
             public void onItemClick(int position) {
                 if (mCategBannerAdapter.getname().get(position).equals("Men")) {
-                    Toast.makeText(getContext(),"Coming Soon",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext,"Coming Soon",Toast.LENGTH_SHORT).show();
                     Log.d("Coming","MEn");
                     Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.nav_men);
                 }else if(mCategBannerAdapter.getname().get(position).equals("Women")){
@@ -284,7 +316,7 @@ HomeShimmeringViewModel mModel;
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        viewModel = ViewModelProviders.of(getActivity()).get(SharedViewModel.class);
+        viewModel = new ViewModelProvider(getActivity()).get(SharedViewModel.class);
         viewModel.getType().observe(getActivity(), new Observer<String>() {
             @Override
             public void onChanged(String s) {
@@ -292,7 +324,7 @@ HomeShimmeringViewModel mModel;
                 Log.d("String",s);
             }
         });
-        mModel = ViewModelProviders.of(getActivity()).get(HomeShimmeringViewModel.class);
+        mModel = new ViewModelProvider(getActivity()).get(HomeShimmeringViewModel.class);
         mModel.getCouplesize().observe(getViewLifecycleOwner(), new Observer<Integer>() {
             @Override
             public void onChanged(Integer integer) {

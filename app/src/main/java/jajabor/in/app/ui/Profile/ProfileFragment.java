@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.text.TextUtils;
@@ -44,15 +45,10 @@ public class ProfileFragment extends Fragment {
     ElasticButton save;
     ElasticImageView logoutbtn;
     SharedViewModel viewModel;
-    ProfileViewModel mModel;
     EventListener<DocumentSnapshot>mEventListener;
-EditText username,firstname,lastname,phone,pincode,address,mail;
-String uname,fnam,lnam,add,email;
-String pno;
-    String pinno;
-    String uid;
+    EditText username,firstname,lastname,phone,pincode,address,mail;
+    String uname,fnam,lnam,add,email,pno,pinno,uid;
     FirebaseUser mUser;
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -60,20 +56,22 @@ String pno;
         noteref = null;
         db = null;
         firebaseAuth = null;
+        mUser=null;
+        viewModel = null;
         System.gc();
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        viewModel = ViewModelProviders.of(getActivity()).get(SharedViewModel.class);
+        viewModel =new ViewModelProvider(getActivity()).get(SharedViewModel.class);
     }
 
     @Override
     public void onStart() {
         super.onStart();
         if (mUser != null) {
-            noteref.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            noteref.addSnapshotListener(mEventListener = new EventListener<DocumentSnapshot>() {
                 @Override
                 public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
                     if (e != null) {
