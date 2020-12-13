@@ -1,5 +1,6 @@
 package jajabor.in.app.ui.Activity;
 
+import android.annotation.SuppressLint;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Intent;
@@ -11,6 +12,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -49,6 +51,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
+import com.google.firebase.installations.FirebaseInstallations;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.shreyaspatil.MaterialDialog.MaterialDialog;
@@ -68,23 +71,24 @@ public class MainActivity2 extends AppCompatActivity {
     NavigationView navigationView;
     MaterialSearchView searchView;
     private AppBarConfiguration mAppBarConfiguration;
-    TextView prof,email,name,mail;
+    TextView prof, email, name, mail;
     FirebaseFirestore db;
-    List<String>pname;
-    String [] suggestion;
+    List<String> pname;
+    String[] suggestion;
     FirebaseUser mUser;
     DatabaseReference mDatabaseReference;
     ListView suggest;
     ArrayAdapter adapter;
     NavController navController;
-    String data,address,email1,phone,pin;
+    String data, address, email1, phone, pin;
     DocumentReference noteref;
-    MaterialDialog mDialog,selectCART;
+    MaterialDialog mDialog, selectCART;
     private SharedViewModel viewModel;
     private ProfileViewModel mModel;
     BottomDialog mBottomDialog;
     ValueEventListener mListener;
     EventListener<DocumentSnapshot> listener;
+
     public String getData() {
         return data;
     }
@@ -97,29 +101,31 @@ public class MainActivity2 extends AppCompatActivity {
         super.onDestroy();
         mDatabaseReference = null;
         db = null;
-        noteref= null;
+        noteref = null;
         mListener = null;
         listener = null;
-        mDialog =null;
+        mDialog = null;
         mModel = null;
         viewModel = null;
-        mUser=null;
+        mUser = null;
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,
+                WindowManager.LayoutParams.FLAG_SECURE);
         setContentView(R.layout.activity_main2);
         viewModel = new ViewModelProvider(MainActivity2.this).get(SharedViewModel.class);
-        mModel =  new ViewModelProvider(MainActivity2.this).get(ProfileViewModel.class);
+        mModel = new ViewModelProvider(MainActivity2.this).get(ProfileViewModel.class);
         mDatabaseReference = FirebaseDatabase.getInstance().getReference();
         mUser = FirebaseAuth.getInstance().getCurrentUser();
-        if(mUser != null){
+        if (mUser != null) {
             viewModel.setAuth(true);
-            Log.d("Authstate","Auth");
-        }else
+            Log.d("Authstate", "Auth");
+        } else
             viewModel.setAuth(false);
-        if(getIntent().hasExtra("How")){
+        if (getIntent().hasExtra("How")) {
             viewModel.setType(getIntent().getStringExtra("How"));
         }
         suggest = findViewById(R.id.suggest);
@@ -137,7 +143,7 @@ public class MainActivity2 extends AppCompatActivity {
                         finishAffinity();
                     }
                 })
-                .setNegativeButton("Cancel", R.drawable.ic_baseline_cancel_24,new MaterialDialog.OnClickListener(){
+                .setNegativeButton("Cancel", R.drawable.ic_baseline_cancel_24, new MaterialDialog.OnClickListener() {
 
                     @Override
                     public void onClick(DialogInterface dialogInterface, int which) {
@@ -156,7 +162,7 @@ public class MainActivity2 extends AppCompatActivity {
                         selectCART.cancel();
                     }
                 })
-                .setNegativeButton("Custom Orders",new MaterialDialog.OnClickListener(){
+                .setNegativeButton("Custom Orders", new MaterialDialog.OnClickListener() {
 
                     @Override
                     public void onClick(DialogInterface dialogInterface, int which) {
@@ -169,18 +175,18 @@ public class MainActivity2 extends AppCompatActivity {
         mDatabaseReference.addValueEventListener(mListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot dataSnapshot: snapshot.getChildren()){
-                   for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren()){
-                       if(dataSnapshot1.getKey().equals("Name")){
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                        if (dataSnapshot1.getKey().equals("Name")) {
                             pname.add(dataSnapshot1.getValue().toString());
-                            Log.d("DARA1",dataSnapshot1.getValue().toString());
-                       }
-                   }
+                            Log.d("DARA1", dataSnapshot1.getValue().toString());
+                        }
+                    }
                 }
                 suggestion = new String[pname.size()];
-                for(int i=0;i<pname.size();i++){
+                for (int i = 0; i < pname.size(); i++) {
                     suggestion[i] = pname.get(i);
-                    Log.d("DARA",suggestion[i]);
+                    Log.d("DARA", suggestion[i]);
                 }
                 start();
 
@@ -195,16 +201,16 @@ public class MainActivity2 extends AppCompatActivity {
         mModel.getAddress().observe(MainActivity2.this, new Observer<String>() {
             @Override
             public void onChanged(String s) {
-                Log.d("Received address",s);
+                Log.d("Received address", s);
                 address = s;
-                    check();
+                check();
             }
         });
         mModel.getPhone().observe(MainActivity2.this, new Observer<String>() {
             @Override
             public void onChanged(String s) {
                 phone = s;
-                Log.d("Received phone",s);
+                Log.d("Received phone", s);
                 check();
             }
         });
@@ -212,7 +218,7 @@ public class MainActivity2 extends AppCompatActivity {
             @Override
             public void onChanged(String s) {
                 pin = s;
-                Log.d("Received pin",s);
+                Log.d("Received pin", s);
                 check();
             }
         });
@@ -220,7 +226,7 @@ public class MainActivity2 extends AppCompatActivity {
             @Override
             public void onChanged(String s) {
                 email1 = s;
-                Log.d("Received email",s);
+                Log.d("Received email", s);
                 check();
             }
         });
@@ -237,12 +243,12 @@ public class MainActivity2 extends AppCompatActivity {
 
                         // Log and toast
                         String msg = token;
-                        Log.d("GENERAL", msg+"33R4");
+                        Log.d("GENERAL", msg + "33R4");
 
                     }
                 });
-        if(Build.VERSION.SDK_INT >=  Build.VERSION_CODES.O){
-            NotificationChannel channel = new NotificationChannel("MyNotifications","MyNotifiaction", NotificationManager.IMPORTANCE_DEFAULT);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel("MyNotifications", "MyNotifiaction", NotificationManager.IMPORTANCE_DEFAULT);
             NotificationManager manager = getSystemService(NotificationManager.class);
             manager.createNotificationChannel(channel);
         }
@@ -266,8 +272,6 @@ public class MainActivity2 extends AppCompatActivity {
         });
 
 
-
-
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -276,12 +280,12 @@ public class MainActivity2 extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_men, R.id.nav_women,R.id.nav_about,R.id.nav_profile,R.id.nav_orderstatus,R.id.nav_wishlist,R.id.nav_customdesign, R.id.nav_contactus,R.id.nav_competition)
+                R.id.nav_home, R.id.nav_men, R.id.nav_women, R.id.nav_about, R.id.nav_profile, R.id.nav_orderstatus, R.id.nav_wishlist, R.id.nav_customdesign, R.id.nav_contactus, R.id.nav_competition)
                 .setDrawerLayout(drawer)
                 .build();
-        View linearLayout=navigationView.inflateHeaderView(R.layout.nav_header_main);
-        name =  linearLayout.findViewById(R.id.profilename);
-        mail =  linearLayout.findViewById(R.id.emailid);
+        View linearLayout = navigationView.inflateHeaderView(R.layout.nav_header_main);
+        name = linearLayout.findViewById(R.id.profilename);
+        mail = linearLayout.findViewById(R.id.emailid);
 //            db.collection("UserProfile").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).addSnapshotListener(new EventListener<DocumentSnapshot>() {
 //                @Override
 //                public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
@@ -291,28 +295,28 @@ public class MainActivity2 extends AppCompatActivity {
 //                    }
 //                }
 //            });
-            viewModel.getAuth().observe(MainActivity2.this, new Observer<Boolean>() {
-                @Override
-                public void onChanged(Boolean aBoolean) {
-                    Toast.makeText(MainActivity2.this,"Changed",Toast.LENGTH_SHORT).show();
-                    if(aBoolean.booleanValue()){
-                        db.collection("UserProfile").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).addSnapshotListener(listener = new EventListener<DocumentSnapshot>() {
-                            @Override
-                            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
-                                if(documentSnapshot.exists()){
-                                    name.setText(documentSnapshot.getString("Username"));
-                                    mail.setText(email1);
-                                }
+        viewModel.getAuth().observe(MainActivity2.this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                Toast.makeText(MainActivity2.this, "Changed", Toast.LENGTH_SHORT).show();
+                if (aBoolean.booleanValue()) {
+                    db.collection("UserProfile").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).addSnapshotListener(listener = new EventListener<DocumentSnapshot>() {
+                        @Override
+                        public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+                            if (documentSnapshot.exists()) {
+                                name.setText(documentSnapshot.getString("Username"));
+                                mail.setText(email1);
                             }
-                        });
-                    }else {
-                        name.setText("Guest");
-                        mail.setText("LogIn or SignUp");
-                    }
+                        }
+                    });
+                } else {
+                    name.setText("Guest");
+                    mail.setText("LogIn or SignUp");
                 }
-            });
+            }
+        });
 
-       navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
         searchView = (MaterialSearchView) findViewById(R.id.search_view);
@@ -323,10 +327,10 @@ public class MainActivity2 extends AppCompatActivity {
                 viewModel.setText(query);
                 Bundle bundle = new Bundle();
                 String myMessage = query;
-                bundle.putString("message", myMessage );
-                SerarchResultFragment fragInfo = new  SerarchResultFragment();
+                bundle.putString("message", myMessage);
+                SerarchResultFragment fragInfo = new SerarchResultFragment();
                 fragInfo.setArguments(bundle);
-                Navigation.findNavController(MainActivity2.this, R.id.nav_host_fragment).navigate(R.id.nav_searchresult,bundle);
+                Navigation.findNavController(MainActivity2.this, R.id.nav_host_fragment).navigate(R.id.nav_searchresult, bundle);
                 return false;
             }
 
@@ -334,18 +338,18 @@ public class MainActivity2 extends AppCompatActivity {
             public boolean onQueryTextChange(String newText) {
                 SerarchResultFragment fragment = SerarchResultFragment.newInstance(newText);
                 //Do some magic
-                if(newText != null && !newText.isEmpty()){
+                if (newText != null && !newText.isEmpty()) {
                     data = newText;
                     List<String> lstFound = new ArrayList<String>();
-                    for(String item:suggestion){
-                        if(item.contains(newText))
+                    for (String item : suggestion) {
+                        if (item.contains(newText))
                             lstFound.add(item);
                     }
-                    adapter = new ArrayAdapter(MainActivity2.this,android.R.layout.simple_list_item_1,lstFound);
+                    adapter = new ArrayAdapter(MainActivity2.this, android.R.layout.simple_list_item_1, lstFound);
                     suggest.setAdapter(adapter);
-                }else{
+                } else {
                     try {
-                     adapter = new ArrayAdapter(MainActivity2.this,android.R.layout.simple_list_item_1,suggestion);
+                        adapter = new ArrayAdapter(MainActivity2.this, android.R.layout.simple_list_item_1, suggestion);
                         suggest.setAdapter(adapter);
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -370,7 +374,7 @@ public class MainActivity2 extends AppCompatActivity {
     }
 
     private void check() {
-        if(address == null || phone == null || pin == null || email1 == null){
+        if (address == null || phone == null || pin == null || email1 == null) {
             try {
                 mBottomDialog.dismiss();
             } catch (Exception e) {
@@ -392,7 +396,7 @@ public class MainActivity2 extends AppCompatActivity {
                             Navigation.findNavController(MainActivity2.this, R.id.nav_host_fragment).navigate(R.id.nav_profile);
                         }
                     }).show();
-        }else
+        } else
             try {
                 mBottomDialog.dismiss();
             } catch (Exception e) {
@@ -404,8 +408,8 @@ public class MainActivity2 extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         try {
-            noteref = db.document("UserProfile/"+FirebaseAuth.getInstance().getCurrentUser().getUid());
-            Log.d("Authstate",FirebaseAuth.getInstance().getCurrentUser().getUid());
+            noteref = db.document("UserProfile/" + FirebaseAuth.getInstance().getCurrentUser().getUid());
+            Log.d("Authstate", FirebaseAuth.getInstance().getCurrentUser().getUid());
             noteref.addSnapshotListener(listener = new EventListener<DocumentSnapshot>() {
                 @Override
                 public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
@@ -414,29 +418,29 @@ public class MainActivity2 extends AppCompatActivity {
                         Log.d("Exception", e.toString());
                         return;
                     }
-                    if(documentSnapshot.exists()){
-                        Log.d("Authstate","Exist");
-                        if(documentSnapshot.getString("Address") != null){
+                    if (documentSnapshot.exists()) {
+                        Log.d("Authstate", "Exist");
+                        if (documentSnapshot.getString("Address") != null) {
                             mModel.setAddress(documentSnapshot.getString("Address"));
-                            Log.d("Authstate","Address"+documentSnapshot.getString("Address"));
+                            Log.d("Authstate", "Address" + documentSnapshot.getString("Address"));
                         }
-                        if(documentSnapshot.getString("Email") != null){
+                        if (documentSnapshot.getString("Email") != null) {
                             mModel.setMail(documentSnapshot.getString("Email"));
-                            Log.d("Authstate","Address"+documentSnapshot.getString("Email"));
+                            Log.d("Authstate", "Address" + documentSnapshot.getString("Email"));
                         }
 
-                        if(documentSnapshot.get("Phone") != null){
+                        if (documentSnapshot.get("Phone") != null) {
                             try {
-                                Log.d("Value phone1",documentSnapshot.getString("Phone"));
+                                Log.d("Value phone1", documentSnapshot.getString("Phone"));
                                 mModel.setPhone(documentSnapshot.getString("Phone"));
                             } catch (Exception ex) {
                                 ex.printStackTrace();
                             }
                         }
-                        if(documentSnapshot.get("Pin") !=null){
+                        if (documentSnapshot.get("Pin") != null) {
 
                             try {
-                                Log.d("Value pin1",documentSnapshot.getString("Pin"));
+                                Log.d("Value pin1", documentSnapshot.getString("Pin"));
                                 mModel.setPin(documentSnapshot.getString("Pin"));
                             } catch (Exception ex) {
                                 ex.printStackTrace();
@@ -449,12 +453,12 @@ public class MainActivity2 extends AppCompatActivity {
             });
             check();
         } catch (Exception e) {
-           Log.d("Problem",e.toString());
+            Log.d("Problem", e.toString());
         }
     }
 
     private void start() {
-      adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,suggestion);
+        adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, suggestion);
         try {
             suggest.setAdapter(adapter);
         } catch (Exception e) {
@@ -470,14 +474,15 @@ public class MainActivity2 extends AppCompatActivity {
             suggest.setVisibility(View.GONE);
         } else {
 
-            if ( !navController.getCurrentDestination().getLabel().equals("Home")) {
+            if (!navController.getCurrentDestination().getLabel().equals("Home")) {
                 super.onBackPressed();
-            }else {
+            } else {
                 mDialog.getAnimationView().setScaleType(ImageView.ScaleType.CENTER_CROP);
                 mDialog.show();
             }
         }
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == MaterialSearchView.REQUEST_VOICE && resultCode == RESULT_OK) {
@@ -492,15 +497,16 @@ public class MainActivity2 extends AppCompatActivity {
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.profile:
                 Navigation.findNavController(this, R.id.nav_host_fragment).navigate(R.id.nav_profile);
-                Toast.makeText(this,"Hello",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Hello", Toast.LENGTH_SHORT).show();
                 break;
-            case  R.id.cart:
-              selectCART.show();
+            case R.id.cart:
+                selectCART.show();
                 break;
 
         }
@@ -522,7 +528,8 @@ public class MainActivity2 extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
-    public NavigationView getNavigationView(){
+
+    public NavigationView getNavigationView() {
         return navigationView;
     }
 }

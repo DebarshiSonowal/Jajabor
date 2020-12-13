@@ -28,7 +28,7 @@
                   android:title="Custom Orders"/>
               <item
                   android:id="@+id/nav_customdesign"
-                  android:icon="@drawable/ic_ropa"
+                  android:icon="@drawable/ic_fabric_pattern"
                   android:title="Custom Design"
                   />
           </group>

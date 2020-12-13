@@ -1,32 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="jajabor.in.app">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-        android:allowBackup="true"
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:largeHeap="true"
+        android:exported="false"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:windowSoftInputMode="adjustNothing">
-        <activity android:name=".ui.Cart.SpecialOrderActivity"></activity>
+        android:windowSoftInputMode="adjustNothing"
+      >
+        <activity android:name=".ui.Cart.SpecialOrderActivity">
+
+        </activity>
         <activity
             android:name=".ui.Cart.CartActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
         <activity android:name=".ui.Activity.MainActivity3" />
         <activity
             android:name=".ui.Activity.MainActivity2"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustNothing"></activity>
+            android:windowSoftInputMode="adjustResize">
+            
+        </activity>
         <activity
             android:name=".ui.Activity.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -48,7 +57,8 @@
 
         <service
             android:name=".Service.MyMessagingService"
-            android:enabled="true">
+            android:enabled="false"
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
                 <action android:name="android.intent.action.RESPOND_VIA_MESSAGE" />

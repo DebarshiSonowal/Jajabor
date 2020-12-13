@@ -1,15 +1,5 @@
 package jajabor.in.app.ui.Cart;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
-import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.ItemTouchHelper;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
@@ -19,9 +9,20 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.javiersantos.bottomdialogs.BottomDialog;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -133,6 +134,12 @@ public class CartActivity extends AppCompatActivity implements PaymentResultWith
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        try {
+            mCursor.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         mEventListener = null;
         documentReference = null;
         mListener = null;
@@ -148,6 +155,8 @@ public class CartActivity extends AppCompatActivity implements PaymentResultWith
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,
+                WindowManager.LayoutParams.FLAG_SECURE);
         setContentView(R.layout.activity_cart);
         mViewModel = ViewModelProviders.of(CartActivity.this).get(CartViewModel.class);
         mEmptyView = findViewById(R.id.progressActivity);
@@ -156,7 +165,7 @@ public class CartActivity extends AppCompatActivity implements PaymentResultWith
         mDatabase = databaseHelper.getWritableDatabase();
         db = FirebaseFirestore.getInstance();
         try {
-            mRazorpayClient = new RazorpayClient("rzp_test_grmtE0KHU0FbE0", "3F1ogXLsJkKjEA3uVEZ7Ex9i");
+            mRazorpayClient = new RazorpayClient(String.valueOf(R.string.razorpay_key), String.valueOf(R.string.razorpay_key_secret));
         } catch (RazorpayException e) {
             e.printStackTrace();
         }
@@ -198,19 +207,22 @@ public class CartActivity extends AppCompatActivity implements PaymentResultWith
         pic = getPic();
         mViewModel.setNo( mCursor.getCount());
 
-//        if(mCursor.getCount() == 0){
-//            Log.d("EMpty","Inside");
-////            mEmptyView.error().include(R.id.linear).show();
-//            mEmptyView.showEmpty(R.drawable.ic_comprar,"No items in the cart","Add items to the cart");
-//            setTitle("Loading");
-//        }else
-//            mEmptyView.showContent();
-        Cursor cursor =  mDatabase.rawQuery("SELECT SUM(" + Contract.CartItem.COLUMN_PRICE + ") as Total FROM " + Contract.CartItem.TABLE_NAME, null);
-        if (cursor.moveToFirst()) {
-            totalprice = cursor.getInt(cursor.getColumnIndex("Total"));
-            cursor.close();
+        if(mCursor.getCount() == 0){
+            Log.d("EMpty","Inside");
+//            mEmptyView.error().include(R.id.linear).show();
+            mEmptyView.showEmpty(R.drawable.ic_comprar,"No items in the cart","Add items to the cart");
+            setTitle("Loading");
+        }else
+            mEmptyView.showContent();
+        try {
+            Cursor cursor =  mDatabase.rawQuery("SELECT SUM(" + Contract.CartItem.COLUMN_PRICE + ") as Total FROM " + Contract.CartItem.TABLE_NAME, null);
+            // Cursor cursor =  mDatabase.execSQL("SELECT SUM(" + Contract.CartItem.COLUMN_PRICE + ") as Total FROM " + Contract.CartItem.TABLE_NAME,null);
+            if (cursor.moveToFirst()) {
+                totalprice = cursor.getInt(cursor.getColumnIndex("Total"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
                 ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
@@ -294,7 +306,6 @@ private List<String> getColour(){
             res.moveToNext();
         }
     }
-    res.close();
     return arrayList;
 }
 private List<String>getPic(){
@@ -311,7 +322,6 @@ private List<String>getPic(){
             res.moveToNext();
         }
     }
-    res.close();
     return arrayList;
 }
     private List<String> getsizes() {
@@ -407,6 +417,7 @@ private List<String>getPic(){
             MRP.setText(""+totalprice);
             PAYABLE.setText(""+totalprice);
         }
+        cursor.close();
     }
 
     private Cursor getAllItems() {

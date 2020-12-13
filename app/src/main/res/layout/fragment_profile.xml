@@ -2,239 +2,324 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:background="#FCFCFC"
+    android:elevation="10dp"
     android:orientation="vertical"
     tools:context=".ui.Profile.ProfileFragment">
 
-    <com.skydoves.elasticviews.ElasticImageView
-        android:id="@+id/logoutbtn"
-        android:layout_width="@dimen/_40sdp"
-        android:layout_height="@dimen/_40sdp"
-        android:layout_marginStart="@dimen/_260sdp"
-        android:scaleType="fitXY"
-        android:tint="#003D95C9"
-        app:imageView_duration="300"
-        app:imageView_scale="0.7"
-        app:srcCompat="@drawable/ic_logout" />
-    <androidx.legacy.widget.Space
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_6sdp" />
+        android:layout_height="match_parent"
+        android:layout_weight="3"
+        android:background="#FFFFFF">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_weight="1"
-        android:id="@+id/textInputLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/edit"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:textColorHint="#000000">
-
-        <EditText
-            android:id="@+id/editTextUsername"
+        <LinearLayout
+            android:id="@+id/frameLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#00FFFFFF"
-            android:cursorVisible="true"
-            android:ems="10"
-            android:hint="Username"
-            android:inputType="textPersonName"
-            android:textColor="#000000"
-            android:textColorHint="#000000"
-            android:textCursorDrawable="@null"
-            android:textSize="@dimen/_12sdp"
-            android:textStyle="bold" />
-    </com.google.android.material.textfield.TextInputLayout>
-    <androidx.legacy.widget.Space
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_10sdp" />
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF"
+            android:gravity="right"
+            android:orientation="vertical"
+            tools:context=".ui.Profile.ProfileFragment">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
 
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_weight="1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/edit"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:textColorHint="#000000">
+                    <com.skydoves.elasticviews.ElasticImageView
+                        android:id="@+id/passwordreset"
+                        android:layout_width="@dimen/_35sdp"
+                        android:layout_height="@dimen/_35sdp"
+                        android:scaleType="fitXY"
+                        android:tint="#003D95C9"
+                        app:imageView_duration="300"
+                        app:imageView_scale="0.7"
+                        app:srcCompat="@drawable/ic_secure" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editTextFirstname"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#00FFFFFF"
-            android:cursorVisible="true"
-            android:hint="Firstname"
-            android:textColor="#000000"
-            android:textColorHint="#040404"
-            android:textCursorDrawable="@null"
-            android:textSize="@dimen/_12sdp"
-            android:textStyle="bold" />
-    </com.google.android.material.textfield.TextInputLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Password Reset"
+                        android:textColor="#000000"
+                        android:textSize="18sp" />
+                </LinearLayout>
 
-    <androidx.legacy.widget.Space
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_10sdp" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_weight="1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/edit"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:textColorHint="#000000">
+                    <com.skydoves.elasticviews.ElasticImageView
+                        android:id="@+id/logoutbtn"
+                        android:layout_width="@dimen/_35sdp"
+                        android:layout_height="@dimen/_35sdp"
+                        android:scaleType="fitXY"
+                        android:tint="#003D95C9"
+                        app:imageView_duration="300"
+                        app:imageView_scale="0.7"
+                        app:srcCompat="@drawable/ic_logout" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editTextLastname"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#00FFFFFF"
-            android:cursorVisible="true"
-            android:hint="Lastname"
-            android:textColor="#000000"
-            android:textColorHint="#000000"
-            android:textCursorDrawable="@null"
-            android:textSize="@dimen/_12sdp"
-            android:textStyle="bold" />
-    </com.google.android.material.textfield.TextInputLayout>
-    <androidx.legacy.widget.Space
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_10sdp" />
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_weight="1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:background="@drawable/edit"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:textColorHint="#000000">
+                    <TextView
+                        android:id="@+id/logouttext"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Log out"
+                        android:textColor="#000000"
+                        android:textSize="18sp" />
+                </LinearLayout>
+            </LinearLayout>
 
-        <EditText
-            android:id="@+id/editEmail"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#00FFFFFF"
-            android:cursorVisible="true"
-            android:ems="10"
-            android:gravity="start|top"
-            android:hint="Email"
-            android:inputType="textEmailAddress"
-            android:textColor="#000000"
-            android:textCursorDrawable="@null"
-            android:textSize="@dimen/_12sdp"
-            android:textStyle="bold" />
-    </com.google.android.material.textfield.TextInputLayout>
-    <androidx.legacy.widget.Space
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_10sdp" />
+            <androidx.legacy.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_10sdp" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_weight="1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/edit"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:textColorHint="#000000">
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_8sdp"
+                android:layout_weight="1"
+                android:background="@drawable/edit"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:textColorHint="#000000">
 
-        <EditText
-            android:id="@+id/editTextPinCode"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#00FFFFFF"
-            android:cursorVisible="true"
-            android:ems="10"
-            android:hint="PinCode"
-            android:inputType="textEmailAddress"
-            android:textColor="#000000"
-            android:textCursorDrawable="@null"
-            android:textSize="@dimen/_12sdp"
-            android:textStyle="bold" />
-    </com.google.android.material.textfield.TextInputLayout>
+                <EditText
+                    android:id="@+id/editTextUsername"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#00FFFFFF"
+                    android:cursorVisible="true"
+                    android:ems="10"
+                    android:hint="Username"
+                    android:inputType="textPersonName"
+                    android:longClickable="false"
+                    android:textColor="#000000"
+                    android:textColorHighlight="#000000"
+                    android:textColorHint="#000000"
+                    android:textCursorDrawable="@null"
+                    android:textSize="@dimen/_12sdp"
+                    android:textStyle="bold" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-    <androidx.legacy.widget.Space
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_10sdp" />
+            <androidx.legacy.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_30sdp" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_weight="1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/edit"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:textColorHint="#000000">
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_8sdp"
+                android:layout_weight="1"
+                android:background="@drawable/edit"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:textColorHint="#000000">
 
-        <EditText
-            android:id="@+id/editTextPhone"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#00FFFFFF"
-            android:cursorVisible="true"
-            android:ems="10"
-            android:hint="Phone"
-            android:inputType="phone"
-            android:textColor="#000000"
-            android:textCursorDrawable="@null"
-            android:textSize="@dimen/_12sdp"
-            android:textStyle="bold" />
-    </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editTextFirstname"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#00FFFFFF"
+                    android:cursorVisible="true"
+                    android:hint="Firstname"
+                    android:longClickable="false"
+                    android:textColor="#000000"
+                    android:textColorHighlight="#000000"
+                    android:textColorHint="#040404"
+                    android:textCursorDrawable="@null"
+                    android:textSize="@dimen/_12sdp"
+                    android:textStyle="bold" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-    <androidx.legacy.widget.Space
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_10sdp" />
+            <androidx.legacy.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_30sdp" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_weight="1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:background="@drawable/edit"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:textColorHint="#000000">
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_8sdp"
+                android:layout_weight="1"
+                android:background="@drawable/edit"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:textColorHint="#000000">
 
-        <EditText
-            android:id="@+id/editTextAddress"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#00FFFFFF"
-            android:cursorVisible="true"
-            android:ems="10"
-            android:gravity="start|top"
-            android:hint="Address"
-            android:inputType="textMultiLine"
-            android:textColor="#000000"
-            android:textCursorDrawable="@null"
-            android:textSize="@dimen/_12sdp"
-            android:textStyle="bold" />
-    </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editTextLastname"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#00FFFFFF"
+                    android:cursorVisible="true"
+                    android:hint="Lastname"
+                    android:longClickable="false"
+                    android:textColor="#000000"
+                    android:textColorHighlight="#000000"
+                    android:textColorHint="#000000"
+                    android:textCursorDrawable="@null"
+                    android:textSize="@dimen/_12sdp"
+                    android:textStyle="bold" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-    <androidx.legacy.widget.Space
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_5sdp" />
+            <androidx.legacy.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_30sdp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="@dimen/_8sdp"
+                android:layout_weight="1"
+                android:background="@drawable/edit"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:textColorHint="#000000">
+
+                <EditText
+                    android:id="@+id/editEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#00FFFFFF"
+                    android:cursorVisible="true"
+                    android:ems="10"
+                    android:gravity="start|top"
+                    android:hint="Email"
+                    android:inputType="textEmailAddress"
+                    android:longClickable="false"
+                    android:textColor="#000000"
+                    android:textColorHighlight="#000000"
+                    android:textCursorDrawable="@null"
+                    android:textSize="@dimen/_12sdp"
+                    android:textStyle="bold" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.legacy.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_30sdp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_8sdp"
+                android:layout_weight="1"
+                android:background="@drawable/edit"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:textColorHint="#000000">
+
+                <EditText
+                    android:id="@+id/editTextPinCode"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#00FFFFFF"
+                    android:cursorVisible="true"
+                    android:ems="10"
+                    android:hint="PinCode"
+                    android:inputType="textEmailAddress"
+                    android:longClickable="false"
+                    android:textColor="#000000"
+                    android:textColorHighlight="#000000"
+                    android:textCursorDrawable="@null"
+                    android:textSize="@dimen/_12sdp"
+                    android:textStyle="bold" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.legacy.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_30sdp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_8sdp"
+                android:layout_weight="1"
+                android:background="@drawable/edit"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:textColorHint="#000000">
+
+                <EditText
+                    android:id="@+id/editTextPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#00FFFFFF"
+                    android:cursorVisible="true"
+                    android:ems="10"
+                    android:hint="Phone"
+                    android:inputType="phone"
+                    android:longClickable="false"
+                    android:textColor="#000000"
+                    android:textColorHighlight="#000000"
+                    android:textCursorDrawable="@null"
+                    android:textSize="@dimen/_12sdp"
+                    android:textStyle="bold" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.legacy.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_30sdp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/edit"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:textColorHint="#000000">
+
+                <EditText
+                    android:id="@+id/editTextAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/_8sdp"
+                    android:background="#00FFFFFF"
+                    android:cursorVisible="true"
+                    android:ems="10"
+                    android:gravity="start|top"
+                    android:hint="Address"
+                    android:inputType="textMultiLine"
+                    android:longClickable="false"
+                    android:textColor="#000000"
+                    android:textColorHighlight="#000000"
+                    android:textCursorDrawable="@null"
+                    android:textSize="@dimen/_12sdp"
+                    android:textStyle="bold" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.legacy.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_30sdp" />
+        </LinearLayout>
+
+    </ScrollView>
 
     <com.skydoves.elasticviews.ElasticButton
         android:id="@+id/savebtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_15sdp"
-        android:layout_marginEnd="@dimen/_15sdp"
+        android:layout_margin="@dimen/_15sdp"
         android:background="#FFEB3B"
         android:text="SAVE"
         android:textColor="#000000"
         android:textSize="@dimen/_10sdp"
         android:textStyle="bold" />
-    <androidx.legacy.widget.Space
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_5sdp" />
 </LinearLayout>

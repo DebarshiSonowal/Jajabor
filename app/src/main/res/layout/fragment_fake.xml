@@ -4,42 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ECE6E6"
     android:orientation="vertical"
-    tools:context=".ui.Activity.MainActivity">
-
-    <com.facebook.shimmer.ShimmerFrameLayout
-        android:id="@+id/shimmerLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#FFFFFF"
-        app:shimmer_repeat_mode="restart"
-        app:shimmer_shape="radial">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#FFFFFF"
-            android:orientation="horizontal">
-
-            <include layout="@layout/shimmeringdemo" />
-
-            <include layout="@layout/shimmeringdemo" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#FFFFFF"
-            android:orientation="horizontal">
-
-            <include layout="@layout/shimmeringdemo" />
-
-            <include layout="@layout/shimmeringdemo" />
-        </LinearLayout>
-    </com.facebook.shimmer.ShimmerFrameLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+    android:padding="@dimen/_3sdp"
+    tools:context=".ui.Activity.signup">
+    <br.com.bloder.magic.view.MagicButton
+        android:id="@+id/facebook_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        app:magic_button_size="50dp"
+        app:button_icon="@drawable/ic_facebook"
+        app:button_icon_width="25dp"
+        app:button_icon_height="25dp"
+        app:hide_text="Github"
+        app:icon_button_color="#464646"
+        app:expandable_area_color="#1c1e21"/>
 </LinearLayout>

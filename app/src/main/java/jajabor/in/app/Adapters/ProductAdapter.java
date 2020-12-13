@@ -20,7 +20,9 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import jajabor.in.app.Helper.Contract;
 import jajabor.in.app.Helper.Contract2;
+import jajabor.in.app.Helper.Contract3;
 import jajabor.in.app.Helper.DatabaseHelper2;
 import jajabor.in.app.R;
 import jajabor.in.app.ui.Activity.ProductView;
@@ -109,12 +111,16 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                 cv.put(Contract2.CartItem2.COLUMN_PRICE,price.get(position));
                 cv.put(Contract2.CartItem2.COLUMN_PID,pid.get(position));
                 cv.put(Contract2.CartItem2.COLUMN_DESC,shrt.get(position));
+                cv.put(Contract2.CartItem2._ID,holder.getItemId());
                 mDatabase.insert(Contract2.CartItem2.TABLE_NAME,null,cv);
             }
 
             @Override
             public void unLiked(LikeButton likeButton) {
-
+                DatabaseHelper2 databaseHelper = new DatabaseHelper2(mActivity);
+                SQLiteDatabase mDatabase =  databaseHelper.getWritableDatabase();
+                mDatabase.delete(Contract2.CartItem2.TABLE_NAME,
+                        Contract2.CartItem2._ID + "=" + holder.getItemId(), null);
             }
         });
     }
@@ -123,6 +129,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     public int getItemCount() {
         return url.size();
     }
+
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
     ImageView product;
     TextView nameview,priceview;

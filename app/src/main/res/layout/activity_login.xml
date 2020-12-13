@@ -7,49 +7,6 @@
     android:background="@drawable/comp"
     tools:context=".ui.Activity.login">
 
-    <com.github.nikartm.button.FitButton
-        android:id="@+id/OTPbtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="88dp"
-        android:enabled="true"
-        android:gravity="center_vertical"
-        app:fb_backgroundColor="#6169FB"
-        app:fb_cornerRadius="2dp"
-        app:fb_divColor="#fff"
-        app:fb_divHeight="40dp"
-        app:fb_divWidth="1dp"
-        app:fb_icon="@drawable/ic_call"
-        app:fb_iconColor="#FFF"
-        app:fb_iconHeight="28dp"
-        app:fb_iconMarginEnd="10dp"
-        app:fb_iconMarginStart="10dp"
-        app:fb_iconPosition="left"
-        app:fb_iconWidth="28dp"
-        app:fb_rippleColor="#FBE9E7"
-        app:fb_shape="rectangle"
-        app:fb_text="Sign up with OTP"
-        app:fb_textColor="#FFF"
-        app:fb_textPaddingEnd="10dp"
-        app:fb_textPaddingStart="10dp"
-        app:fb_textSize="@dimen/_10sdp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <com.shobhitpuri.custombuttons.GoogleSignInButton
-        android:id="@+id/googlebtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="84dp"
-        android:text="@string/google_sign_up"
-        app:isDarkTheme="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.926"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <View
         android:id="@+id/view"
         android:layout_width="0dp"
@@ -58,9 +15,7 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline55"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/textView42"
-        app:layout_constraintTop_toBottomOf="@+id/googlebtn"
-        app:layout_constraintVertical_bias="0.52" />
+        app:layout_constraintStart_toEndOf="@+id/textView42" />
 
     <com.skydoves.elasticviews.ElasticButton
         android:id="@+id/mailbtn"
@@ -72,6 +27,7 @@
         android:textColor="#000000"
         android:textSize="18sp"
         android:textStyle="bold"
+        app:button_cornerRadius="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
@@ -104,6 +60,7 @@
             android:layout_marginEnd="3dp"
             android:layout_marginBottom="0dp"
             android:focusable="true"
+            android:longClickable="false"
             android:focusableInTouchMode="true"
             android:textColorHint="#000000"
             app:hintTextColor="#000000"
@@ -117,6 +74,7 @@
                 android:id="@+id/emailtext"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:longClickable="false"
                 android:cursorVisible="true"
                 android:ems="10"
                 android:hint="Email"
@@ -147,7 +105,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.31" />
+        app:layout_constraintGuide_percent="0.32" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView4"
@@ -195,6 +153,7 @@
                 android:background="#00FFFFFF"
                 android:cursorVisible="true"
                 android:ems="10"
+                android:longClickable="false"
                 android:hint="Password"
                 android:inputType="textPassword"
                 android:textColor="#000000"
@@ -250,9 +209,7 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline55"
         app:layout_constraintEnd_toStartOf="@+id/textView42"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/googlebtn"
-        app:layout_constraintVertical_bias="0.531" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView41"
@@ -276,9 +233,8 @@
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline55"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/googlebtn"
-        app:layout_constraintVertical_bias="0.551" />
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <com.skydoves.elasticviews.ElasticButton
         android:id="@+id/signupbtn"
@@ -290,6 +246,7 @@
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         android:textStyle="bold"
+        app:button_cornerRadius="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.476"
         app:layout_constraintStart_toStartOf="parent"
@@ -300,12 +257,68 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Forgot Password?"
-        android:textColor="#150E0E"
+        android:textColor="#000000"
+        android:textSize="@dimen/_15sdp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/guideline58"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView4"
         app:layout_constraintVertical_bias="0.141" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/textView42"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView41">
+
+        <com.github.nikartm.button.FitButton
+            android:id="@+id/OTPbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/_5sdp"
+            android:layout_weight="1"
+            android:enabled="true"
+            android:gravity="center_vertical"
+            app:fb_backgroundColor="#6169FB"
+            app:fb_cornerRadius="2dp"
+            app:fb_divColor="#fff"
+            app:fb_divHeight="40dp"
+            app:fb_divWidth="1dp"
+            app:fb_icon="@drawable/ic_call"
+            app:fb_iconColor="#FFF"
+            app:fb_iconHeight="28dp"
+            app:fb_iconMarginBottom="@dimen/_5sdp"
+            app:fb_iconMarginEnd="@dimen/_5sdp"
+            app:fb_iconMarginStart="@dimen/_5sdp"
+            app:fb_iconMarginTop="@dimen/_5sdp"
+            app:fb_iconPosition="left"
+            app:fb_iconWidth="28dp"
+            app:fb_rippleColor="#FBE9E7"
+            app:fb_shape="rectangle"
+            app:fb_text="Sign up with OTP"
+            app:fb_textColor="#FFF"
+            app:fb_textPaddingEnd="@dimen/_2sdp"
+            app:fb_textPaddingStart="@dimen/_15sdp"
+            app:fb_textSize="@dimen/_10sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.shobhitpuri.custombuttons.GoogleSignInButton
+            android:id="@+id/googlebtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_5sdp"
+            android:layout_weight="1"
+            android:includeFontPadding="false"
+            android:padding="@dimen/_4sdp"
+            android:text="@string/google_sign_up"
+            android:textSize="@dimen/_10sdp"
+            app:isDarkTheme="true" />
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

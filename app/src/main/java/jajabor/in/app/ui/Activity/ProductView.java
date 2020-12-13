@@ -8,23 +8,21 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.util.Log;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
-
-
 import com.bumptech.glide.Glide;
 import com.ceylonlabs.imageviewpopup.ImagePopup;
 import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.core.ZombieEventManager;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -32,17 +30,14 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.pd.chocobar.ChocoBar;
 import com.skydoves.elasticviews.ElasticButton;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Random;
 
 import belka.us.androidtoggleswitch.widgets.ToggleSwitch;
 import jajabor.in.app.Helper.Contract;
 import jajabor.in.app.Helper.DatabaseHelper;
 import jajabor.in.app.R;
-import lib.kingja.switchbutton.SwitchMultiButton;
 import me.himanshusoni.quantityview.QuantityView;
 
 public class ProductView extends AppCompatActivity {
@@ -92,6 +87,8 @@ ImagePopup imagePopup;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,
+                WindowManager.LayoutParams.FLAG_SECURE);
         setContentView(R.layout.activity_product_view);
         toggleSwitch = findViewById(R.id.sizeswitch);
         mToggleSwitch =findViewById(R.id.colorswitch);

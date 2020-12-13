@@ -193,4 +193,5 @@
         tools:layout="@layout/fragment_custom_order_details"
         >
     </fragment>
+
 </navigation>

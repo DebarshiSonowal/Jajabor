@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +16,9 @@ import com.bumptech.glide.Glide;
 import com.like.LikeButton;
 import com.like.OnLikeListener;
 
+import jajabor.in.app.Helper.Contract;
 import jajabor.in.app.Helper.Contract2;
+import jajabor.in.app.Helper.DatabaseHelper2;
 import jajabor.in.app.ui.Activity.ProductView;
 import jajabor.in.app.R;
 
@@ -72,7 +75,10 @@ public class WishlistAdapter extends BaseAdapter {
 
             @Override
             public void unLiked(LikeButton likeButton) {
-
+                DatabaseHelper2 databaseHelper = new DatabaseHelper2(mActivity);
+                SQLiteDatabase mDatabase =  databaseHelper.getWritableDatabase();
+                mDatabase.delete(Contract2.CartItem2.TABLE_NAME,
+                        Contract2.CartItem2._ID + "=" + mCursor.getInt(mCursor.getColumnIndex(Contract2.CartItem2._ID)) , null);
             }
         });
         product.setOnClickListener(new View.OnClickListener() {

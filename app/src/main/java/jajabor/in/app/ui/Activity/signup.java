@@ -1,10 +1,12 @@
 package jajabor.in.app.ui.Activity;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -27,6 +29,7 @@ import com.skydoves.elasticviews.ElasticButton;
 import java.util.HashMap;
 import java.util.Map;
 
+import dmax.dialog.SpotsDialog;
 import jajabor.in.app.Helper.user;
 import jajabor.in.app.R;
 
@@ -38,10 +41,20 @@ public class signup extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     DatabaseReference databaseReference;
     FirebaseFirestore db ;
+    AlertDialog mDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,
+                WindowManager.LayoutParams.FLAG_SECURE);
         setContentView(R.layout.activity_signup);
+        mDialog =  new SpotsDialog.Builder()
+                .setContext(signup.this)
+                .setTheme(R.style.Custom)
+                .setMessage("Please Wait")
+                .setCancelable(false)
+                .build();
+
         mActionBar = getSupportActionBar();
        mActionBar.setTitle(Html.fromHtml("<font color='#000000'>SIGNUP </font>"));
         txtFirstName = findViewById(R.id.firstnameinput);
@@ -60,6 +73,7 @@ public class signup extends AppCompatActivity {
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 startActivity(new Intent(signup.this,login.class));
 
 //                btn_login.doneLoadingAnimation();
@@ -69,6 +83,7 @@ public class signup extends AppCompatActivity {
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mDialog.show();
                 final String userName = txtUserName.getText().toString().trim();
                 final String email = txtEmail.getText().toString().trim();
                 String password = txtPassword.getText().toString().trim();
@@ -78,34 +93,42 @@ public class signup extends AppCompatActivity {
 
                 if (TextUtils.isEmpty(userName)) {
                     Toast.makeText(signup.this, "Please Enter User Name", Toast.LENGTH_SHORT).show();
+                    mDialog.dismiss();
                     return;
                 }
                 if (TextUtils.isEmpty(firstName)) {
                     Toast.makeText(signup.this, "Please Enter Email", Toast.LENGTH_SHORT).show();
+                    mDialog.dismiss();
                     return;
                 }
                 if (TextUtils.isEmpty(lastName)) {
                     Toast.makeText(signup.this, "Please Enter Firstname", Toast.LENGTH_SHORT).show();
+                    mDialog.dismiss();
                     return;
                 }
                 if (TextUtils.isEmpty(email)) {
                     Toast.makeText(signup.this, "Please Enter Lastname", Toast.LENGTH_SHORT).show();
+                    mDialog.dismiss();
                     return;
                 }
                 if (TextUtils.isEmpty(password)) {
                     Toast.makeText(signup.this, "Please Enter Password", Toast.LENGTH_SHORT).show();
+                    mDialog.dismiss();
                     return;
                 }
                 if (TextUtils.isEmpty(confirmPassword)) {
                     Toast.makeText(signup.this, "Please Enter Confirm Password", Toast.LENGTH_SHORT).show();
+                    mDialog.dismiss();
                     return;
                 }
                 if (password.length() < 6) {
                     Toast.makeText(signup.this, "Password too short", Toast.LENGTH_SHORT).show();
+                    mDialog.dismiss();
                     return;
                 }
                 if(!agree.isChecked()){
                     Toast.makeText(signup.this, "You have not agreed to our Terms & Conditions", Toast.LENGTH_SHORT).show();
+                    mDialog.dismiss();
                     return;
                 }
 
@@ -134,6 +157,7 @@ public class signup extends AppCompatActivity {
                                         db.collection("UserProfile").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).set(note).addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
+                                                mDialog.dismiss();
                                                 Toast.makeText(signup.this, "Registration Complete", Toast.LENGTH_SHORT).show();
                                                 startActivity(new Intent(getApplicationContext(), login.class));
                                             }
