@@ -55,7 +55,7 @@ public class CartProductAdapter extends RecyclerView.Adapter<CartProductAdapter.
             return;
         }
 //        Glide.with(mContext).load( mCursor.getString(mCursor.getColumnIndex(Contract.CartItem.COLUMN_PIC))).into(holder.product);
-        Picasso.get().load( mCursor.getString(mCursor.getColumnIndex(Contract3.CartItem.COLUMN_PIC))).into(holder.product);
+        Picasso.get().load( mCursor.getString(mCursor.getColumnIndex(Contract3.CartItem.COLUMN_PIC))).placeholder(R.drawable.error_404).into(holder.product);
         holder.nameview.setText( mCursor.getString(mCursor.getColumnIndex(Contract3.CartItem.COLUMN_NAME)));
         Log.d("Product", mCursor.getString(mCursor.getColumnIndex(Contract3.CartItem.COLUMN_NAME)));
         holder.quantityview.setText( mCursor.getInt(mCursor.getColumnIndex(Contract3.CartItem.COLUMN_QUANTITY))+"");

@@ -94,7 +94,7 @@ public class CartActivity extends AppCompatActivity implements PaymentResultWith
     Map<String,Object>note;
     FirebaseUser mUser;
     JSONObject options;
-    private SimpleDateFormat sdf = new SimpleDateFormat("DD/MM/YYYY", Locale.getDefault());
+    private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
     DatabaseHelper databaseHelper;
     ConstraintLayout mConstraintLayout;
     LinearLayout a;

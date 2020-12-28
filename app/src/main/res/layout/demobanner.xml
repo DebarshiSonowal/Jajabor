@@ -5,7 +5,7 @@
     android:layout_width="135dp"
     android:layout_height="@dimen/_100sdp"
     android:layout_gravity="center|top"
-    android:background="#FFFFFF">
+    android:background="#00FFFFFF">
 
     <androidx.cardview.widget.CardView
         android:layout_width="120dp"

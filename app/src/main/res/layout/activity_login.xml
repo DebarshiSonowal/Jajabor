@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/comp"
+    android:background="@drawable/compback"
     tools:context=".ui.Activity.login">
 
     <View
@@ -60,8 +60,8 @@
             android:layout_marginEnd="3dp"
             android:layout_marginBottom="0dp"
             android:focusable="true"
-            android:longClickable="false"
             android:focusableInTouchMode="true"
+            android:longClickable="false"
             android:textColorHint="#000000"
             app:hintTextColor="#000000"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -74,11 +74,11 @@
                 android:id="@+id/emailtext"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:longClickable="false"
                 android:cursorVisible="true"
                 android:ems="10"
                 android:hint="Email"
                 android:inputType="textEmailAddress"
+                android:longClickable="false"
                 android:textColor="#000000"
                 android:textColorHighlight="#FFFFFF"
                 android:textColorLink="#FFFFFF"
@@ -98,14 +98,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.42" />
+        app:layout_constraintGuide_percent="0.48" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline55"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.32" />
+        app:layout_constraintGuide_percent="0.37" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView4"
@@ -153,9 +153,9 @@
                 android:background="#00FFFFFF"
                 android:cursorVisible="true"
                 android:ems="10"
-                android:longClickable="false"
                 android:hint="Password"
                 android:inputType="textPassword"
+                android:longClickable="false"
                 android:textColor="#000000"
                 android:textCursorDrawable="@null"
                 android:textSize="@dimen/_12sdp"
@@ -172,21 +172,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.45" />
+        app:layout_constraintGuide_percent="0.51" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline57"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.55" />
+        app:layout_constraintGuide_percent="0.62" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline58"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.76" />
+        app:layout_constraintGuide_percent="0.8" />
 
     <TextView
         android:id="@+id/textView21"

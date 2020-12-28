@@ -66,7 +66,7 @@ public class GridAdapter extends BaseAdapter {
         nameview = convertView.findViewById(R.id.name);
         priceview = convertView.findViewById(R.id.price);
         star = convertView.findViewById(R.id.star_button);
-        Glide.with(mActivity).load(url.get(position)).into(product);
+        Glide.with(mActivity).load(url.get(position)).error(R.drawable.error_404).dontAnimate().into(product);
 //        Picasso.get().load(url.get(position)).into(product);
         nameview.setText(name.get(position));
         priceview.setText("₹"+price.get(position));

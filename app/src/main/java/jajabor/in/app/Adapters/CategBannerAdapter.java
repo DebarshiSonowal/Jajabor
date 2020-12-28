@@ -44,7 +44,7 @@ public class CategBannerAdapter extends RecyclerView.Adapter<CategBannerAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Picasso.get().load(url.get(position)).into(holder.productpic);
+        Picasso.get().load(url.get(position)).error(R.drawable.error_404).into(holder.productpic);
         holder.nameview.setText(name.get(position));
 
     }

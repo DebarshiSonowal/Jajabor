@@ -58,7 +58,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
-        Picasso.get().load(url.get(position)).resize(400,400).into(holder.product);
+        Picasso.get().load(url.get(position)).error(R.drawable.error_404).resize(400,400).into(holder.product);
         holder.nameview.setText(name.get(position));
         holder.priceview.setText("₹"+price.get(position));
         holder.priceview.setOnClickListener(new View.OnClickListener() {

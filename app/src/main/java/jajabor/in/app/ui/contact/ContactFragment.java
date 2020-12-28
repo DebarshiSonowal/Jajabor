@@ -13,21 +13,25 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.github.nikartm.button.FitButton;
+import com.rilixtech.materialfancybutton.MaterialFancyButton;
 import com.skydoves.elasticviews.ElasticButton;
 import com.skydoves.elasticviews.ElasticImageView;
 
 import br.com.bloder.magic.view.MagicButton;
+import in.championswimmer.libsocialbuttons.FabSocial;
 import info.hoang8f.widget.FButton;
 import jajabor.in.app.R;
 
 public class ContactFragment extends Fragment {
-    private MagicButton callbtn,mailbtn,locbtn,fbtn,instabtn,tbtn;
+    private MaterialFancyButton callbtn,mailbtn,locbtn,wbtn;
+    private FabSocial fbtn,instabtn,tbtn;
     private Intent intentAiguilleur;
     private  View view;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_contactus, container, false);
+            view = inflater.inflate(R.layout.fragment_contactus, container, false);
+
 
         callbtn = view.findViewById(R.id.call_btn);
         mailbtn = view.findViewById(R.id.gmail_btn);
@@ -35,8 +39,9 @@ public class ContactFragment extends Fragment {
         fbtn = view.findViewById(R.id.facebook_btn);
         tbtn = view.findViewById(R.id.twitter_btn);
         instabtn = view.findViewById(R.id.insta_btn);
+        wbtn = view.findViewById(R.id.web_btn);
 
-        callbtn.setMagicButtonClickListener(new View.OnClickListener() {
+        callbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Uri number2 = Uri.parse( "tel:"+"+918486558323");
@@ -44,7 +49,7 @@ public class ContactFragment extends Fragment {
                 startActivity(callIntent);
             }
         });
-       mailbtn.setMagicButtonClickListener(new View.OnClickListener() {
+       mailbtn.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
                Intent send = new Intent(Intent.ACTION_SENDTO);
@@ -56,7 +61,7 @@ public class ContactFragment extends Fragment {
                startActivity(Intent.createChooser(send, "Send mail..."));
            }
        });
-       locbtn.setMagicButtonClickListener(new View.OnClickListener() {
+       locbtn.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
                Uri gmmIntentUri = Uri.parse("geo:26.4626776,90.5568552?q=Jajabor,Borpara, Bongaigaon");
@@ -65,7 +70,7 @@ public class ContactFragment extends Fragment {
                startActivity(mapIntent);
            }
        });
-        fbtn.setMagicButtonClickListener(new View.OnClickListener() {
+        fbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
@@ -76,7 +81,7 @@ public class ContactFragment extends Fragment {
                 }
             }
         });
-     instabtn.setMagicButtonClickListener(new View.OnClickListener() {
+     instabtn.setOnClickListener(new View.OnClickListener() {
          @Override
          public void onClick(View v) {
              String scheme = "http://instagram.com/_u/jajabor.in";
@@ -91,7 +96,7 @@ public class ContactFragment extends Fragment {
              getActivity().startActivity(intentAiguilleur);
          }
      });
-      tbtn.setMagicButtonClickListener(new View.OnClickListener() {
+      tbtn.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View v) {
               try {
@@ -99,6 +104,14 @@ public class ContactFragment extends Fragment {
               }catch (Exception e) {
                   startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/#!/" + "@jajaborshopping")));
               }
+          }
+      });
+      wbtn.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+              Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://jajabor.in"));
+              Intent browserChooserIntent = Intent.createChooser(browserIntent , "Choose browser of your choice");
+              startActivity(browserChooserIntent );
           }
       });
         return view;

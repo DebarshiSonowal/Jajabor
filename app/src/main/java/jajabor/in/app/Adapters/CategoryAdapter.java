@@ -49,7 +49,7 @@ public class CategoryAdapter extends BaseAdapter {
         convertView= mLayoutInflater.inflate(R.layout.topweardemo, null);
         product = convertView.findViewById(R.id.categpic);
         nameview = convertView.findViewById(R.id.categname);
-        Glide.with(parent.getContext()).load(url.get(position)).fitCenter().into(product);
+        Glide.with(parent.getContext()).load(url.get(position)).error(R.drawable.error_404).dontAnimate().fitCenter().into(product);
         nameview.setVisibility(View.GONE);
 //        nameview.setText(name.get(position));
         return convertView;

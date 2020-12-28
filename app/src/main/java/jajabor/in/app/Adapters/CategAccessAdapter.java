@@ -48,7 +48,7 @@ public class CategAccessAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         convertView= mLayoutInflater.inflate(R.layout.accessorydemo, null);
         product = convertView.findViewById(R.id.accesspic);
-        Glide.with(mActivity).load(url.get(position)).into(product);
+        Glide.with(mActivity).load(url.get(position)).error(R.drawable.error_404).dontAnimate().into(product);
 //        nameview.setText(name.get(position));
         return convertView;
     }

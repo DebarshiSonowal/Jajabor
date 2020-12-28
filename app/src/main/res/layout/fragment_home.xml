@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:background="@drawable/specback"
     tools:context=".ui.home.HomeFragment">
 
     <LinearLayout
@@ -12,16 +12,19 @@
         android:layout_height="wrap_content"
         android:focusableInTouchMode="true"
         android:orientation="vertical">
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/categorybanner"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="#00FFFFFF">
 
         </androidx.recyclerview.widget.RecyclerView>
 
         <androidx.legacy.widget.Space
             android:layout_width="match_parent"
             android:layout_height="@dimen/_10sdp" />
+
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -37,9 +40,10 @@
                 app:slider_interval="5000"
                 app:slider_loopSlides="true" />
         </androidx.cardview.widget.CardView>
+
         <androidx.legacy.widget.Space
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_10sdp"/>
+            android:layout_height="@dimen/_10sdp" />
 
 
         <androidx.cardview.widget.CardView
@@ -64,6 +68,7 @@
         <androidx.legacy.widget.Space
             android:layout_width="match_parent"
             android:layout_height="@dimen/_10sdp" />
+
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -85,23 +90,22 @@
             android:layout_height="@dimen/_10sdp" />
 
 
-            <ImageView
-                android:id="@+id/imageView15"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_220sdp"
-                android:scaleType="fitCenter"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:layout_marginBottom="@dimen/_5sdp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
+        <ImageView
+            android:id="@+id/imageView15"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_220sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
         <androidx.legacy.widget.Space
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_10sdp"/>
+            android:layout_height="@dimen/_10sdp" />
 
         <TextView
             android:id="@+id/textView13"
@@ -159,7 +163,7 @@
 
         <androidx.legacy.widget.Space
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_10sdp"/>
+            android:layout_height="@dimen/_10sdp" />
 
         <TextView
             android:id="@+id/textView38"
@@ -188,6 +192,7 @@
             android:gravity="center"
             android:text="PRICE STARTING AT ₹39"
             android:textColor="#B03566" />
+
         <TextView
             android:id="@+id/textViewVX"
             android:layout_width="match_parent"
@@ -197,6 +202,7 @@
             android:textColor="#F4214E"
             android:textSize="18sp"
             android:textStyle="bold" />
+
         <GridView
             android:id="@+id/ACCESSORIES"
             android:layout_width="match_parent"
@@ -208,9 +214,11 @@
             android:verticalSpacing="@dimen/_20sdp">
 
         </GridView>
+
         <androidx.legacy.widget.Space
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_10sdp"/>
+            android:layout_height="@dimen/_10sdp" />
+
         <TextView
             android:id="@+id/textView2"
             android:layout_width="match_parent"
@@ -225,45 +233,52 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
             <com.facebook.shimmer.ShimmerFrameLayout
                 android:id="@+id/shimmerLayoutcouple"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:shimmer_auto_start="true"
                 app:shimmer_shape="linear">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
+
                     <include
                         layout="@layout/padad"
-                        android:layout_weight="1"
-                        android:layout_margin="@dimen/_7sdp"
-                        android:layout_height="match_parent"
-                        android:layout_width="match_parent" />
-                    <include
-                        layout="@layout/padad"
-                        android:layout_height="match_parent"
                         android:layout_width="match_parent"
-                        android:layout_weight="1"
+                        android:layout_height="match_parent"
                         android:layout_margin="@dimen/_7sdp"
-                         />
+                        android:layout_weight="1" />
+
+                    <include
+                        layout="@layout/padad"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/_7sdp"
+                        android:layout_weight="1" />
                 </LinearLayout>
             </com.facebook.shimmer.ShimmerFrameLayout>
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/couplesale"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </LinearLayout>
-<androidx.legacy.widget.Space
-    android:layout_width="match_parent"
-    android:layout_height="@dimen/_10sdp"/>
+
+        <androidx.legacy.widget.Space
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_10sdp" />
+
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="@dimen/_140sdp"
             android:layout_margin="4dp"
             app:cardBackgroundColor="#FFEB3B"
             app:cardElevation="6dp">
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -301,7 +316,7 @@
 
         <androidx.legacy.widget.Space
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_10sdp"/>
+            android:layout_height="@dimen/_10sdp" />
 
         <TextView
             android:id="@+id/textView3"
@@ -317,31 +332,35 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
             <com.facebook.shimmer.ShimmerFrameLayout
                 android:id="@+id/shimmerLayoutbihu"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:shimmer_auto_start="true"
                 app:shimmer_shape="linear">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
+
                     <include
                         layout="@layout/padad"
-                        android:layout_weight="1"
-                        android:layout_margin="@dimen/_7sdp"
-                        android:layout_height="match_parent"
-                        android:layout_width="match_parent" />
-                    <include
-                        layout="@layout/padad"
-                        android:layout_height="match_parent"
                         android:layout_width="match_parent"
-                        android:layout_weight="1"
+                        android:layout_height="match_parent"
                         android:layout_margin="@dimen/_7sdp"
-                        />
+                        android:layout_weight="1" />
+
+                    <include
+                        layout="@layout/padad"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/_7sdp"
+                        android:layout_weight="1" />
                 </LinearLayout>
             </com.facebook.shimmer.ShimmerFrameLayout>
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/bihusale"
                 android:layout_width="match_parent"
@@ -416,31 +435,35 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
             <com.facebook.shimmer.ShimmerFrameLayout
                 android:id="@+id/shimmerLayoutall"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:shimmer_auto_start="true"
                 app:shimmer_shape="linear">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
+
                     <include
                         layout="@layout/padad"
-                        android:layout_weight="1"
-                        android:layout_margin="@dimen/_7sdp"
-                        android:layout_height="match_parent"
-                        android:layout_width="match_parent" />
-                    <include
-                        layout="@layout/padad"
-                        android:layout_height="match_parent"
                         android:layout_width="match_parent"
-                        android:layout_weight="1"
+                        android:layout_height="match_parent"
                         android:layout_margin="@dimen/_7sdp"
-                        />
+                        android:layout_weight="1" />
+
+                    <include
+                        layout="@layout/padad"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/_7sdp"
+                        android:layout_weight="1" />
                 </LinearLayout>
             </com.facebook.shimmer.ShimmerFrameLayout>
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/allproducts"
                 android:layout_width="match_parent"
@@ -450,6 +473,7 @@
         <androidx.legacy.widget.Space
             android:layout_width="match_parent"
             android:layout_height="@dimen/_10sdp" />
+
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

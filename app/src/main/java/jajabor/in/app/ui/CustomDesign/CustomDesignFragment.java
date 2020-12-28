@@ -21,6 +21,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import com.github.siyamed.shapeimageview.RoundedImageView;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -52,7 +53,7 @@ public class CustomDesignFragment extends Fragment {
     StorageReference mStorageReference;
     FirebaseStorage mStorage;
     FirebaseFirestore db;
-    ImageView design;
+    RoundedImageView design;
     ElasticImageView select, upload;
     SwitchMultiButton sizeswitch, colourswitch;
     QuantityView quantity;

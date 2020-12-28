@@ -43,7 +43,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Picasso.get().load(url.get(position)).into(holder.product);
+        Picasso.get().load(url.get(position)).placeholder(R.drawable.error_404).into(holder.product);
         holder.nameview.setText(name.get(position));
         if (quantity.get(position)!= null) {
             holder.quantityview.setText(String.valueOf(quantity.get(position)));

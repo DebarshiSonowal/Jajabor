@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FCFCFC"
+    android:background="@drawable/compback"
     android:elevation="10dp"
     android:orientation="vertical"
     tools:context=".ui.Profile.ProfileFragment">
@@ -13,15 +13,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="3"
-        android:background="#FFFFFF">
+
+        android:background="#00F3ECEC">
 
         <LinearLayout
             android:id="@+id/frameLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#FFFFFF"
+            android:background="#00F6F1F1"
             android:gravity="right"
             android:orientation="vertical"
+            android:alpha=".85"
             tools:context=".ui.Profile.ProfileFragment">
 
             <LinearLayout
@@ -88,226 +90,303 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_10sdp" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayout"
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_8sdp"
                 android:layout_weight="1"
-                android:background="@drawable/edit"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:textColorHint="#000000">
+                android:elevation="@dimen/_10sdp"
+                app:cardBackgroundColor="#ffffff"
+                app:cardCornerRadius="@dimen/_10sdp">
 
-                <EditText
-                    android:id="@+id/editTextUsername"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="#00FFFFFF"
-                    android:cursorVisible="true"
-                    android:ems="10"
-                    android:hint="Username"
-                    android:inputType="textPersonName"
-                    android:longClickable="false"
-                    android:textColor="#000000"
-                    android:textColorHighlight="#000000"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_5sdp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edit"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
                     android:textColorHint="#000000"
-                    android:textCursorDrawable="@null"
-                    android:textSize="@dimen/_12sdp"
-                    android:textStyle="bold" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    app:hintTextColor="#000000">
+
+                    <EditText
+                        android:id="@+id/editTextUsername"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#00FFFFFF"
+                        android:cursorVisible="true"
+                        android:ems="10"
+                        android:hint="Username"
+                        android:inputType="textPersonName"
+                        android:longClickable="false"
+                        android:textColor="#000000"
+                        android:textColorHighlight="#000000"
+                        android:textColorHint="#000000"
+                        android:textCursorDrawable="@null"
+                        android:textSize="@dimen/_12sdp"
+                        android:textStyle="bold" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </androidx.cardview.widget.CardView>
 
             <androidx.legacy.widget.Space
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_30sdp" />
 
-            <com.google.android.material.textfield.TextInputLayout
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_8sdp"
+                android:layout_margin="@dimen/_5sdp"
                 android:layout_weight="1"
-                android:background="@drawable/edit"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:textColorHint="#000000">
+                android:elevation="@dimen/_10sdp"
+                app:cardBackgroundColor="#ffffff"
+                app:cardCornerRadius="@dimen/_10sdp">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editTextFirstname"
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="#00FFFFFF"
-                    android:cursorVisible="true"
-                    android:hint="Firstname"
-                    android:longClickable="false"
-                    android:textColor="#000000"
-                    android:textColorHighlight="#000000"
-                    android:textColorHint="#040404"
-                    android:textCursorDrawable="@null"
-                    android:textSize="@dimen/_12sdp"
-                    android:textStyle="bold" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <androidx.legacy.widget.Space
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_30sdp" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_8sdp"
-                android:layout_weight="1"
-                android:background="@drawable/edit"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:textColorHint="#000000">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editTextLastname"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="#00FFFFFF"
-                    android:cursorVisible="true"
-                    android:hint="Lastname"
-                    android:longClickable="false"
-                    android:textColor="#000000"
-                    android:textColorHighlight="#000000"
-                    android:textColorHint="#000000"
-                    android:textCursorDrawable="@null"
-                    android:textSize="@dimen/_12sdp"
-                    android:textStyle="bold" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <androidx.legacy.widget.Space
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_30sdp" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:layout_margin="@dimen/_8sdp"
-                android:layout_weight="1"
-                android:background="@drawable/edit"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:textColorHint="#000000">
-
-                <EditText
-                    android:id="@+id/editEmail"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="#00FFFFFF"
-                    android:cursorVisible="true"
-                    android:ems="10"
-                    android:gravity="start|top"
-                    android:hint="Email"
-                    android:inputType="textEmailAddress"
-                    android:longClickable="false"
-                    android:textColor="#000000"
-                    android:textColorHighlight="#000000"
-                    android:textCursorDrawable="@null"
-                    android:textSize="@dimen/_12sdp"
-                    android:textStyle="bold" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <androidx.legacy.widget.Space
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_30sdp" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_8sdp"
-                android:layout_weight="1"
-                android:background="@drawable/edit"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:textColorHint="#000000">
-
-                <EditText
-                    android:id="@+id/editTextPinCode"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="#00FFFFFF"
-                    android:cursorVisible="true"
-                    android:ems="10"
-                    android:hint="PinCode"
-                    android:inputType="textEmailAddress"
-                    android:longClickable="false"
-                    android:textColor="#000000"
-                    android:textColorHighlight="#000000"
-                    android:textCursorDrawable="@null"
-                    android:textSize="@dimen/_12sdp"
-                    android:textStyle="bold" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <androidx.legacy.widget.Space
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_30sdp" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_8sdp"
-                android:layout_weight="1"
-                android:background="@drawable/edit"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:textColorHint="#000000">
-
-                <EditText
-                    android:id="@+id/editTextPhone"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="#00FFFFFF"
-                    android:cursorVisible="true"
-                    android:ems="10"
-                    android:hint="Phone"
-                    android:inputType="phone"
-                    android:longClickable="false"
-                    android:textColor="#000000"
-                    android:textColorHighlight="#000000"
-                    android:textCursorDrawable="@null"
-                    android:textSize="@dimen/_12sdp"
-                    android:textStyle="bold" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <androidx.legacy.widget.Space
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_30sdp" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/edit"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:textColorHint="#000000">
-
-                <EditText
-                    android:id="@+id/editTextAddress"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_margin="@dimen/_8sdp"
-                    android:background="#00FFFFFF"
-                    android:cursorVisible="true"
-                    android:ems="10"
-                    android:gravity="start|top"
-                    android:hint="Address"
-                    android:inputType="textMultiLine"
-                    android:longClickable="false"
-                    android:textColor="#000000"
-                    android:textColorHighlight="#000000"
-                    android:textCursorDrawable="@null"
-                    android:textSize="@dimen/_12sdp"
-                    android:textStyle="bold" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_weight="1"
+                    android:background="@drawable/edit"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:textColorHint="#000000"
+                    app:hintTextColor="#000000">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editTextFirstname"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#00FFFFFF"
+                        android:cursorVisible="true"
+                        android:hint="Firstname"
+                        android:longClickable="false"
+                        android:textColor="#000000"
+                        android:textColorHighlight="#000000"
+                        android:textColorHint="#040404"
+                        android:textCursorDrawable="@null"
+                        android:textSize="@dimen/_12sdp"
+                        android:textStyle="bold" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </androidx.cardview.widget.CardView>
 
             <androidx.legacy.widget.Space
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_30sdp" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_5sdp"
+                android:layout_weight="1"
+                android:elevation="@dimen/_10sdp"
+                app:cardBackgroundColor="#ffffff"
+                app:cardCornerRadius="@dimen/_10sdp">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_8sdp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edit"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:textColorHint="#000000"
+                    app:hintTextColor="#000000">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editTextLastname"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#00FFFFFF"
+                        android:cursorVisible="true"
+                        android:hint="Lastname"
+                        android:longClickable="false"
+                        android:textColor="#000000"
+                        android:textColorHighlight="#000000"
+                        android:textColorHint="#000000"
+                        android:textCursorDrawable="@null"
+                        android:textSize="@dimen/_12sdp"
+                        android:textStyle="bold" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.legacy.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_30sdp" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_5sdp"
+                android:layout_weight="1"
+                android:elevation="@dimen/_10sdp"
+                app:cardBackgroundColor="#ffffff"
+                app:cardCornerRadius="@dimen/_10sdp">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_margin="@dimen/_8sdp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edit"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:textColorHint="#000000"
+                    app:hintTextColor="#000000">
+
+                    <EditText
+                        android:id="@+id/editEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#00FFFFFF"
+                        android:cursorVisible="true"
+                        android:ems="10"
+                        android:gravity="start|top"
+                        android:hint="Email"
+                        android:inputType="textEmailAddress"
+                        android:longClickable="false"
+                        android:textColor="#000000"
+                        android:textColorHighlight="#000000"
+                        android:textCursorDrawable="@null"
+                        android:textSize="@dimen/_12sdp"
+                        android:textStyle="bold" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.legacy.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_30sdp" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_5sdp"
+                android:layout_weight="1"
+                android:elevation="@dimen/_10sdp"
+                app:cardBackgroundColor="#ffffff"
+                app:cardCornerRadius="@dimen/_10sdp">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_8sdp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edit"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:textColorHint="#000000"
+                    app:hintTextColor="#000000">
+
+                    <EditText
+                        android:id="@+id/editTextPinCode"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#00FFFFFF"
+                        android:cursorVisible="true"
+                        android:maxLength="7"
+                        android:hint="PinCode"
+                        android:inputType="number"
+                        android:longClickable="false"
+                        android:textColor="#000000"
+                        android:textColorHighlight="#000000"
+                        android:textCursorDrawable="@null"
+                        android:textSize="@dimen/_12sdp"
+                        android:textStyle="bold" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.legacy.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_30sdp" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_5sdp"
+                android:layout_weight="1"
+                android:elevation="@dimen/_10sdp"
+                app:cardBackgroundColor="#ffffff"
+                app:cardCornerRadius="@dimen/_10sdp">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_8sdp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edit"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:textColorHint="#000000"
+                    app:hintTextColor="#000000">
+
+                    <EditText
+                        android:id="@+id/editTextPhone"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#00FFFFFF"
+                        android:cursorVisible="true"
+                        android:ems="10"
+                        android:hint="Phone"
+                        android:inputType="phone"
+                        android:longClickable="false"
+                        android:textColor="#000000"
+                        android:textColorHighlight="#000000"
+                        android:textCursorDrawable="@null"
+                        android:textSize="@dimen/_12sdp"
+                        android:textStyle="bold" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.legacy.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_30sdp" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_5sdp"
+                android:layout_weight="1"
+                android:elevation="@dimen/_10sdp"
+                app:cardBackgroundColor="#ffffff"
+                app:cardCornerRadius="@dimen/_10sdp">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_8sdp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edit"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:textColorHint="#000000"
+                    app:hintTextColor="#000000">
+
+                    <EditText
+                        android:id="@+id/editTextAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#00FFFFFF"
+                        android:cursorVisible="true"
+                        android:ems="10"
+                        android:hint="Address"
+                        android:inputType="textMultiLine"
+                        android:longClickable="false"
+                        android:textColor="#000000"
+                        android:textColorHighlight="#000000"
+                        android:textCursorDrawable="@null"
+                        android:textSize="@dimen/_12sdp"
+                        android:textStyle="bold" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.legacy.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_10sdp" />
         </LinearLayout>
 
     </ScrollView>

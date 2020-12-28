@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
 
+import jajabor.in.app.R;
 import ss.com.bannerslider.ImageLoadingService;
 
 public class GlideImageLoadingService implements ImageLoadingService {
@@ -19,14 +20,14 @@ public class GlideImageLoadingService implements ImageLoadingService {
     public void loadImage(String url, ImageView imageView) {
 //        Picasso.with(context).load(url).into(imageView);
 //        Picasso.get().load(url).into(imageView);
-        Glide.with(context).load(url).fitCenter().into(imageView);
+        Glide.with(context).load(url).error(R.drawable.error_404).dontAnimate().fitCenter().into(imageView);
     }
 
     @Override
     public void loadImage(int resource, ImageView imageView) {
 //        Picasso.with(context).load(resource).into(imageView);
 //        Picasso.get().load(resource).into(imageView);
-        Glide.with(context).load(resource).fitCenter().into(imageView);
+        Glide.with(context).load(resource).error(R.drawable.error_404).dontAnimate().fitCenter().into(imageView);
     }
 
     @Override

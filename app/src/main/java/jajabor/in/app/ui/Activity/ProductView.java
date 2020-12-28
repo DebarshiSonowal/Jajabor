@@ -156,7 +156,7 @@ ImagePopup imagePopup;
         pid = getIntent().getIntExtra("pid",0);
         money =Long.parseLong( getIntent().getStringExtra("price"));
 //        Picasso.get().load(getIntent().getStringExtra("url")).into(productpic);
-        Glide.with( mActivity).load(getIntent().getStringExtra("url")).into(productpic);
+        Glide.with( mActivity).load(getIntent().getStringExtra("url")).placeholder(R.drawable.error_404).into(productpic);
         quantityView =findViewById(R.id.quantityview);
         quantityView.setOnQuantityChangeListener(new QuantityView.OnQuantityChangeListener() {
             @Override

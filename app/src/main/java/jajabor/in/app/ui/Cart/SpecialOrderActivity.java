@@ -92,7 +92,7 @@ public class SpecialOrderActivity extends AppCompatActivity implements PaymentRe
     Map<String,Object> note;
     FirebaseUser mUser;
     JSONObject options;
-    private SimpleDateFormat sdf = new SimpleDateFormat("DD/MM/YYYY", Locale.getDefault());
+    private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
     DatabaseHelper3 databaseHelper;
     ConstraintLayout mConstraintLayout;
     LinearLayout a;

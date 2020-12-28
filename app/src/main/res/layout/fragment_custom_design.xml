@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:background="@drawable/compback"
     tools:context=".ui.CustomDesign.CustomDesignFragment">
 
     <LinearLayout
@@ -91,14 +91,19 @@
                 app:switchTabs="@array/switch_color"
                 app:textSize="14sp" />
 
-            <androidx.appcompat.widget.AppCompatImageView
+            <com.github.siyamed.shapeimageview.RoundedImageView
                 android:id="@+id/designview"
                 android:layout_width="153dp"
                 android:layout_height="122dp"
-                android:layout_marginTop="124dp"
-                android:layout_marginEnd="28dp"
+                android:layout_marginTop="116dp"
+                android:layout_marginEnd="32dp"
+                android:layout_weight="1"
+                android:scaleType="fitCenter"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:siBorderWidth="1dp"
+                app:siRadius="6dp"
+                app:siSquare="true" />
 
             <TextView
                 android:id="@+id/textView32"

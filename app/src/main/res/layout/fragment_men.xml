@@ -4,12 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:background="@drawable/compback"
     tools:context=".ui.Men.MenFragment">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <com.facebook.shimmer.ShimmerFrameLayout
             android:id="@+id/shimmerLayoutmen"
             android:layout_width="match_parent"
@@ -21,7 +23,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/colorPrimary"
+                android:background="#00FFFFFF"
                 android:orientation="vertical"
                 android:weightSum="1">
 
@@ -38,8 +40,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="@dimen/_15sdp"
-                        android:layout_weight="1"
-                        />
+                        android:layout_weight="1" />
 
                     <include
                         layout="@layout/shimmeringdemo"
@@ -75,18 +76,18 @@
                 </LinearLayout>
             </LinearLayout>
         </com.facebook.shimmer.ShimmerFrameLayout>
+
         <GridView
             android:id="@+id/mangrid"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#FFFFFF"
+            android:background="#00FFFFFF"
             android:horizontalSpacing="@dimen/_2sdp"
             android:numColumns="2"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
             android:verticalScrollbarPosition="right"
-            android:verticalSpacing="@dimen/_20sdp"
-           />
+            android:verticalSpacing="@dimen/_20sdp" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

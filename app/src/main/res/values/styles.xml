@@ -53,7 +53,7 @@
 
 
     <style name="Dark" parent="Theme.AppCompat.DayNight.DarkActionBar">
-        <item name="colorPrimary">#FFEB3B</item>
+        <item name="colorPrimary">#FED919</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="android:actionBarStyle">@style/MyActionBar</item>
         <item name="android:textColor">@color/colorPrimaryDark</item>
@@ -62,7 +62,7 @@
 
 
     <style name="MyActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
-        <item name="android:background">#FFEB3B</item>
+        <item name="android:background">#FED919</item>
         <item name="android:textColor">@color/colorPrimaryDark</item>
         <item name="titleTextColor">@color/colorPrimaryDark</item>
     </style>

@@ -6,9 +6,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    android:orientation="vertical"
+    android:background="@drawable/compback"
     android:gravity="center"
+    android:orientation="vertical"
     tools:context=".ui.Activity.ProductView">
 
     <ScrollView
@@ -24,7 +24,7 @@
             <ImageView
                 android:id="@+id/productpic1"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_310sdp"
+                android:layout_height="@dimen/_280sdp"
                 android:contentDescription="TODO"
                 android:scaleType="fitCenter"
                 android:src="@drawable/asssamese"
@@ -38,8 +38,11 @@
                 android:id="@+id/prductm"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_15sdp"
                 android:gravity="center"
                 android:textColor="#000000"
+                android:textSize="@dimen/_14sdp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -49,8 +52,11 @@
                 android:id="@+id/productdesc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_15sdp"
                 android:gravity="center"
                 android:text="TextView"
+                android:textColor="#000000"
+                android:textSize="@dimen/_12sdp"
                 app:layout_constraintTop_toBottomOf="@+id/prductm" />
 
             <TextView
@@ -67,61 +73,66 @@
                 android:id="@+id/textView29"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
+                android:layout_marginStart="@dimen/_4sdp"
+                android:layout_marginBottom="@dimen/_15sdp"
                 android:text="Sizes:"
                 android:textColor="#000000" />
 
             <belka.us.androidtoggleswitch.widgets.ToggleSwitch
                 android:id="@+id/sizeswitch"
-                android:layout_gravity="center"
-                android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/_3sdp"
+                android:layout_gravity="center"
                 android:layout_marginStart="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_5sdp"
-                custom:textToggleCenter="Center"
+                android:layout_marginBottom="@dimen/_15sdp"
+                android:gravity="center"
+                android:padding="@dimen/_3sdp"
                 android:textSize="@dimen/_7sdp"
-                custom:activeBgColor="#FFC107"
-                custom:activeTextColor="@android:color/black"
-                custom:inactiveBgColor="@android:color/white"
-                custom:inactiveTextColor="@android:color/black"
-                custom:cornerRadius="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/switchmultibutton"/>
+                app:layout_constraintTop_toBottomOf="@+id/switchmultibutton"
+                custom:activeBgColor="#FFC107"
+                custom:activeTextColor="@android:color/black"
+                custom:cornerRadius="8dp"
+                custom:inactiveBgColor="@android:color/white"
+                custom:inactiveTextColor="@android:color/black"
+                custom:textToggleCenter="Center" />
 
             <TextView
                 android:id="@+id/textView24"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
+                android:layout_marginStart="@dimen/_4sdp"
+                android:layout_marginBottom="@dimen/_15sdp"
                 android:text="Color:"
-                android:textColor="#000000"/>
+                android:textColor="#000000" />
 
             <belka.us.androidtoggleswitch.widgets.ToggleSwitch
                 android:id="@+id/colorswitch"
-                android:layout_gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                custom:textToggleCenter="Center"
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/_15sdp"
                 android:gravity="center"
                 android:padding="@dimen/_1sdp"
                 android:textSize="@dimen/_6sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/switchmultibutton"
                 custom:activeBgColor="#FFC107"
                 custom:activeTextColor="@android:color/black"
                 custom:inactiveBgColor="@android:color/white"
                 custom:inactiveTextColor="@android:color/black"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/switchmultibutton"/>
+                custom:textToggleCenter="Center" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
+                android:layout_marginStart="@dimen/_4sdp"
+                android:layout_marginBottom="@dimen/_15sdp"
                 android:text="Quantity:"
-                android:textColor="#000000"/>
+                android:textColor="#000000" />
 
             <me.himanshusoni.quantityview.QuantityView
                 android:id="@+id/quantityview"
@@ -138,22 +149,24 @@
                 app:qv_quantityTextColor="#000000"
                 app:qv_removeButtonText="-"
                 app:qv_removeButtonTextColor="#000000" />
-         <LinearLayout
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:orientation="horizontal">
-             <TextView
-                 android:id="@+id/sizecharttext"
-                 android:layout_width="match_parent"
-                 android:layout_height="wrap_content"
-                 android:layout_marginStart="4dp"
-                 android:gravity="center"
-                 android:textSize="@dimen/_15sdp"
-                 android:layout_marginBottom="4dp"
-                 android:text="Size Chart"
-                 android:textColor="#000000"
-                 android:textStyle="bold"/>
-         </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/sizecharttext"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginBottom="4dp"
+                    android:gravity="center"
+                    android:text="Size Chart"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/_15sdp"
+                    android:textStyle="bold" />
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 
